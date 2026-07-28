@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Login to your Amos Garden account">
+  <title>Login - Amos Garden</title>
+
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="bi bi-flower1 me-2"></i>Amos Garden
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="shop.html">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cart.html"><i class="bi bi-cart3 me-1"></i>Cart <span class="badge bg-danger rounded-pill" id="cartCount">0</span></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  
+  <section class="section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-5">
+          <div class="auth-card card shadow-sm border-0 animate-fade-in-up">
+            <div class="card-body p-4 p-md-5">
+              <div class="auth-header text-center mb-4">
+                <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width: 70px; height: 70px; background: rgba(82, 183, 136, 0.1);">
+                  <i class="bi bi-person-circle fs-1 text-primary"></i>
+                </div>
+                <h2 class="fw-bold mb-1" style="color: var(--bs-secondary);">Welcome Back</h2>
+                <p class="text-muted">Sign in to your Amos Garden account</p>
+              </div>
+
+              
+              <div id="alertContainer"></div>
+
+              <form id="loginForm" novalidate>
+                <div class="form-group mb-3">
+                  <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-transparent border-end-0"><i class="bi bi-envelope text-muted"></i></span>
+                    <input type="email" class="form-control border-start-0" id="email" name="email" required placeholder="juan@example.com" autocomplete="email">
+                  </div>
+                  <div class="invalid-feedback">Please enter a valid email address.</div>
+                </div>
+
+                <div class="form-group mb-4">
+                  <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                  <div class="input-group">
+                    <span class="input-group-text bg-transparent border-end-0"><i class="bi bi-lock text-muted"></i></span>
+                    <input type="password" class="form-control border-start-0" id="password" name="password" required placeholder="Enter your password" autocomplete="current-password">
+                    <button class="btn btn-outline-secondary" type="button" id="togglePassword" aria-label="Toggle password visibility">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </div>
+                  <div class="invalid-feedback">Please enter your password.</div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="rememberMe" name="remember">
+                    <label class="form-check-label text-muted small" for="rememberMe">Remember me</label>
+                  </div>
+                  <a href="forgot_password.html" class="small text-decoration-none">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 py-3 fw-semibold">
+                  <i class="bi bi-box-arrow-in-right me-2"></i>Sign In
+                </button>
+              </form>
+
+              <div class="auth-footer text-center mt-4">
+                <p class="text-muted mb-0">Don't have an account? <a href="register.html" class="fw-semibold">Create one</a></p>
+              </div>
+
+              <div class="text-center mt-3">
+                <a href="index.html" class="text-muted small text-decoration-none"><i class="bi bi-arrow-left me-1"></i>Back to Home</a>
+              </div>
+            </div>
+          </div>
+
+          
+          <div class="card mt-3 border-0 shadow-sm animate-fade-in-up delay-1">
+            <div class="card-body py-3">
+              <small class="text-muted d-flex align-items-center justify-content-center gap-2">
+                <i class="bi bi-info-circle"></i>
+                <span>Demo: Use any email/password (frontend demo only)</span>
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-brand"><i class="bi bi-flower1 me-2"></i>Amos Garden</div>
+          <p class="footer-text">Your trusted plant shop in Parañaque City.</p>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <h5 class="footer-links">Shop</h5>
+          <ul class="footer-links">
+            <li><a href="shop.html">All Plants</a></li>
+            <li><a href="shop.html?category=Succulents">Succulents</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <h5 class="footer-links">Services</h5>
+          <ul class="footer-links">
+            <li><a href="landscaping.html">Landscaping</a></li>
+            <li><a href="shop.html">Plant Care Guide</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h5 class="footer-links">Contact</h5>
+          <ul class="footer-links">
+            <li><i class="bi bi-geo-alt me-2"></i>123 Green Avenue, Parañaque City</li>
+            <li><i class="bi bi-telephone me-2"></i>+63 917 123 4567</li>
+            <li><i class="bi bi-envelope me-2"></i>hello@amosgarden.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="mb-0">&copy; 2026 Amos Garden. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+  
+  <script src="assets/js/utils.js"></script>
+
+  
+  <script>
+    // Toggle password visibility
+    document.getElementById('togglePassword')?.addEventListener('click', function() {
+      const passwordInput = document.getElementById('password');
+      const icon = this.querySelector('i');
+
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.replace('bi-eye', 'bi-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        icon.classList.replace('bi-eye-slash', 'bi-eye');
+      }
+    });
+
+    // Form validation and submission
+    (function() {
+      'use strict';
+
+      const form = document.getElementById('loginForm');
+      const alertContainer = document.getElementById('alertContainer');
+
+      function showAlert(message, type = 'danger') {
+        alertContainer.innerHTML = `
+          <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        `;
+      }
+
+      function clearAlert() {
+        alertContainer.innerHTML = '';
+      }
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        clearAlert();
+
+        if (form.checkValidity()) {
+          const submitBtn = form.querySelector('button[type="submit"]');
+          const originalHtml = submitBtn.innerHTML;
+
+          // Show loading state
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Signing in...';
+
+          // Simulate API call
+          setTimeout(() => {
+            const email = document.getElementById('email').value;
+
+            // Save login state to localStorage (demo)
+            localStorage.setItem('amosGardenUser', JSON.stringify({
+              email: email,
+              name: email.split('@')[0],
+              loggedIn: true,
+              loginTime: Date.now()
+            }));
+
+            // Show success using ToastManager (Interactive Components PDF)
+            if (window.toast) {
+              window.toast.success('Welcome back! Redirecting...');
+            } else {
+              showAlert('<i class="bi bi-check-circle-fill me-2"></i>Welcome back! Redirecting...', 'success');
+            }
+
+            // Redirect after delay
+            setTimeout(() => {
+              // Check for redirect URL
+              const urlParams = new URLSearchParams(window.location.search);
+              const redirect = urlParams.get('redirect') || 'index.html';
+              window.location.href = redirect;
+            }, 1500);
+          }, 1000);
+        }
+
+        form.classList.add('was-validated');
+      }, false);
+    })();
+
+    // Check if already logged in
+    document.addEventListener('DOMContentLoaded', function() {
+      const userData = localStorage.getItem('amosGardenUser');
+      if (userData) {
+        try {
+          const user = JSON.parse(userData);
+          if (user.loggedIn) {
+            // Already logged in, redirect to home
+            // window.location.href = 'index.html';
+          }
+        } catch (e) {
+          // Invalid data, clear it
+          localStorage.removeItem('amosGardenUser');
+        }
+      }
+
+      // Initialize tooltips
+      initTooltips();
+    });
+  </script>
+</body>
+</html>

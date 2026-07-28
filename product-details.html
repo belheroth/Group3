@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Detailed information about our beautiful plants and gardening supplies.">
+    <title>Product Details - Amos Garden</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navigation - Bootstrap 5 Navbar Component -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-flower1 me-2"></i>Amos Garden
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html"><i class="bi bi-cart3 me-1"></i>Cart <span class="badge bg-danger rounded-pill" id="cartCount">0</span></a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link btn btn-primary btn-nav" href="login.html">Sign Up / Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Product Details Section -->
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="products.html">Products</a></li>
+                            <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-product">Product Details</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="row g-5" id="productDetails">
+                <!-- Product images will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Specifications Accordion -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="section-title text-center">Product Specifications</h2>
+                    <p class="section-subtitle text-center">Detailed information about caring for your plant</p>
+                </div>
+            </div>
+
+            <div class="accordion mt-5" id="productSpecsAccordion">
+                <!-- Specifications will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand"><i class="bi bi-flower1 me-2"></i>Amos Garden</div>
+                    <p class="footer-text">Your trusted plant shop in Parañaque City. We cultivate healthy, beautiful plants ready to thrive in your home.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white" aria-label="Facebook"><i class="bi bi-facebook fs-5"></i></a>
+                        <a href="#" class="text-white" aria-label="Instagram"><i class="bi bi-instagram fs-5"></i></a>
+                        <a href="#" class="text-white" aria-label="Twitter"><i class="bi bi-twitter fs-5"></i></a>
+                        <a href="#" class="text-white" aria-label="YouTube"><i class="bi bi-youtube fs-5"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-links">Shop</h5>
+                    <ul class="footer-links">
+                        <li><a href="products.html">All Plants</a></li>
+                        <li><a href="products.html?category=Succulents">Succulents</a></li>
+                        <li><a href="products.html?category=Indoor+Plants">Indoor Plants</a></li>
+                        <li><a href="products.html?category=Flowering">Flowering</a></li>
+                        <li><a href="cart.html">Cart</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="footer-links">Services</h5>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="about.html#landscaping">Landscaping</a></li>
+                        <li><a href="about.html#plant-doctor">Plant Doctor</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="footer-links">Contact Us</h5>
+                    <ul class="footer-links">
+                        <li><i class="bi bi-geo-alt me-2"></i>123 Green Avenue, BF Homes, Parañaque City</li>
+                        <li><i class="bi bi-telephone me-2"></i>+63 917 123 4567</li>
+                        <li><i class="bi bi-envelope me-2"></i>hello@amosgarden.com</li>
+                        <li><i class="bi bi-clock me-2"></i>Mon - Sat: 8:00 AM - 6:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="mb-0">&copy; 2026 Amos Garden. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <!-- JavaScript -->
+    <script>
+        // Product data
+        const products = [
+            {
+                id: 1,
+                name: "Monstera Deliciosa",
+                category: "Indoor Plants",
+                price: 350.00,
+                image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80",
+                description: "A popular tropical plant with large, glossy leaves. Perfect for adding a touch of the jungle to your home. This plant needs bright, indirect light and regular watering.",
+                images: [
+                    "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80",
+                    "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80",
+                    "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80"
+                ],
+                specs: {
+                    "Plant Type": "Tropical Evergreen",
+                    "Lighting Requirements": "Bright, indirect light",
+                    "Watering Needs": "Moderate watering, let soil dry slightly between waterings",
+                    "Temperature": "65-80°F (18-27°C)",
+                    "Humidity": "Average to high humidity",
+                    "Fertilizer": "Fertilize monthly during growing season",
+                    "Growth Rate": "Fast",
+                    "Size": "Up to 6 feet tall (indoor)"
+                }
+            },
+            {
+                id: 2,
+                name: "Snake Plant",
+                category: "Succulents",
+                price: 200.00,
+                image: "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80",
+                description: "Low maintenance plant that's perfect for beginners. It's also known for its air-purifying qualities and unique appearance.",
+                images: [
+                    "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80",
+                    "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80",
+                    "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80"
+                ],
+                specs: {
+                    "Plant Type": "Succulent",
+                    "Lighting Requirements": "Bright to low light",
+                    "Watering Needs": "Low watering, allow soil to dry completely between waterings",
+                    "Temperature": "65-80°F (18-27°C)",
+                    "Humidity": "Low to average humidity",
+                    "Fertilizer": "Fertilize monthly in spring",
+                    "Growth Rate": "Slow",
+                    "Size": "Up to 2 feet tall"
+                }
+            },
+            {
+                id: 3,
+                name: "Peace Lily",
+                category: "Flowering",
+                price: 280.00,
+                image: "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80",
+                description: "Beautiful flower plant that blooms white flowers. Known for its air-purifying properties and easy care.",
+                images: [
+                    "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80",
+                    "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80",
+                    "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80"
+                ],
+                specs: {
+                    "Plant Type": "Tropical Flowering",
+                    "Lighting Requirements": "Bright, indirect light",
+                    "Watering Needs": "Keep soil evenly moist but not soggy",
+                    "Temperature": "65-80°F (18-27°C)",
+                    "Humidity": "Moderate to high humidity",
+                    "Fertilizer": "Fertilize every 2-3 months",
+                    "Growth Rate": "Medium",
+                    "Size": "Up to 3 feet tall"
+                }
+            },
+            {
+                id: 4,
+                name: "ZZ Plant",
+                category: "Indoor Plants",
+                price: 320.00,
+                image: "https://images.unsplash.com/photo-1614016821356-5c0b2f5d8c6b?auto=format&fit=crop&w=400&q=80",
+                description: "Very low maintenance plant with glossy, dark green leaves. Tolerates low light conditions well.",
+                images: [
+                    "https://images.unsplash.com/photo-1614016821356-5c0b2f5d8c6b?auto=format&fit=crop&w=400&q=80",
+                    "https://images.unsplash.com/photo-1614016821356-5c0b2f5d8c6b?auto=format&fit=crop&w=400&q=80",
+                    "https://images.unsplash.com/photo-1614016821356-5c0b2f5d8c6b?auto=format&fit=crop&w=400&q=80"
+                ],
+                specs: {
+                    "Plant Type": "Tropical Evergreen",
+                    "Lighting Requirements": "Low to bright indirect light",
+                    "Watering Needs": "Low watering, allow soil to dry out completely",
+                    "Temperature": "65-75°F (18-24°C)",
+                    "Humidity": "Average humidity",
+                    "Fertilizer": "Fertilize quarterly",
+                    "Growth Rate": "Slow",
+                    "Size": "Up to 3 feet tall"
+                }
+            },
+            {
+                id: 5,
+                name: "Fiddle Leaf Fig",
+                category: "Indoor Plants",
+                price: 450.00,
+                image: "https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=400&q=80",
+                description: "Large, glossy leaves that make a bold statement in any room. Popular as a centerpiece plant.",
+                images: [
+                    "https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=400&q=80",
+                    "https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=400&q=80",
+                    "https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=400&q=80"
+                ],
+                specs: {
+                    "Plant Type": "Tropical Evergreen",
+                    "Lighting Requirements": "Bright, indirect light",
+                    "Watering Needs": "Moderate watering, let soil dry slightly between waterings",
+                    "Temperature": "65-75°F (18-24°C)",
+                    "Humidity": "Moderate to high humidity",
+                    "Fertilizer": "Fertilize monthly during growing season",
+                    "Growth Rate": "Fast",
+                    "Size": "Up to 8 feet tall (indoor)"
+                }
+            }
+        ];
+
+        // Function to render product details
+        function renderProductDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+
+            if (!productId) {
+                // If no ID, redirect to products page
+                window.location.href = 'products.html';
+                return;
+            }
+
+            const product = products.find(p => p.id == productId);
+
+            if (!product) {
+                // Product not found
+                document.getElementById('productDetails').innerHTML = '<div class="col-12"><div class="alert alert-danger">Product not found.</div></div>';
+                return;
+            }
+
+            // Update breadcrumb
+            document.getElementById('breadcrumb-product').textContent = product.name;
+
+            // Render product images with carousel
+            const carouselItems = product.images.map((img, index) => `
+                <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                    <img src="${img}" class="d-block w-100" alt="${product.name}" style="height: 400px; object-fit: cover;">
+                </div>
+            `).join('');
+
+            const carouselIndicators = product.images.map((_, index) => `
+                <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="${index}" ${index === 0 ? 'class="active"' : ''}></button>
+            `).join('');
+
+            const carouselHTML = `
+                <div class="col-lg-6">
+                    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            ${carouselIndicators}
+                        </div>
+                        <div class="carousel-inner rounded-4 overflow-hidden shadow">
+                            ${carouselItems}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            // Render product info
+            const infoHTML = `
+                <div class="col-lg-6">
+                    <div class="product-info">
+                        <span class="badge bg-light text-dark mb-2">${product.category}</span>
+                        <h1 class="section-title">${product.name}</h1>
+                        <p class="section-subtitle">${product.description}</p>
+                        <p class="fs-4 fw-bold text-primary">₱${product.price.toFixed(2)}</p>
+
+                        <div class="mt-4">
+                            <button type="button" class="btn btn-primary btn-lg" id="addToCartBtn">
+                                <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary btn-lg ms-2" id="viewCartBtn">
+                                <i class="bi bi-cart me-2"></i>View Cart
+                            </button>
+                        </div>
+
+                        <div class="mt-4">
+                            <h5>Care Tips</h5>
+                            <ul>
+                                <li>Water regularly but let soil dry slightly between waterings</li>
+                                <li>Place in bright, indirect light</li>
+                                <li>Prune when needed to maintain shape</li>
+                                <li>Repot every 2-3 years in fresh potting soil</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Build specifications accordion
+            let specsHTML = '';
+            for (const [key, value] of Object.entries(product.specs)) {
+                specsHTML += `
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="spec-${key.replace(/\s+/g, '-')}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#spec-${key.replace(/\s+/g, '-')}Content">
+                                ${key}
+                            </button>
+                        </h2>
+                        <div id="spec-${key.replace(/\s+/g, '-')}Content" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                ${value}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Insert into DOM
+            document.getElementById('productDetails').innerHTML = carouselHTML + infoHTML;
+            document.getElementById('productSpecsAccordion').innerHTML = specsHTML;
+
+            // Add to Cart functionality
+            const addToCartBtn = document.getElementById('addToCartBtn');
+            const viewCartBtn = document.getElementById('viewCartBtn');
+
+            if (addToCartBtn) {
+                addToCartBtn.addEventListener('click', function() {
+                    const cart = JSON.parse(localStorage.getItem('amosGardenCart') || '{}');
+                    const productId = product.id.toString();
+
+                    if (cart[productId]) {
+                        cart[productId] += 1;
+                    } else {
+                        cart[productId] = 1;
+                    }
+
+                    localStorage.setItem('amosGardenCart', JSON.stringify(cart));
+                    updateCartCount();
+
+                    // Show feedback
+                    addToCartBtn.innerHTML = '<i class="bi bi-check me-2"></i>Added!';
+                    addToCartBtn.classList.remove('btn-primary');
+                    addToCartBtn.classList.add('btn-success');
+
+                    setTimeout(() => {
+                        addToCartBtn.innerHTML = '<i class="bi bi-cart-plus me-2"></i>Add to Cart';
+                        addToCartBtn.classList.remove('btn-success');
+                        addToCartBtn.classList.add('btn-primary');
+                    }, 2000);
+                });
+            }
+
+            if (viewCartBtn) {
+                viewCartBtn.addEventListener('click', function() {
+                    window.location.href = 'cart.html';
+                });
+            }
+
+            // Update cart count
+            updateCartCount();
+        }
+
+        // Update cart count in navbar
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('amosGardenCart') || '{}');
+            const itemCount = Object.values(cart).reduce((sum, count) => sum + count, 0);
+            const cartBadge = document.getElementById('cartCount');
+            if (cartBadge) {
+                cartBadge.textContent = itemCount;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProductDetails();
+        });
+    </script>
+</body>
+</html>

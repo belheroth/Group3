@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Admin Inventory - Amos Garden">
+  <title>Inventory - Amos Garden Admin</title>
+
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .admin-page {
+      background-color: #f4f7f6;
+      min-height: 100vh;
+    }
+
+    .admin-navbar {
+      border-bottom: 3px solid var(--bs-secondary) !important;
+    }
+
+    .admin-navbar .navbar-brand {
+      color: var(--bs-secondary) !important;
+    }
+
+    .admin-navbar .nav-link {
+      color: #555 !important;
+    }
+
+    .admin-navbar .nav-link.active {
+      color: var(--bs-secondary) !important;
+      font-weight: 700;
+    }
+
+    .admin-navbar .nav-link:hover {
+      color: var(--bs-primary) !important;
+    }
+
+    .admin-container {
+      padding: 3rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .admin-title h2 {
+      margin-bottom: 0.25rem;
+    }
+
+    .admin-title p {
+      color: #666;
+      margin: 0;
+    }
+
+    .product-table {
+      background: #fff;
+      border-radius: var(--bs-border-radius);
+      box-shadow: var(--bs-box-shadow);
+      overflow: hidden;
+    }
+
+    .product-table thead th {
+      background-color: var(--bs-secondary);
+      color: #fff;
+      font-weight: 600;
+      border: none;
+      padding: 1rem;
+      white-space: nowrap;
+    }
+
+    .product-table tbody td {
+      padding: 1rem;
+      vertical-align: middle;
+      border-color: #eee;
+    }
+
+    .product-table tbody tr:hover {
+      background-color: #f8fbf9;
+    }
+
+    .product-image {
+      width: 60px;
+      height: 60px;
+      border-radius: var(--bs-border-radius-sm);
+      object-fit: cover;
+    }
+
+    .product-name {
+      font-weight: 600;
+      color: var(--bs-secondary);
+    }
+
+    .product-price {
+      font-weight: 600;
+      color: var(--bs-primary-dark);
+    }
+
+    .stock-badge {
+      font-weight: 600;
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.8125rem;
+    }
+
+    .stock-high { background-color: #d4edda; color: #155724; }
+    .stock-medium { background-color: #fff3cd; color: #856404; }
+    .stock-low { background-color: #f8d7da; color: #721c24; }
+    .stock-zero { background-color: #f8d7da; color: #721c24; }
+
+    .action-btns {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .action-btn {
+      padding: 0.5rem 1rem;
+      border-radius: var(--bs-border-radius-sm);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+    }
+
+    .btn-edit {
+      background-color: var(--bs-accent);
+      border-color: var(--bs-accent);
+      color: #fff;
+    }
+
+    .btn-edit:hover {
+      background-color: #e8900f;
+      border-color: #e8900f;
+      color: #fff;
+    }
+
+    .btn-delete {
+      background-color: #e63946;
+      border-color: #e63946;
+      color: #fff;
+    }
+
+    .btn-delete:hover {
+      background-color: #d62828;
+      border-color: #d62828;
+      color: #fff;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: #fff;
+      border-radius: var(--bs-border-radius);
+      box-shadow: var(--bs-box-shadow);
+    }
+
+    .empty-state i {
+      font-size: 4rem;
+      color: #ccc;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 767.98px) {
+      .admin-container {
+        padding: 2rem 1rem;
+      }
+
+      .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .product-table thead {
+        display: none;
+      }
+
+      .product-table tbody tr {
+        display: block;
+        padding: 1rem;
+        border-bottom: 1px solid #eee;
+      }
+
+      .product-table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border: none;
+      }
+
+      .product-table tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--bs-secondary);
+        font-size: 0.875rem;
+      }
+
+      .action-btns {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body class="admin-page">
+
+  
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top admin-navbar">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="admin_dashboard.html">
+        <i class="bi bi-lock-fill me-2"></i>Amos Garden Admin
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="adminNavbar">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="admin_dashboard.html"><i class="bi bi-box-seam me-1"></i>Orders</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="admin_inventory.html"><i class="bi bi-flower1 me-1"></i>Inventory</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin_customers.html"><i class="bi bi-people me-1"></i>Customers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html" target="_blank"><i class="bi bi-box-arrow-up-right me-1"></i>View Public Shop</a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="nav-link btn btn-outline-danger" href="logout.html"><i class="bi bi-box-arrow-right me-1"></i>Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  
+  <div class="admin-container">
+    <div class="admin-header">
+      <div class="admin-title">
+        <h2 style="color: var(--bs-secondary);"><i class="bi bi-flower1 me-2"></i>Current Plant Inventory</h2>
+        <p>Manage the plants available in your shop</p>
+      </div>
+      <a href="add_product.html" class="btn btn-primary" style="background-color: var(--bs-secondary); border-color: var(--bs-secondary);">
+        <i class="bi bi-plus-circle me-2"></i>Add New Plant
+      </a>
+    </div>
+
+    
+    <div class="product-table" id="productTable">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th style="width: 80px;">Image</th>
+              <th>Plant Name</th>
+              <th style="width: 130px;">Price</th>
+              <th style="width: 100px;">Stock</th>
+              <th style="width: 180px;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="productBody">
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    
+    <div class="empty-state d-none" id="emptyState">
+      <i class="bi bi-flower1"></i>
+      <h3 style="color: var(--bs-secondary);">No plants in inventory</h3>
+      <p class="text-muted">Start by adding your first plant to the shop.</p>
+      <a href="add_product.html" class="btn btn-primary mt-3" style="background-color: var(--bs-secondary); border-color: var(--bs-secondary);">
+        <i class="bi bi-plus-circle me-2"></i>Add New Plant
+      </a>
+    </div>
+  </div>
+
+  
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title text-danger"><i class="bi bi-exclamation-triangle-fill me-2"></i>Delete Plant?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete <strong id="deletePlantName"></strong>? This action cannot be undone.</p>
+        </div>
+        <div class="modal-footer border-0 justify-content-center">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" id="confirmDeleteBtn"><i class="bi bi-trash me-2"></i>Yes, Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <footer class="footer mt-5">
+    <div class="container">
+      <div class="footer-bottom text-center">
+        <p class="mb-0">&copy; 2026 Amos Garden Admin. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;" id="toastContainer">
+    
+  </div>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+  
+  <script src="assets/js/utils.js"></script>
+
+  
+  <script>
+    const products = [
+      { id: 1, name: "Aloe Vera", price: 150.00, stock: 20, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Aloe", category: "Succulents" },
+      { id: 2, name: "Snake Plant", price: 200.00, stock: 15, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Snake", category: "Succulents" },
+      { id: 3, name: "Echeveria Elegans", price: 180.00, stock: 25, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Ech", category: "Succulents" },
+      { id: 4, name: "Jade Plant", price: 220.00, stock: 8, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Jade", category: "Succulents" },
+      { id: 5, name: "Monstera Deliciosa", price: 350.00, stock: 10, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Mon", category: "Indoor Plants" },
+      { id: 6, name: "Peace Lily", price: 280.00, stock: 12, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Peace", category: "Indoor Plants" },
+      { id: 7, name: "ZZ Plant", price: 320.00, stock: 5, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=ZZ", category: "Indoor Plants" },
+      { id: 8, name: "Fiddle Leaf Fig", price: 450.00, stock: 3, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Fid", category: "Indoor Plants" },
+      { id: 9, name: "Phalaenopsis Orchid", price: 450.00, stock: 15, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Orch", category: "Flowering" },
+      { id: 10, name: "Anthurium Red", price: 320.00, stock: 20, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Ant", category: "Flowering" },
+      { id: 11, name: "Bromeliad", price: 280.00, stock: 14, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Bro", category: "Flowering" },
+      { id: 12, name: "African Violet", price: 180.00, stock: 30, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Afr", category: "Flowering" },
+      { id: 13, name: "Sweet Basil", price: 120.00, stock: 40, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Bas", category: "Herbs" },
+      { id: 14, name: "Peppermint", price: 120.00, stock: 35, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Mint", category: "Herbs" },
+      { id: 15, name: "Rosemary", price: 150.00, stock: 22, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Ros", category: "Herbs" },
+      { id: 16, name: "Thai Basil", price: 130.00, stock: 18, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Thai", category: "Herbs" },
+      { id: 17, name: "Bougainvillea", price: 400.00, stock: 8, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Bou", category: "Outdoor" },
+      { id: 18, name: "Hibiscus", price: 350.00, stock: 12, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Hib", category: "Outdoor" },
+      { id: 19, name: "Plumeria", price: 500.00, stock: 5, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Plu", category: "Outdoor" },
+      { id: 20, name: "Bird of Paradise", price: 600.00, stock: 4, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Bir", category: "Outdoor" }
+    ];
+
+    
+    // DOM ELEMENTS
+    
+    const productBody = document.getElementById('productBody');
+    const productTable = document.getElementById('productTable');
+    const emptyState = document.getElementById('emptyState');
+    const deleteModalEl = document.getElementById('deleteModal');
+    const deleteModal = new bootstrap.Modal(deleteModalEl);
+    const deletePlantName = document.getElementById('deletePlantName');
+    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+
+    let productToDelete = null;
+
+    
+    // HELPER FUNCTIONS
+    
+    function formatPrice(price) {
+      return '₱' + price.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function getStockClass(stock) {
+      if (stock === 0) return 'stock-zero';
+      if (stock <= 5) return 'stock-low';
+      if (stock <= 15) return 'stock-medium';
+      return 'stock-high';
+    }
+
+    
+    // RENDER PRODUCTS
+    
+    function renderProducts() {
+      if (products.length === 0) {
+        productTable.classList.add('d-none');
+        emptyState.classList.remove('d-none');
+        return;
+      }
+
+      productTable.classList.remove('d-none');
+      emptyState.classList.add('d-none');
+
+      productBody.innerHTML = products.map((product, index) => `
+        <tr style="animation-delay: ${index * 0.03}s;">
+          <td data-label="Image">
+            <img src="${product.image}" alt="${product.name}" class="product-image">
+          </td>
+          <td data-label="Plant Name">
+            <div class="product-name">${product.name}</div>
+            <small class="text-muted">${product.category}</small>
+          </td>
+          <td data-label="Price" class="product-price">${formatPrice(product.price)}</td>
+          <td data-label="Stock">
+            <span class="stock-badge ${getStockClass(product.stock)}">${product.stock}</span>
+          </td>
+          <td data-label="Actions">
+            <div class="action-btns">
+              <a href="edit_product.html?id=${product.id}" class="action-btn btn-edit">
+                <i class="bi bi-pencil"></i>Edit
+              </a>
+              <button type="button" class="action-btn btn-delete" onclick="openDeleteModal(${product.id}, '${product.name.replace(/'/g, "\\'")}')">
+                <i class="bi bi-trash"></i>Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    
+    // DELETE MODAL
+    
+    window.openDeleteModal = function(id, name) {
+      productToDelete = id;
+      deletePlantName.textContent = name;
+      deleteModal.show();
+    };
+
+    confirmDeleteBtn.addEventListener('click', function() {
+      if (productToDelete !== null) {
+        // In real app, send DELETE request to API
+        const index = products.findIndex(p => p.id === productToDelete);
+        if (index !== -1) {
+          products.splice(index, 1);
+          renderProducts();
+        }
+        productToDelete = null;
+        deleteModal.hide();
+      }
+    });
+
+    
+    // INITIALIZE
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check admin auth
+      if (!AdminSession.isLoggedIn()) {
+        window.location.href = 'admin_login.html';
+        return;
+      }
+
+      renderProducts();
+
+      // Intersection Observer for animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+      document.querySelectorAll('.animate-fade-in-up').forEach(el => {
+        el.style.animationPlayState = 'paused';
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>

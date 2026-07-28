@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Checkout - Amos Garden">
+  <title>Checkout - Amos Garden</title>
+
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .checkout-page {
+      background-color: var(--bs-body-bg);
+    }
+
+    .checkout-form {
+      background: #fff;
+      border-radius: var(--bs-border-radius-lg);
+      box-shadow: var(--bs-box-shadow);
+      padding: 2.5rem;
+    }
+
+    .checkout-section {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .checkout-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .checkout-section h3 {
+      font-size: 1.125rem;
+      color: var(--bs-secondary);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .order-summary {
+      position: sticky;
+      top: 100px;
+    }
+
+    .order-summary-card {
+      background: #fff;
+      border-radius: var(--bs-border-radius);
+      box-shadow: var(--bs-box-shadow);
+      overflow: hidden;
+    }
+
+    .summary-header {
+      background: var(--bs-primary);
+      color: #fff;
+      padding: 1rem 1.5rem;
+    }
+
+    .summary-body {
+      padding: 1.5rem;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .summary-row.total {
+      font-weight: 700;
+      font-size: 1.125rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+      margin-top: 1rem;
+    }
+
+    .delivery-option {
+      border: 2px solid #e9ecef;
+      border-radius: var(--bs-border-radius);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: var(--bs-transition);
+    }
+
+    .delivery-option:hover {
+      border-color: var(--bs-primary);
+    }
+
+    .delivery-option.selected {
+      border-color: var(--bs-primary);
+      background-color: rgba(82, 183, 136, 0.05);
+    }
+
+    .delivery-option input {
+      display: none;
+    }
+
+    .pickup-info {
+      background-color: #eef7f4;
+      border: 1px solid var(--bs-primary);
+      border-radius: var(--bs-border-radius-sm);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: none;
+    }
+
+    .pickup-info.show {
+      display: block;
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-check-label {
+      cursor: pointer;
+    }
+
+    .btn-submit {
+      position: sticky;
+      bottom: 0;
+      z-index: 10;
+    }
+
+    @media (max-width: 991.98px) {
+      .order-summary {
+        position: static;
+        margin-bottom: 2rem;
+      }
+      .btn-submit {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body class="checkout-page">
+
+  
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="bi bi-flower1 me-2"></i>Amos Garden
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="shop.html">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="landscaping.html">Landscaping</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="cart.html"><i class="bi bi-cart3 me-1"></i>Cart <span class="badge bg-danger rounded-pill" id="cartCount">0</span></a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="nav-link btn btn-primary btn-nav" href="login.html">Sign Up / Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <button type="button" class="btn-back" onclick="window.history.back()">
+    <i class="bi bi-arrow-left"></i> Go Back
+  </button>
+
+  
+  <section class="section section-alt">
+    <div class="container">
+      <div class="row">
+        
+        <div class="col-lg-8">
+          <div class="checkout-form animate-fade-in-up" id="checkoutForm">
+            <h2 class="mb-1" style="color: var(--bs-secondary);">Checkout</h2>
+            <p class="text-muted mb-4">Please enter your contact and delivery information.</p>
+
+            <form id="checkoutFormElement" novalidate>
+              
+              <div class="checkout-section">
+                <h3><i class="bi bi-person-fill me-2"></i>Contact Information</h3>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="firstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="firstName" name="first_name" required placeholder="Juan" autocomplete="given-name">
+                    <div class="invalid-feedback">Please enter your first name.</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="lastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="lastName" name="last_name" required placeholder="Dela Cruz" autocomplete="family-name">
+                    <div class="invalid-feedback">Please enter your last name.</div>
+                  </div>
+                </div>
+                <div class="row g-3 mt-3">
+                  <div class="col-md-6">
+                    <label for="phone" class="form-label">Mobile Number <span class="text-danger">*</span></label>
+                    <input type="tel" class="form-control" id="phone" name="phone" required placeholder="0917-123-4567" autocomplete="tel">
+                    <div class="invalid-feedback">Please enter a valid phone number.</div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
+                    <input type="email" class="form-control" id="email" name="email" required placeholder="juan@example.com" autocomplete="email">
+                    <div class="invalid-feedback">Please enter a valid email address.</div>
+                  </div>
+                </div>
+              </div>
+
+              
+              <div class="checkout-section">
+                <h3><i class="bi bi-truck me-2"></i>Delivery Options</h3>
+
+                <div class="delivery-option selected" data-type="delivery" onclick="selectDelivery('delivery')">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="order_type" id="deliveryOption" value="Delivery" checked>
+                    <label class="form-check-label w-100 d-flex align-items-center" for="deliveryOption">
+                      <div class="me-3">
+                        <i class="bi bi-truck fs-4 text-primary"></i>
+                      </div>
+                      <div>
+                        <strong class="d-block">Deliver to my address</strong>
+                        <small class="text-muted">Standard delivery within Parañaque City</small>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="delivery-option" data-type="pickup" onclick="selectDelivery('pickup')">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="order_type" id="pickupOption" value="Pickup">
+                    <label class="form-check-label w-100 d-flex align-items-center" for="pickupOption">
+                      <div class="me-3">
+                        <i class="bi bi-shop fs-4 text-primary"></i>
+                      </div>
+                      <div>
+                        <strong class="d-block">Store Pickup</strong>
+                        <small class="text-muted">Pick up at our shop - no delivery fee</small>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
+                
+                <div id="addressFields">
+                  <div class="row g-3">
+                    <div class="col-12">
+                      <label for="streetAddress" class="form-label">Street Address <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="streetAddress" name="street_address" required placeholder="House number, street name" autocomplete="street-address">
+                      <div class="invalid-feedback">Please enter your street address.</div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="aptSuite" class="form-label">Apartment, suite, unit (Optional)</label>
+                      <input type="text" class="form-control" id="aptSuite" name="apt_suite" placeholder="Unit 2B" autocomplete="address-line2">
+                    </div>
+                    <div class="col-md-6">
+                      <label for="city" class="form-label">City <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="city" name="city" required value="Parañaque City" autocomplete="address-level2">
+                      <div class="invalid-feedback">Please enter your city.</div>
+                    </div>
+                  </div>
+                </div>
+
+                
+                <div id="pickupInfo" class="pickup-info">
+                  <h5 class="mb-2" style="color: var(--bs-secondary);"><i class="bi bi-geo-alt-fill me-2"></i>Amos Garden Pickup Location</h5>
+                  <p class="mb-0 small">
+                    <strong>Main Store & Greenhouse</strong><br>
+                    123 Green Avenue, Barangay BF Homes<br>
+                    Parañaque City, Metro Manila<br>
+                    <small class="text-muted">Open Mon-Sat: 8:00 AM - 6:00 PM</small>
+                  </p>
+                </div>
+              </div>
+
+              
+              <div class="checkout-section">
+                <h3><i class="bi bi-credit-card me-2"></i>Payment Method</h3>
+                <div class="alert alert-info mb-0">
+                  <i class="bi bi-info-circle me-2"></i>
+                  <strong>Cash on Delivery / Pickup</strong> - Payment will be collected upon delivery or at the store.
+                </div>
+              </div>
+
+              
+              <button type="submit" class="btn btn-primary btn-lg w-100 btn-submit animate-fade-in-up">
+                <i class="bi bi-check-circle me-2"></i>Complete Order
+              </button>
+            </form>
+          </div>
+        </div>
+
+        
+        <div class="col-lg-4">
+          <div class="order-summary animate-fade-in-up delay-1">
+            <div class="order-summary-card">
+              <div class="summary-header">
+                <h5 class="mb-0"><i class="bi bi-receipt me-2"></i>Order Summary</h5>
+              </div>
+              <div class="summary-body" id="orderSummary">
+                
+              </div>
+            </div>
+
+            
+            <div class="mt-4 p-3 text-center small text-muted animate-fade-in-up delay-2">
+              <div class="d-flex justify-content-center gap-3 flex-wrap mb-2">
+                <span><i class="bi bi-shield-lock-fill me-1"></i>Secure Checkout</span>
+                <span><i class="bi bi-truck me-1"></i>Free Delivery (Parañaque)</span>
+                <span><i class="bi bi-arrow-return-left me-1"></i>Easy Returns</span>
+              </div>
+              <p class="mb-0">Your information is encrypted and secure.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <h5 class="modal-title" id="successModalLabel"><i class="bi bi-check-circle-fill text-success me-2"></i>Order Placed!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <div class="mb-3">
+            <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+          </div>
+          <h4>Thank you for your order!</h4>
+          <p class="text-muted">Your order has been placed successfully. You will receive a confirmation via SMS/email shortly.</p>
+          <p class="text-muted small">Order Number: <strong id="orderNumber"></strong></p>
+        </div>
+        <div class="modal-footer border-0 justify-content-center">
+          <a href="my_account.html" class="btn btn-primary" data-bs-dismiss="modal">View My Orders</a>
+          <a href="shop.html" class="btn btn-outline-secondary" data-bs-dismiss="modal">Continue Shopping</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="footer-brand"><i class="bi bi-flower1 me-2"></i>Amos Garden</div>
+          <p class="footer-text">Your trusted plant shop in Parañaque City.</p>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <h5 class="footer-links">Shop</h5>
+          <ul class="footer-links">
+            <li><a href="shop.html">All Plants</a></li>
+            <li><a href="shop.html?category=Succulents">Succulents</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <h5 class="footer-links">Services</h5>
+          <ul class="footer-links">
+            <li><a href="landscaping.html">Landscaping</a></li>
+            <li><a href="shop.html">Plant Care Guide</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <h5 class="footer-links">Contact</h5>
+          <ul class="footer-links">
+            <li><i class="bi bi-geo-alt me-2"></i>123 Green Avenue, Parañaque City</li>
+            <li><i class="bi bi-telephone me-2"></i>+63 917 123 4567</li>
+            <li><i class="bi bi-envelope me-2"></i>hello@amosgarden.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="mb-0">&copy; 2026 Amos Garden. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+  
+  <script src="assets/js/utils.js"></script>
+
+  
+  <script>
+    const products = [
+      { id: 1, name: "Aloe Vera", price: 150.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Aloe" },
+      { id: 2, name: "Snake Plant", price: 200.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Snake" },
+      { id: 3, name: "Echeveria Elegans", price: 180.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Ech" },
+      { id: 4, name: "Jade Plant", price: 220.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Jade" },
+      { id: 5, name: "Monstera Deliciosa", price: 350.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Mon" },
+      { id: 6, name: "Peace Lily", price: 280.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Peace" },
+      { id: 7, name: "ZZ Plant", price: 320.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=ZZ" },
+      { id: 8, name: "Fiddle Leaf Fig", price: 450.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Fid" },
+      { id: 9, name: "Phalaenopsis Orchid", price: 450.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Orch" },
+      { id: 10, name: "Anthurium Red", price: 320.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Ant" },
+      { id: 11, name: "Bromeliad", price: 280.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Bro" },
+      { id: 12, name: "African Violet", price: 180.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Afr" },
+      { id: 13, name: "Sweet Basil", price: 120.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Bas" },
+      { id: 14, name: "Peppermint", price: 120.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Mint" },
+      { id: 15, name: "Rosemary", price: 150.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Ros" },
+      { id: 16, name: "Thai Basil", price: 130.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Thai" },
+      { id: 17, name: "Bougainvillea", price: 400.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Bou" },
+      { id: 18, name: "Hibiscus", price: 350.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Hib" },
+      { id: 19, name: "Plumeria", price: 500.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Plu" },
+      { id: 20, name: "Bird of Paradise", price: 600.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Bir" }
+    ];
+
+    
+    // STATE
+    
+    let selectedDeliveryType = 'delivery'; // 'delivery' or 'pickup'
+    const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+
+    
+    // CART HELPERS
+    
+    function getCart() {
+      return JSON.parse(localStorage.getItem('amosGardenCart') || '{}');
+    }
+
+    function formatPrice(price) {
+      return '₱' + price.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function calculateTotals() {
+      const cart = getCart();
+      let subtotal = 0;
+      let itemCount = 0;
+
+      Object.entries(cart).forEach(([id, qty]) => {
+        const product = products.find(p => p.id === parseInt(id));
+        if (product) {
+          subtotal += product.price * qty;
+          itemCount += qty;
+        }
+      });
+
+      const deliveryFee = selectedDeliveryType === 'delivery' ? 150 : 0;
+      const total = subtotal + deliveryFee;
+
+      return { subtotal, deliveryFee, total, itemCount };
+    }
+
+    
+    // RENDER ORDER SUMMARY
+    
+    function renderOrderSummary() {
+      const cart = getCart();
+      const { subtotal, deliveryFee, total, itemCount } = calculateTotals();
+      const summaryEl = document.getElementById('orderSummary');
+
+      if (Object.keys(cart).length === 0) {
+        summaryEl.innerHTML = `
+          <div class="text-center py-4">
+            <i class="bi bi-cart-x display-1 text-muted"></i>
+            <h5 class="mt-3" style="color: var(--bs-secondary);">Your cart is empty</h5>
+            <a href="shop.html" class="btn btn-primary mt-2">Start Shopping</a>
+          </div>
+        `;
+        return;
+      }
+
+      let itemsHtml = '';
+      Object.entries(cart).forEach(([id, qty]) => {
+        const product = products.find(p => p.id === parseInt(id));
+        if (product) {
+          itemsHtml += `
+            <div class="d-flex gap-3 mb-3">
+              <img src="${product.image}" alt="${product.name}" class="rounded" style="width: 60px; height: 60px; object-fit: cover;">
+              <div class="flex-grow-1">
+                <div class="d-flex justify-content-between">
+                  <span class="fw-medium small">${product.name}</span>
+                  <span class="fw-medium small">${formatPrice(product.price * qty)}</span>
+                </div>
+                <small class="text-muted">Qty: ${qty}</small>
+              </div>
+            </div>
+          `;
+        }
+      });
+
+      summaryEl.innerHTML = `
+        ${itemsHtml}
+        <hr>
+        <div class="summary-row">
+          <span>Subtotal (${itemCount} items)</span>
+          <span>${formatPrice(subtotal)}</span>
+        </div>
+        <div class="summary-row">
+          <span>Delivery Fee</span>
+          <span>${selectedDeliveryType === 'delivery' ? formatPrice(deliveryFee) : '<span class="text-success">Free (Pickup)</span>'}</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <span>${formatPrice(total)}</span>
+        </div>
+      `;
+    }
+
+    
+    // DELIVERY TYPE SELECTION
+    
+    function selectDelivery(type) {
+      selectedDeliveryType = type;
+
+      // Update UI
+      document.querySelectorAll('.delivery-option').forEach(opt => {
+        opt.classList.toggle('selected', opt.dataset.type === type);
+      });
+
+      document.getElementById('deliveryOption').checked = type === 'delivery';
+      document.getElementById('pickupOption').checked = type === 'pickup';
+
+      // Toggle address fields
+      const addressFields = document.getElementById('addressFields');
+      const pickupInfo = document.getElementById('pickupInfo');
+      const streetInput = document.getElementById('streetAddress');
+      const cityInput = document.getElementById('city');
+
+      if (type === 'pickup') {
+        addressFields.style.display = 'none';
+        pickupInfo.classList.add('show');
+        streetInput.removeAttribute('required');
+        cityInput.removeAttribute('required');
+      } else {
+        addressFields.style.display = 'block';
+        pickupInfo.classList.remove('show');
+        streetInput.setAttribute('required', 'required');
+        cityInput.setAttribute('required', 'required');
+      }
+
+      renderOrderSummary();
+    }
+
+    
+    // FORM VALIDATION & SUBMISSION
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('checkoutFormElement');
+
+      // Initial render
+      renderOrderSummary();
+
+      // Check if cart is empty
+      if (Object.keys(getCart()).length === 0) {
+        // Redirect to cart page or show message
+        // For now, just let the render handle it
+      }
+
+      // Form submission
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (form.checkValidity()) {
+          // Validate delivery address if delivery selected
+          if (selectedDeliveryType === 'delivery') {
+            const street = document.getElementById('streetAddress').value.trim();
+            const city = document.getElementById('city').value.trim();
+            if (!street || !city) {
+              form.classList.add('was-validated');
+              return;
+            }
+          }
+
+          // Process order
+          processOrder(form);
+        }
+
+        form.classList.add('was-validated');
+      }, false);
+    });
+
+    
+    // PROCESS ORDER
+    
+    function processOrder(form) {
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalHtml = submitBtn.innerHTML;
+
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Processing...';
+
+      // Simulate API call
+      setTimeout(() => {
+        // Generate order number
+        const orderNumber = 'AG-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substr(2, 4).toUpperCase();
+
+        // Clear cart
+        localStorage.removeItem('amosGardenCart');
+
+        // Show success modal (Components PDF - Modal)
+        document.getElementById('orderNumber').textContent = orderNumber;
+        successModal.show();
+
+        // Reset button
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalHtml;
+
+        // Redirect after modal closes (optional)
+        // setTimeout(() => window.location.href = 'my_account.html', 3000);
+      }, 1500);
+    }
+
+    
+    // PREFILL FROM LOCALSTORAGE (if user was logged in)
+    
+    function prefillForm() {
+      // In a real app, you'd check for logged-in user data
+      // For demo, we can check if there's saved form data
+      const savedData = localStorage.getItem('amosGardenCheckoutData');
+      if (savedData) {
+        try {
+          const data = JSON.parse(savedData);
+          Object.keys(data).forEach(key => {
+            const input = document.getElementById(key);
+            if (input) input.value = data[key];
+          });
+        } catch (e) {
+          console.warn('Failed to parse saved checkout data');
+        }
+      }
+    }
+
+    // Save form data as user types
+    document.getElementById('checkoutFormElement')?.addEventListener('input', function(e) {
+      if (e.target.matches('input, select, textarea')) {
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData);
+        localStorage.setItem('amosGardenCheckoutData', JSON.stringify(data));
+      }
+    });
+
+    // Initialize
+    prefillForm();
+  </script>
+</body>
+</html>
