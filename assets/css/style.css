@@ -321,13 +321,13 @@ a:hover {
 
 /* Product cards - slightly darker border for plant cards */
 .product-card {
-  border: 1px solid rgba(124, 194, 158, 0.45);
-  box-shadow: 0 2px 8px rgba(124, 194, 158, 0.08);
+  border: 1px solid rgba(124, 194, 158, 0.3);
+  box-shadow: 0 4px 12px rgba(45, 125, 94, 0.1);
 }
 
 .product-card:hover {
-  border-color: rgba(124, 194, 158, 0.7);
-  box-shadow: 0 4px 16px rgba(124, 194, 158, 0.15);
+  border-color: rgba(124, 194, 158, 0.6);
+  box-shadow: 0 8px 24px rgba(45, 125, 94, 0.15);
 }
 
 .card-img-top {
