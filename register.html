@@ -298,12 +298,24 @@
             const fullName = document.getElementById('fullName').value;
             const email = document.getElementById('email').value;
 
+            // Save current user session
             localStorage.setItem('amosGardenUser', JSON.stringify({
               name: fullName,
               email: email,
               loggedIn: true,
               loginTime: Date.now()
             }));
+
+            // Save to all users list
+            const users = JSON.parse(localStorage.getItem('amosGardenUsers') || '[]');
+            if (!users.find(u => u.email === email)) {
+              users.push({
+                full_name: fullName,
+                email: email,
+                created_at: new Date().toISOString().replace('T', ' ').slice(0, 19)
+              });
+              localStorage.setItem('amosGardenUsers', JSON.stringify(users));
+            }
 
             if (window.toast) {
               window.toast.success('Account created successfully! Redirecting...');

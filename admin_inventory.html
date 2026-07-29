@@ -172,6 +172,27 @@
       margin-bottom: 1rem;
     }
 
+    .file-upload-area {
+      border: 2px dashed #ddd;
+      border-radius: var(--bs-border-radius);
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background-color: #fafafa;
+    }
+
+    .file-upload-area:hover {
+      border-color: var(--bs-secondary);
+      background-color: #f0f7f4;
+    }
+
+    .file-upload-area.dragover {
+      border-color: var(--bs-primary) !important;
+      background-color: #eef7f4 !important;
+      transform: scale(1.01);
+    }
+
     @media (max-width: 767.98px) {
       .admin-container {
         padding: 2rem 1rem;
@@ -253,9 +274,9 @@
         <h2 style="color: var(--bs-secondary);"><i class="bi bi-flower1 me-2"></i>Current Plant Inventory</h2>
         <p>Manage the plants available in your shop</p>
       </div>
-      <a href="add_product.html" class="btn btn-primary" style="background-color: var(--bs-secondary); border-color: var(--bs-secondary);">
+      <button type="button" class="btn" style="background-color: var(--bs-secondary); border-color: var(--bs-secondary);" data-bs-toggle="modal" data-bs-target="#addPlantModal">
         <i class="bi bi-plus-circle me-2"></i>Add New Plant
-      </a>
+      </button>
     </div>
 
 
@@ -296,9 +317,9 @@
       <i class="bi bi-flower1"></i>
       <h3 style="color: var(--bs-secondary);">No plants in inventory</h3>
       <p class="text-muted">Start by adding your first plant to the shop.</p>
-      <a href="add_product.html" class="btn btn-primary mt-3" style="background-color: var(--bs-secondary); border-color: var(--bs-secondary);">
+      <button type="button" class="btn btn-primary mt-3" style="background-color: var(--bs-secondary); border-color: var(--bs-secondary);" data-bs-toggle="modal" data-bs-target="#addPlantModal">
         <i class="bi bi-plus-circle me-2"></i>Add New Plant
-      </a>
+      </button>
     </div>
   </div>
 
@@ -328,6 +349,77 @@
     </div>
   </footer>
 
+  <!-- Add Plant Modal -->
+  <div class="modal fade" id="addPlantModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: var(--bs-secondary); color: white;">
+          <h5 class="modal-title"><i class="bi bi-plus-circle me-2"></i>Add New Plant</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <form id="addPlantForm" novalidate>
+          <div class="modal-body p-4">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label for="plantName" class="form-label fw-semibold">Plant Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="plantName" name="name" required placeholder="e.g., Monstera Deliciosa">
+                <div class="invalid-feedback">Please enter a plant name.</div>
+              </div>
+              <div class="col-md-6">
+                <label for="plantCategory" class="form-label fw-semibold">Category <span class="text-danger">*</span></label>
+                <select class="form-select" id="plantCategory" name="category" required>
+                  <option value="" disabled selected>Select a category</option>
+                  <option value="Succulents">Succulents</option>
+                  <option value="Indoor Plants">Indoor Plants</option>
+                  <option value="Flowering">Flowering</option>
+                  <option value="Herbs">Herbs</option>
+                  <option value="Outdoor">Outdoor</option>
+                </select>
+                <div class="invalid-feedback">Please select a category.</div>
+              </div>
+              <div class="col-md-6">
+                <label for="plantPrice" class="form-label fw-semibold">Price (₱) <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" id="plantPrice" name="price" required min="0" step="0.01" placeholder="0.00">
+                <div class="invalid-feedback">Please enter a valid price.</div>
+              </div>
+              <div class="col-md-6">
+                <label for="plantStock" class="form-label fw-semibold">Stock Quantity <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" id="plantStock" name="stock" required min="0" placeholder="0">
+                <div class="invalid-feedback">Please enter a valid stock quantity.</div>
+              </div>
+              <div class="col-12">
+                <label for="plantImage" class="form-label fw-semibold">Plant Image <span class="text-danger">*</span></label>
+                <div class="file-upload-area" id="fileUploadArea" onclick="document.getElementById('plantImage').click()">
+                  <input type="file" id="plantImage" name="image" accept="image/png, image/jpeg, image/webp" required onchange="previewImage(this)" style="display: none;">
+                  <i class="bi bi-cloud-upload fs-1 text-muted"></i>
+                  <p class="mt-2 mb-0"><strong>Drag & drop or click to upload</strong></p>
+                  <small class="text-muted">PNG, JPG, or WebP (max 5MB)</small>
+                </div>
+                <div class="invalid-feedback">Please upload an image.</div>
+              </div>
+              <div class="col-12">
+                <label for="plantDescription" class="form-label fw-semibold">Description</label>
+                <textarea class="form-control" id="plantDescription" name="description" rows="3" placeholder="Add a description (optional)"></textarea>
+              </div>
+              <div class="col-12">
+                <div id="imagePreviewContainer" class="mt-3" style="display: none;">
+                  <label class="form-label">Preview</label>
+                  <img id="previewImg" src="" alt="Image Preview" class="image-preview">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer border-0 pt-0">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" style="background-color: var(--bs-secondary); border-color: var(--bs-secondary);">
+              <i class="bi bi-check-circle me-2"></i>Save Plant
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;" id="toastContainer">
 
   </div>
@@ -338,30 +430,49 @@
   <script src="js/plant-images.js"></script>
 
   <script>
-    const products = [
-      { id: 1, name: "Aloe Vera", price: 150.00, stock: 20, image: getPlantImage("Aloe Vera"), category: "Succulents" },
-      { id: 2, name: "Snake Plant", price: 200.00, stock: 15, image: getPlantImage("Snake Plant"), category: "Succulents" },
-      { id: 3, name: "Echeveria Elegans", price: 180.00, stock: 25, image: getPlantImage("Echeveria Elegans"), category: "Succulents" },
-      { id: 4, name: "Jade Plant", price: 220.00, stock: 8, image: getPlantImage("Jade Plant"), category: "Succulents" },
-      { id: 5, name: "Monstera Deliciosa", price: 350.00, stock: 10, image: getPlantImage("Monstera Deliciosa"), category: "Indoor Plants" },
-      { id: 6, name: "Peace Lily", price: 280.00, stock: 12, image: getPlantImage("Peace Lily"), category: "Indoor Plants" },
-      { id: 7, name: "ZZ Plant", price: 320.00, stock: 5, image: getPlantImage("ZZ Plant"), category: "Indoor Plants" },
-      { id: 8, name: "Fiddle Leaf Fig", price: 450.00, stock: 3, image: getPlantImage("Fiddle Leaf Fig"), category: "Indoor Plants" },
-      { id: 9, name: "Phalaenopsis Orchid", price: 450.00, stock: 15, image: getPlantImage("Phalaenopsis Orchid"), category: "Flowering" },
-      { id: 10, name: "Anthurium Red", price: 320.00, stock: 20, image: getPlantImage("Anthurium Red"), category: "Flowering" },
-      { id: 11, name: "Bromeliad", price: 280.00, stock: 14, image: getPlantImage("Bromeliad"), category: "Flowering" },
-      { id: 12, name: "African Violet", price: 180.00, stock: 30, image: getPlantImage("African Violet"), category: "Flowering" },
-      { id: 13, name: "Sweet Basil", price: 120.00, stock: 40, image: getPlantImage("Sweet Basil"), category: "Herbs" },
-      { id: 14, name: "Peppermint", price: 120.00, stock: 35, image: getPlantImage("Peppermint"), category: "Herbs" },
-      { id: 15, name: "Rosemary", price: 150.00, stock: 22, image: getPlantImage("Rosemary"), category: "Herbs" },
-      { id: 16, name: "Thai Basil", price: 130.00, stock: 18, image: getPlantImage("Thai Basil"), category: "Herbs" },
-      { id: 17, name: "Bougainvillea", price: 400.00, stock: 8, image: getPlantImage("Bougainvillea"), category: "Outdoor" },
-      { id: 18, name: "Hibiscus", price: 350.00, stock: 12, image: getPlantImage("Hibiscus"), category: "Outdoor" },
-      { id: 19, name: "Plumeria", price: 500.00, stock: 5, image: getPlantImage("Plumeria"), category: "Outdoor" },
-      { id: 20, name: "Bird of Paradise", price: 600.00, stock: 4, image: getPlantImage("Bird of Paradise"), category: "Outdoor" }
-    ];
+    // Load products from localStorage or use defaults
+    function loadProducts() {
+      const stored = localStorage.getItem('amosGardenProducts');
+      if (stored) {
+        try {
+          return JSON.parse(stored);
+        } catch (e) {
+          console.error('Failed to parse stored products:', e);
+        }
+      }
+      return [
+        { id: 1, name: "Aloe Vera", price: 150.00, stock: 20, image: getPlantImage("Aloe Vera"), category: "Succulents" },
+        { id: 2, name: "Snake Plant", price: 200.00, stock: 15, image: getPlantImage("Snake Plant"), category: "Succulents" },
+        { id: 3, name: "Echeveria Elegans", price: 180.00, stock: 25, image: getPlantImage("Echeveria Elegans"), category: "Succulents" },
+        { id: 4, name: "Jade Plant", price: 220.00, stock: 8, image: getPlantImage("Jade Plant"), category: "Succulents" },
+        { id: 5, name: "Monstera Deliciosa", price: 350.00, stock: 10, image: getPlantImage("Monstera Deliciosa"), category: "Indoor Plants" },
+        { id: 6, name: "Peace Lily", price: 280.00, stock: 12, image: getPlantImage("Peace Lily"), category: "Indoor Plants" },
+        { id: 7, name: "ZZ Plant", price: 320.00, stock: 5, image: getPlantImage("ZZ Plant"), category: "Indoor Plants" },
+        { id: 8, name: "Fiddle Leaf Fig", price: 450.00, stock: 3, image: getPlantImage("Fiddle Leaf Fig"), category: "Indoor Plants" },
+        { id: 9, name: "Phalaenopsis Orchid", price: 450.00, stock: 15, image: getPlantImage("Phalaenopsis Orchid"), category: "Flowering" },
+        { id: 10, name: "Anthurium Red", price: 320.00, stock: 20, image: getPlantImage("Anthurium Red"), category: "Flowering" },
+        { id: 11, name: "Bromeliad", price: 280.00, stock: 14, image: getPlantImage("Bromeliad"), category: "Flowering" },
+        { id: 12, name: "African Violet", price: 180.00, stock: 30, image: getPlantImage("African Violet"), category: "Flowering" },
+        { id: 13, name: "Sweet Basil", price: 120.00, stock: 40, image: getPlantImage("Sweet Basil"), category: "Herbs" },
+        { id: 14, name: "Peppermint", price: 120.00, stock: 35, image: getPlantImage("Peppermint"), category: "Herbs" },
+        { id: 15, name: "Rosemary", price: 150.00, stock: 22, image: getPlantImage("Rosemary"), category: "Herbs" },
+        { id: 16, name: "Thai Basil", price: 130.00, stock: 18, image: getPlantImage("Thai Basil"), category: "Herbs" },
+        { id: 17, name: "Bougainvillea", price: 400.00, stock: 8, image: getPlantImage("Bougainvillea"), category: "Outdoor" },
+        { id: 18, name: "Hibiscus", price: 350.00, stock: 12, image: getPlantImage("Hibiscus"), category: "Outdoor" },
+        { id: 19, name: "Plumeria", price: 500.00, stock: 5, image: getPlantImage("Plumeria"), category: "Outdoor" },
+        { id: 20, name: "Bird of Paradise", price: 600.00, stock: 4, image: getPlantImage("Bird of Paradise"), category: "Outdoor" }
+      ];
+    }
 
+    let products = loadProducts();
 
+    function saveProducts() {
+      localStorage.setItem('amosGardenProducts', JSON.stringify(products));
+    }
+
+    function getNextId() {
+      return products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
+    }
 
 
     const productBody = document.getElementById('productBody');
@@ -448,6 +559,7 @@
         const index = products.findIndex(p => p.id === productToDelete);
         if (index !== -1) {
           products.splice(index, 1);
+          saveProducts();
           renderProducts();
         }
         productToDelete = null;
@@ -456,9 +568,152 @@
     });
 
 
+    // Add plant form handling
+    const addPlantForm = document.getElementById('addPlantForm');
+    const plantImageInput = document.getElementById('plantImage');
+    const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+    const previewImg = document.getElementById('previewImg');
+    const fileUploadArea = document.getElementById('fileUploadArea');
 
+    // Image preview functionality for file upload
+    function previewImage(input) {
+      const file = input.files[0];
+      if (file) {
+        const validTypes = ['image/png', 'image/jpeg', 'image/webp'];
+        if (!validTypes.includes(file.type)) {
+          if (window.toast) window.toast.danger('Please upload a PNG, JPG, or WebP image.');
+          else alert('Please upload a PNG, JPG, or WebP image.');
+          input.value = '';
+          return;
+        }
 
+        if (file.size > 5 * 1024 * 1024) {
+          if (window.toast) window.toast.danger('File size must be less than 5MB.');
+          else alert('File size must be less than 5MB.');
+          input.value = '';
+          return;
+        }
 
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          previewImg.src = e.target.result;
+          imagePreviewContainer.style.display = 'block';
+          fileUploadArea.style.borderColor = '#28a745';
+          fileUploadArea.style.backgroundColor = '#eef7f4';
+          fileUploadArea.innerHTML = `
+            <i class="bi bi-check-circle fs-1 text-success"></i>
+            <p class="mt-2 mb-0"><strong>${file.name}</strong></p>
+            <small class="text-muted">${(file.size / 1024).toFixed(1)} KB &bull; ${file.type}</small>
+            <button type="button" class="btn btn-sm btn-outline-secondary mt-2" onclick="resetFileInput()">
+              <i class="bi bi-x-circle me-1"></i>Remove
+            </button>
+          `;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Reset file input
+    window.resetFileInput = function() {
+      const input = document.getElementById('plantImage');
+      const previewContainer = document.getElementById('imagePreviewContainer');
+      const uploadArea = document.getElementById('fileUploadArea');
+
+      input.value = '';
+      previewContainer.style.display = 'none';
+      uploadArea.style.borderColor = '#ddd';
+      uploadArea.style.backgroundColor = '';
+      uploadArea.innerHTML = `
+        <i class="bi bi-cloud-upload fs-1 text-muted"></i>
+        <p class="mt-2 mb-0"><strong>Drag & drop or click to upload</strong></p>
+        <small class="text-muted">PNG, JPG, or WebP (max 5MB)</small>
+      `;
+    };
+
+    // Drag and drop events
+    fileUploadArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      fileUploadArea.classList.add('dragover');
+    });
+
+    fileUploadArea.addEventListener('dragleave', () => {
+      fileUploadArea.classList.remove('dragover');
+    });
+
+    fileUploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      fileUploadArea.classList.remove('dragover');
+
+      const file = e.dataTransfer.files[0];
+      if (file) {
+        const input = document.getElementById('plantImage');
+        input.files = e.dataTransfer.files;
+        previewImage(input);
+      }
+    });
+
+    // Reset form and preview when modal is hidden
+    const addPlantModalEl = document.getElementById('addPlantModal');
+    addPlantModalEl.addEventListener('hidden.bs.modal', function() {
+      addPlantForm.reset();
+      addPlantForm.classList.remove('was-validated');
+      resetFileInput();
+    });
+
+    // Form submission
+    addPlantForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (!addPlantForm.checkValidity()) {
+        addPlantForm.classList.add('was-validated');
+        return;
+      }
+
+      const name = document.getElementById('plantName').value.trim();
+      const category = document.getElementById('plantCategory').value;
+      const price = parseFloat(document.getElementById('plantPrice').value);
+      const stock = parseInt(document.getElementById('plantStock').value, 10);
+      const imageFile = document.getElementById('plantImage').files[0];
+
+      if (!imageFile) {
+        if (window.toast) window.toast.danger('Please upload an image.');
+        else alert('Please upload an image.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const imageDataUrl = e.target.result;
+        const description = document.getElementById('plantDescription').value.trim();
+
+        const newProduct = {
+          id: getNextId(),
+          name,
+          category,
+          price,
+          stock,
+          image: imageDataUrl,
+          description
+        };
+
+        products.push(newProduct);
+        saveProducts();
+        renderProducts();
+
+        // Show success toast
+        if (window.toast) {
+          window.toast.success('Plant added successfully!');
+        } else {
+          alert('Plant added successfully!');
+        }
+
+        // Close modal
+        const modal = bootstrap.Modal.getInstance(addPlantModalEl);
+        if (modal) modal.hide();
+      };
+      reader.readAsDataURL(imageFile);
+    });
 
 
 
@@ -478,7 +733,7 @@
         });
       }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-      document.queryAll('.animate-fade-in-up').forEach(el => {
+      document.querySelectorAll('.animate-fade-in-up').forEach(el => {
         el.style.animationPlayState = 'paused';
         observer.observe(el);
       });

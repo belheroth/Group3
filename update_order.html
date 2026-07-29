@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Update Order Status - Amos Garden Admin">
+  <title>Update Order - Amos Garden Admin</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .admin-page {
+      background-color: #f4f7f6;
+      min-height: 100vh;
+    }
+
+    .admin-navbar {
+      border-bottom: 3px solid var(--bs-secondary) !important;
+    }
+
+    .admin-navbar .navbar-brand {
+      color: var(--bs-secondary) !important;
+    }
+
+    .admin-navbar .nav-link {
+      color: #555 !important;
+    }
+
+    .admin-navbar .nav-link.active {
+      color: var(--bs-secondary) !important;
+      font-weight: 700;
+    }
+
+    .admin-navbar .nav-link:hover {
+      color: var(--bs-primary) !important;
+    }
+
+    .admin-form-container {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .admin-form-card {
+      background: #fff;
+      border-radius: var(--bs-border-radius-lg);
+      box-shadow: var(--bs-box-shadow);
+      padding: 2.5rem;
+    }
+
+    .admin-form-title {
+      color: var(--bs-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .success-banner {
+      background-color: #eef7f4;
+      color: var(--bs-secondary);
+      padding: 1rem 1.5rem;
+      border-left: 5px solid var(--bs-primary);
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      border-radius: 0 var(--bs-border-radius) var(--bs-border-radius) 0;
+    }
+
+    .error-banner {
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 1rem 1.5rem;
+      border-left: 5px solid #dc3545;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      border-radius: 0 var(--bs-border-radius) var(--bs-border-radius) 0;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: var(--bs-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-control,
+    .form-select {
+      border: 1px solid #ddd;
+      border-radius: var(--bs-border-radius-sm);
+      padding: 0.875rem 1rem;
+      font-size: 1rem;
+      transition: var(--bs-transition);
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: var(--bs-primary);
+      box-shadow: 0 0 0 0.25rem rgba(82, 183, 136, 0.15);
+    }
+
+    .form-control::placeholder {
+      color: #999;
+    }
+
+    .current-status {
+      background: #f8f9fa;
+      border-radius: var(--bs-border-radius);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .current-status-label {
+      font-weight: 600;
+      color: var(--bs-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 767.98px) {
+      .admin-form-container {
+        padding: 1rem;
+      }
+
+      .admin-form-card {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body class="admin-page">
+
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top admin-navbar">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="admin_dashboard.html">
+        <i class="bi bi-lock-fill me-2"></i>Amos Garden Admin
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar" aria-controls="adminNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="adminNavbar">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" href="admin_dashboard.html"><i class="bi bi-box-seam me-1"></i>Orders</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin_inventory.html"><i class="bi bi-flower1 me-1"></i>Inventory</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin_customers.html"><i class="bi bi-people me-1"></i>Customers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html" target="_blank"><i class="bi bi-box-arrow-up-right me-1"></i>View Public Shop</a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="nav-link btn btn-outline-danger" href="logout.html"><i class="bi bi-box-arrow-right me-1"></i>Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="admin-form-container">
+    <div class="admin-form-card animate-fade-in-up">
+      <h2 class="admin-form-title"><i class="bi bi-pencil-square me-2"></i>Update Order Status</h2>
+
+      <div id="alertContainer"></div>
+
+      <div class="current-status">
+        <div class="current-status-label">Current Order Info</div>
+        <div id="orderInfo"></div>
+      </div>
+
+      <form id="updateForm" novalidate>
+        <input type="hidden" name="id" id="orderId">
+
+        <div class="form-group">
+          <label for="newStatus" class="form-label">New Status <span class="text-danger">*</span></label>
+          <select class="form-select" id="newStatus" name="status" required>
+            <option value="" disabled selected>Select new status</option>
+            <option value="Preparing">Preparing</option>
+            <option value="Ready to Deliver">Ready to Deliver</option>
+            <option value="Delivering">Delivering</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+          <div class="invalid-feedback">Please select a status.</div>
+        </div>
+
+        <div class="d-flex gap-2">
+          <button type="submit" class="btn btn-primary flex-grow-1" style="background-color: var(--bs-secondary); border-color: var(--bs-secondary);">
+            <i class="bi bi-check-circle me-2"></i>Update Status
+          </button>
+          <a href="admin_dashboard.html" class="btn btn-outline-secondary">
+            <i class="bi bi-x-circle me-2"></i>Cancel
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer mt-5">
+    <div class="container">
+      <div class="footer-bottom text-center">
+        <p class="mb-0">&copy; 2026 Amos Garden Admin. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+  <script src="assets/js/utils.js"></script>
+
+  <script>
+    // Load orders from localStorage or use defaults
+    function loadOrdersFromStorage() {
+      const stored = localStorage.getItem('amosGardenOrders');
+      if (stored) {
+        try {
+          return JSON.parse(stored);
+        } catch (e) {
+          console.error('Failed to parse stored orders:', e);
+        }
+      }
+      return [
+        { id: 12, customer_name: "Maria Santos", phone: "0917-123-4567", email: "maria@example.com", order_type: "Delivery", delivery_address: "123 Green St, BF Homes, Parañaque", total_amount: 1250.00, order_date: "2026-07-25 10:30:00", status: "Pending" },
+        { id: 11, customer_name: "Juan Dela Cruz", phone: "0918-234-5678", email: "juan@example.com", order_type: "Pickup", delivery_address: "Store Pickup", total_amount: 850.00, order_date: "2026-07-25 09:15:00", status: "Preparing" },
+        { id: 10, customer_name: "Ana Reyes", phone: "0919-345-6789", email: "ana@example.com", order_type: "Delivery", delivery_address: "456 Rose Ave, Don Bosco, Parañaque", total_amount: 2100.00, order_date: "2026-07-24 16:45:00", status: "Ready to Deliver" },
+        { id: 9, customer_name: "Pedro Garcia", phone: "0920-456-7890", email: "pedro@example.com", order_type: "Delivery", delivery_address: "789 Lily Lane, San Antonio, Parañaque", total_amount: 3200.00, order_date: "2026-07-24 14:20:00", status: "Delivering" },
+        { id: 8, customer_name: "Lisa Chen", phone: "0921-567-8901", email: "lisa@example.com", order_type: "Pickup", delivery_address: "Store Pickup", total_amount: 580.00, order_date: "2026-07-23 11:00:00", status: "Delivered" },
+        { id: 7, customer_name: "Roberto Lim", phone: "0922-678-9012", email: "roberto@example.com", order_type: "Delivery", delivery_address: "321 Orchid Rd, Moonwalk, Parañaque", total_amount: 1750.00, order_date: "2026-07-23 10:00:00", status: "Delivered" },
+        { id: 6, customer_name: "Carmen Wong", phone: "0923-789-0123", email: "carmen@example.com", order_type: "Delivery", delivery_address: "654 Sunflower Blvd, Sucat, Parañaque", total_amount: 980.00, order_date: "2026-07-22 15:30:00", status: "Delivered" },
+        { id: 5, customer_name: "Antonio Cruz", phone: "0924-890-1234", email: "antonio@example.com", order_type: "Pickup", delivery_address: "Store Pickup", total_amount: 420.00, order_date: "2026-07-22 09:45:00", status: "Delivered" },
+        { id: 4, customer_name: "Dad", phone: null, email: null, order_type: "Delivery", delivery_address: "adawd", total_amount: 2131.00, order_date: "2026-04-08 09:00:09", status: "Delivered" },
+        { id: 3, customer_name: "Dwa", phone: null, email: null, order_type: "Delivery", delivery_address: "da", total_amount: 200.00, order_date: "2026-04-08 08:55:02", status: "Delivered" }
+      ];
+    }
+
+    // Normalize order to handle both old and new formats
+    function normalizeOrder(order) {
+      // Old format: orderNumber, customer.name, customer.deliveryType, total, date, status: 'Processing'
+      if (order.orderNumber && order.customer) {
+        return {
+          id: order.id || parseInt(order.orderNumber.replace('AG-', '')) || Date.now(),
+          customer_name: order.customer?.name || 'Unknown',
+          phone: order.customer?.phone || '',
+          email: order.customer?.email || '',
+          order_type: order.customer?.deliveryType === 'delivery' ? 'Delivery' : 'Pickup',
+          delivery_address: order.customer?.address ? order.customer.address + (order.customer.city ? ', ' + order.customer.city : '') : 'Store Pickup',
+          total_amount: Number(order.total) || 0,
+          order_date: order.date || new Date().toISOString(),
+          status: order.status === 'Processing' ? 'Pending' : order.status
+        };
+      }
+      // New format - ensure total_amount is number
+      return {
+        ...order,
+        total_amount: Number(order.total_amount) || 0
+      };
+    }
+
+    let orders = loadOrdersFromStorage().map(normalizeOrder);
+
+    function saveOrders() {
+      localStorage.setItem('amosGardenOrders', JSON.stringify(orders));
+    }
+
+    function formatPrice(price) {
+      return '₱' + price.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function formatDate(dateStr) {
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('en-PH', { month: 'short', day: 'numeric', year: '2-digit', hour: '2-digit', minute: '2-digit' });
+    }
+
+    const statusConfig = {
+      'Pending': { class: 'status-pending', label: 'Pending' },
+      'Preparing': { class: 'status-preparing', label: 'Preparing' },
+      'Ready to Deliver': { class: 'status-ready', label: 'Ready to Deliver' },
+      'Delivering': { class: 'status-delivering', label: 'Delivering' },
+      'Delivered': { class: 'status-delivered', label: 'Delivered' },
+      'Cancelled': { class: 'bg-danger', label: 'Cancelled' }
+    };
+
+    const typeConfig = {
+      'Delivery': { class: 'status-pending', icon: 'bi-truck', label: 'Delivery' },
+      'Pickup': { class: 'status-pickup', icon: 'bi-shop', label: 'Pickup' }
+    };
+
+    function showAlert(message, type = 'danger') {
+      const container = document.getElementById('alertContainer');
+      const alertClass = type === 'success' ? 'success-banner' : 'error-banner';
+      container.innerHTML = `
+        <div class="alert ${alertClass} alert-dismissible fade show" role="alert">
+          ${message}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      `;
+    }
+
+    function clearAlert() {
+      document.getElementById('alertContainer').innerHTML = '';
+    }
+
+    function loadOrder() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const idParam = urlParams.get('id');
+      const id = parseInt(idParam);
+      const status = urlParams.get('status');
+
+      console.log('URL params:', { idParam, id, status });
+      console.log('Available orders:', orders.map(o => ({ id: o.id, idType: typeof o.id, customer: o.customer_name })));
+
+      if (!idParam || isNaN(id)) {
+        showAlert('Invalid order ID.');
+        return;
+      }
+
+      // Compare using loose equality to handle string vs number
+      const order = orders.find(o => o.id == id);
+
+      console.log('Found order:', order);
+
+      if (!order) {
+        showAlert('Order not found.');
+        return;
+      }
+
+      document.getElementById('orderId').value = order.id;
+
+      const st = statusConfig[order.status] || { class: 'status-pending', label: order.status };
+      const ty = typeConfig[order.order_type] || { class: 'status-pending', icon: 'bi-box', label: order.order_type };
+
+      document.getElementById('orderInfo').innerHTML = `
+        <div class="row g-3">
+          <div class="col-md-6">
+            <strong>Order ID:</strong> <span class="ms-2">#${order.id}</span>
+          </div>
+          <div class="col-md-6">
+            <strong>Customer:</strong> <span class="ms-2">${order.customer_name}</span>
+          </div>
+          <div class="col-md-6">
+            <strong>Type:</strong> <span class="ms-2"><span class="badge ${ty.class} d-inline-flex align-items-center gap-1"><i class="bi ${ty.icon}"></i>${ty.label}</span></span>
+          </div>
+          <div class="col-md-6">
+            <strong>Total:</strong> <span class="ms-2" style="color: var(--bs-primary-dark);">${formatPrice(order.total_amount)}</span>
+          </div>
+          <div class="col-md-6">
+            <strong>Date:</strong> <span class="ms-2">${formatDate(order.order_date)}</span>
+          </div>
+          <div class="col-md-6">
+            <strong>Current Status:</strong> <span class="ms-2"><span class="badge ${st.class}">${st.label}</span></span>
+          </div>
+        </div>
+      `;
+
+      // Pre-select the status from URL
+      if (status) {
+        document.getElementById('newStatus').value = status;
+      }
+    }
+
+    const form = document.getElementById('updateForm');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      event.stopPropagation();
+      clearAlert();
+
+      if (!form.checkValidity()) {
+        form.classList.add('was-validated');
+        return;
+      }
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalHtml = submitBtn.innerHTML;
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Updating...';
+
+      const id = parseInt(document.getElementById('orderId').value);
+      const newStatus = document.getElementById('newStatus').value;
+
+      const orderIndex = orders.findIndex(o => o.id === id);
+
+      if (orderIndex === -1) {
+        showAlert('Order not found.', 'danger');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalHtml;
+        return;
+      }
+
+      // Validate status transition
+      const currentStatus = orders[orderIndex].status;
+      const validTransitions = {
+      'Pending': ['Preparing', 'Cancelled'],
+      'Preparing': ['Ready to Deliver', 'Cancelled'],
+      'Ready to Deliver': ['Delivering', 'Cancelled'],
+      'Delivering': ['Delivered', 'Cancelled'],
+      'Delivered': [],
+      'Cancelled': []
+    };
+
+      if (!validTransitions[currentStatus]?.includes(newStatus)) {
+        showAlert(`Invalid status transition from ${currentStatus} to ${newStatus}.`, 'danger');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalHtml;
+        return;
+      }
+
+      // Update order
+      orders[orderIndex].status = newStatus;
+      orders[orderIndex].updated_at = new Date().toISOString().replace('T', ' ').slice(0, 19);
+      saveOrders();
+
+      showAlert(`<i class="bi bi-check-circle-fill me-2"></i>Order #${id} status updated to "${newStatus}"!`, 'success');
+
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalHtml;
+
+      // Redirect back to dashboard after short delay
+      setTimeout(() => {
+        window.location.href = 'admin_dashboard.html';
+      }, 1500);
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      if (!AdminSession.isLoggedIn()) {
+        window.location.href = 'admin_login.html';
+        return;
+      }
+
+      loadOrder();
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+      document.querySelectorAll('.animate-fade-in-up').forEach(el => {
+        el.style.animationPlayState = 'paused';
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>

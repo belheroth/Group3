@@ -36,7 +36,13 @@
                         <a class="nav-link" href="landscaping.html">Landscaping</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="cart.html"><i class="bi bi-cart3 me-1"></i>Cart <span class="badge bg-danger rounded-pill" id="cartCount">0</span></a>
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html"><i class="bi bi-cart3 me-1"></i>Cart <span class="badge bg-danger rounded-pill d-none" id="cartCount">0</span></a>
                     </li>
                     <li class="nav-item ms-lg-2">
                         <a class="nav-link btn btn-primary btn-nav" href="login.html">Sign Up / Login</a>
@@ -53,7 +59,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item"><a href="products.html">Products</a></li>
+                            <li class="breadcrumb-item"><a href="shop.html">Shop</a></li>
                             <li class="breadcrumb-item active" aria-current="page" id="breadcrumb-product">Product Details</li>
                         </ol>
                     </nav>
@@ -142,123 +148,47 @@
 
     <script src="assets/js/utils.js"></script>
     <script>
-        const products = [
-            {
-                id: 1,
-                name: "Monstera Deliciosa",
-                category: "Indoor Plants",
-                price: 350.00,
-                image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80",
-                description: "A popular tropical plant with large, glossy leaves. Perfect for adding a touch of the jungle to your home. This plant needs bright, indirect light and regular watering.",
-                images: [
-                    "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80",
-                    "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80",
-                    "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80"
-                ],
-                specs: {
-                    "Plant Type": "Tropical Evergreen",
-                    "Lighting Requirements": "Bright, indirect light",
-                    "Watering Needs": "Moderate watering, let soil dry slightly between waterings",
-                    "Temperature": "65-80°F (18-27°C)",
-                    "Humidity": "Average to high humidity",
-                    "Fertilizer": "Fertilize monthly during growing season",
-                    "Growth Rate": "Fast",
-                    "Size": "Up to 6 feet tall (indoor)"
-                }
-            },
-            {
-                id: 2,
-                name: "Snake Plant",
-                category: "Succulents",
-                price: 200.00,
-                image: "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80",
-                description: "Low maintenance plant that's perfect for beginners. It's also known for its air-purifying qualities and unique appearance.",
-                images: [
-                    "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80",
-                    "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80",
-                    "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80"
-                ],
-                specs: {
-                    "Plant Type": "Succulent",
-                    "Lighting Requirements": "Bright to low light",
-                    "Watering Needs": "Low watering, allow soil to dry completely between waterings",
-                    "Temperature": "65-80°F (18-27°C)",
-                    "Humidity": "Low to average humidity",
-                    "Fertilizer": "Fertilize monthly in spring",
-                    "Growth Rate": "Slow",
-                    "Size": "Up to 2 feet tall"
-                }
-            },
-            {
-                id: 3,
-                name: "Peace Lily",
-                category: "Flowering",
-                price: 280.00,
-                image: "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80",
-                description: "Beautiful flower plant that blooms white flowers. Known for its air-purifying properties and easy care.",
-                images: [
-                    "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80",
-                    "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80",
-                    "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80"
-                ],
-                specs: {
-                    "Plant Type": "Tropical Flowering",
-                    "Lighting Requirements": "Bright, indirect light",
-                    "Watering Needs": "Keep soil evenly moist but not soggy",
-                    "Temperature": "65-80°F (18-27°C)",
-                    "Humidity": "Moderate to high humidity",
-                    "Fertilizer": "Fertilize every 2-3 months",
-                    "Growth Rate": "Medium",
-                    "Size": "Up to 3 feet tall"
-                }
-            },
-            {
-                id: 4,
-                name: "ZZ Plant",
-                category: "Indoor Plants",
-                price: 320.00,
-                image: "https://images.unsplash.com/photo-1614016821356-5c0b2f5d8c6b?auto=format&fit=crop&w=400&q=80",
-                description: "Very low maintenance plant with glossy, dark green leaves. Tolerates low light conditions well.",
-                images: [
-                    "https://images.unsplash.com/photo-1614016821356-5c0b2f5d8c6b?auto=format&fit=crop&w=400&q=80",
-                    "https://images.unsplash.com/photo-1614016821356-5c0b2f5d8c6b?auto=format&fit=crop&w=400&q=80",
-                    "https://images.unsplash.com/photo-1614016821356-5c0b2f5d8c6b?auto=format&fit=crop&w=400&q=80"
-                ],
-                specs: {
-                    "Plant Type": "Tropical Evergreen",
-                    "Lighting Requirements": "Low to bright indirect light",
-                    "Watering Needs": "Low watering, allow soil to dry out completely",
-                    "Temperature": "65-75°F (18-24°C)",
-                    "Humidity": "Average humidity",
-                    "Fertilizer": "Fertilize quarterly",
-                    "Growth Rate": "Slow",
-                    "Size": "Up to 3 feet tall"
-                }
-            },
-            {
-                id: 5,
-                name: "Fiddle Leaf Fig",
-                category: "Indoor Plants",
-                price: 450.00,
-                image: "https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=400&q=80",
-                description: "Large, glossy leaves that make a bold statement in any room. Popular as a centerpiece plant.",
-                images: [
-                    "https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=400&q=80",
-                    "https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=400&q=80",
-                    "https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=400&q=80"
-                ],
-                specs: {
-                    "Plant Type": "Tropical Evergreen",
-                    "Lighting Requirements": "Bright, indirect light",
-                    "Watering Needs": "Moderate watering, let soil dry slightly between waterings",
-                    "Temperature": "65-75°F (18-24°C)",
-                    "Humidity": "Moderate to high humidity",
-                    "Fertilizer": "Fertilize monthly during growing season",
-                    "Growth Rate": "Fast",
-                    "Size": "Up to 8 feet tall (indoor)"
+        // Default fallback products (same as shop.html)
+        const defaultProducts = [
+            { id: 1, name: "Golden Pothos", category: "Indoor Plants", price: 350.00, stock: 25, image: "assets/images/defo.png", description: "A hardy, trailing vine with heart-shaped leaves. Perfect for beginners and low-light spaces.", specs: { "Light": "Low to bright indirect light", "Water": "When top inch of soil is dry", "Difficulty": "Easy", "Pet Safe": "No" } },
+            { id: 2, name: "Snake Plant", category: "Succulents", price: 450.00, stock: 18, image: "assets/images/defo.png", description: "Tough, air-purifying plant with upright sword-like leaves. Thrives on neglect.", specs: { "Light": "Low to bright indirect light", "Water": "Every 2-3 weeks, let soil dry completely", "Difficulty": "Very Easy", "Pet Safe": "No" } },
+            { id: 3, name: "Peace Lily", category: "Indoor Plants", price: 380.00, stock: 22, image: "assets/images/defo.png", description: "Elegant white blooms and glossy green leaves. Great for improving indoor air quality.", specs: { "Light": "Low to medium indirect light", "Water": "Keep soil moist, don't let dry out", "Difficulty": "Easy", "Pet Safe": "No" } },
+            { id: 4, name: "Jade Plant", category: "Succulents", price: 320.00, stock: 30, image: "assets/images/defo.png", description: "Compact succulent with thick, oval leaves. Symbol of good luck and prosperity.", specs: { "Light": "Bright indirect to direct sun", "Water": "When soil is completely dry", "Difficulty": "Easy", "Pet Safe": "No" } },
+            { id: 5, name: "Monstera Deliciosa", category: "Indoor Plants", price: 550.00, stock: 12, image: "assets/images/defo.png", description: "Iconic split leaves make this a statement piece. Loves bright, indirect light.", specs: { "Light": "Bright indirect light", "Water": "When top 2 inches of soil are dry", "Difficulty": "Moderate", "Pet Safe": "No" } },
+            { id: 6, name: "Peace Lily", category: "Indoor Plants", price: 280.00, stock: 12, image: "assets/images/defo.png", description: "Air-purifying, elegant white flowers.", specs: { "Light": "Low to medium indirect light", "Water": "Keep soil moist", "Difficulty": "Easy", "Pet Safe": "No" } },
+            { id: 7, name: "ZZ Plant", category: "Indoor Plants", price: 320.00, stock: 8, image: "assets/images/defo.png", description: "Nearly indestructible, thrives on neglect.", specs: { "Light": "Low to bright indirect light", "Water": "Every 2-3 weeks", "Difficulty": "Very Easy", "Pet Safe": "No" } },
+            { id: 8, name: "Fiddle Leaf Fig", category: "Indoor Plants", price: 450.00, stock: 6, image: "assets/images/defo.png", description: "Large violin-shaped leaves, dramatic presence.", specs: { "Light": "Bright indirect light", "Water": "When top inch of soil is dry", "Difficulty": "Moderate", "Pet Safe": "No" } },
+            { id: 9, name: "Phalaenopsis Orchid", category: "Flowering", price: 450.00, stock: 15, image: "assets/images/defo.png", description: "Long-lasting blooms, elegant and exotic.", specs: { "Light": "Bright indirect light", "Water": "Weekly, let drain completely", "Difficulty": "Moderate", "Pet Safe": "Yes" } },
+            { id: 10, name: "Anthurium Red", category: "Flowering", price: 320.00, stock: 20, image: "assets/images/defo.png", description: "Glossy heart-shaped flowers year-round.", specs: { "Light": "Bright indirect light", "Water": "Keep soil slightly moist", "Difficulty": "Moderate", "Pet Safe": "No" } },
+            { id: 11, name: "Bromeliad", category: "Flowering", price: 280.00, stock: 14, image: "assets/images/defo.png", description: "Tropical flower with vibrant bracts.", specs: { "Light": "Bright indirect light", "Water": "Fill central cup weekly", "Difficulty": "Easy", "Pet Safe": "Yes" } },
+            { id: 12, name: "African Violet", category: "Flowering", price: 180.00, stock: 30, image: "assets/images/defo.png", description: "Compact flowering plant for small spaces.", specs: { "Light": "Bright indirect light", "Water": "Bottom water when soil dry", "Difficulty": "Moderate", "Pet Safe": "Yes" } },
+            { id: 13, name: "Sweet Basil", category: "Herbs", price: 120.00, stock: 40, image: "assets/images/defo.png", description: "Essential herb for Italian cooking.", specs: { "Light": "Full sun (6+ hours)", "Water": "Keep soil moist", "Difficulty": "Easy", "Pet Safe": "Yes" } },
+            { id: 14, name: "Peppermint", category: "Herbs", price: 120.00, stock: 35, image: "assets/images/defo.png", description: "Refreshing mint for teas and desserts.", specs: { "Light": "Partial to full sun", "Water": "Keep soil consistently moist", "Difficulty": "Easy", "Pet Safe": "Yes" } },
+            { id: 15, name: "Rosemary", category: "Herbs", price: 150.00, stock: 22, image: "assets/images/defo.png", description: "Fragrant woody herb for roasting.", specs: { "Light": "Full sun (6+ hours)", "Water": "Let soil dry between waterings", "Difficulty": "Moderate", "Pet Safe": "Yes" } },
+            { id: 16, name: "Thai Basil", category: "Herbs", price: 130.00, stock: 18, image: "assets/images/defo.png", description: "Spicy anise flavor for Asian dishes.", specs: { "Light": "Full sun (6+ hours)", "Water": "Keep soil moist", "Difficulty": "Easy", "Pet Safe": "Yes" } },
+            { id: 17, name: "Bougainvillea", category: "Outdoor", price: 400.00, stock: 8, image: "assets/images/defo.png", description: "Vibrant climber for walls and fences.", specs: { "Light": "Full sun", "Water": "Deep water weekly when established", "Difficulty": "Easy", "Pet Safe": "Yes" } },
+            { id: 18, name: "Hibiscus", category: "Outdoor", price: 350.00, stock: 12, image: "assets/images/defo.png", description: "Large tropical flowers, sun-loving.", specs: { "Light": "Full sun", "Water": "Keep soil moist", "Difficulty": "Moderate", "Pet Safe": "No" } },
+            { id: 19, name: "Plumeria", category: "Outdoor", price: 500.00, stock: 5, image: "assets/images/defo.png", description: "Fragrant frangipani flowers.", specs: { "Light": "Full sun", "Water": "Deep water, let dry between", "Difficulty": "Moderate", "Pet Safe": "No" } },
+            { id: 20, name: "Bird of Paradise", category: "Outdoor", price: 600.00, stock: 4, image: "assets/images/defo.png", description: "Striking orange and blue flowers.", specs: { "Light": "Full sun to bright indirect", "Water": "Keep soil moist", "Difficulty": "Moderate", "Pet Safe": "No" } }
+        ];
+
+        // Load products from localStorage (admin inventory) with fallback to defaults
+        function loadProducts() {
+            const stored = localStorage.getItem('amosGardenProducts');
+            if (stored) {
+                try {
+                    const parsed = JSON.parse(stored);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        return parsed;
+                    }
+                } catch (e) {
+                    console.error('Failed to parse stored products:', e);
                 }
             }
-        ];
+            return defaultProducts;
+        }
+
+        const products = loadProducts();
 
         function renderProductDetails() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -278,13 +208,15 @@
 
             document.getElementById('breadcrumb-product').textContent = product.name;
 
-            const carouselItems = product.images.map((img, index) => `
+            // Handle images - admin inventory has single image, old format has images array
+            const images = product.images || [product.image || 'assets/images/defo.png'];
+            const carouselItems = images.map((img, index) => `
                 <div class="carousel-item ${index === 0 ? 'active' : ''}">
                     <img src="${img}" class="d-block w-100" alt="${product.name}" style="height: 400px; object-fit: cover;">
                 </div>
             `).join('');
 
-            const carouselIndicators = product.images.map((_, index) => `
+            const carouselIndicators = images.map((_, index) => `
                 <button type="button" data-bs-target="#productCarousel" data-bs-slide-to="${index}" ${index === 0 ? 'class="active"' : ''}></button>
             `).join('');
 
@@ -339,22 +271,49 @@
                 </div>
             `;
 
+            // Handle specs - admin inventory might not have specs, fallback to basic care info
             let specsHTML = '';
-            for (const [key, value] of Object.entries(product.specs)) {
-                specsHTML += `
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="spec-${key.replace(/\s+/g, '-')}">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#spec-${key.replace(/\s+/g, '-')}Content">
-                                ${key}
-                            </button>
-                        </h2>
-                        <div id="spec-${key.replace(/\s+/g, '-')}Content" class="accordion-collapse collapse">
-                            <div class="accordion-body">
-                                ${value}
+            if (product.specs) {
+                for (const [key, value] of Object.entries(product.specs)) {
+                    specsHTML += `
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="spec-${key.replace(/\s+/g, '-')}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#spec-${key.replace(/\s+/g, '-')}Content">
+                                    ${key}
+                                </button>
+                            </h2>
+                            <div id="spec-${key.replace(/\s+/g, '-')}Content" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                    ${value}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `;
+                    `;
+                }
+            } else {
+                // Default specs for admin inventory products
+                const defaultSpecs = {
+                    "Light": "Bright indirect light",
+                    "Water": "When top inch of soil is dry",
+                    "Difficulty": "Easy to Moderate",
+                    "Pet Safe": "Varies by species"
+                };
+                for (const [key, value] of Object.entries(defaultSpecs)) {
+                    specsHTML += `
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="spec-${key.replace(/\s+/g, '-')}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#spec-${key.replace(/\s+/g, '-')}Content">
+                                    ${key}
+                                </button>
+                            </h2>
+                            <div id="spec-${key.replace(/\s+/g, '-')}Content" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                    ${value}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
             }
 
             document.getElementById('productDetails').innerHTML = carouselHTML + infoHTML;

@@ -317,17 +317,36 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
+  <script src="assets/js/utils.js"></script>
+
   <script>
-    const customers = [
-      { id: 1, full_name: "Maria Santos", email: "maria@example.com", created_at: "2026-01-15 10:30:00" },
-      { id: 2, full_name: "Juan Dela Cruz", email: "juan@example.com", created_at: "2026-02-20 09:15:00" },
-      { id: 3, full_name: "Ana Reyes", email: "ana@example.com", created_at: "2026-03-10 14:20:00" },
-      { id: 4, full_name: "Pedro Garcia", email: "pedro@example.com", created_at: "2026-03-25 16:45:00" },
-      { id: 5, full_name: "Lisa Chen", email: "lisa@example.com", created_at: "2026-04-05 11:00:00" },
-      { id: 6, full_name: "Roberto Lim", email: "roberto@example.com", created_at: "2026-04-18 13:30:00" },
-      { id: 7, full_name: "Carmen Wong", email: "carmen@example.com", created_at: "2026-05-02 10:15:00" },
-      { id: 8, full_name: "Antonio Cruz", email: "antonio@example.com", created_at: "2026-05-20 09:45:00" }
-    ];
+    // Load customers from localStorage or use defaults
+    function loadCustomersFromStorage() {
+      const stored = localStorage.getItem('amosGardenUsers');
+      if (stored) {
+        try {
+          return JSON.parse(stored);
+        } catch (e) {
+          console.error('Failed to parse stored users:', e);
+        }
+      }
+      // Default sample data
+      return [
+        { id: 1, full_name: "Maria Santos", email: "maria@example.com", created_at: "2026-01-15 10:30:00" },
+        { id: 2, full_name: "Juan Dela Cruz", email: "juan@example.com", created_at: "2026-02-20 09:15:00" },
+        { id: 3, full_name: "Ana Reyes", email: "ana@example.com", created_at: "2026-03-10 14:20:00" },
+        { id: 4, full_name: "Pedro Garcia", email: "pedro@example.com", created_at: "2026-03-25 16:45:00" },
+        { id: 5, full_name: "Lisa Chen", email: "lisa@example.com", created_at: "2026-04-05 11:00:00" },
+        { id: 6, full_name: "Roberto Lim", email: "roberto@example.com", created_at: "2026-04-18 13:30:00" },
+        { id: 7, full_name: "Carmen Wong", email: "carmen@example.com", created_at: "2026-05-02 10:15:00" },
+        { id: 8, full_name: "Antonio Cruz", email: "antonio@example.com", created_at: "2026-05-20 09:45:00" }
+      ];
+    }
+
+    let customers = loadCustomersFromStorage();
+
+    // Assign IDs if not present
+    customers = customers.map((c, i) => ({ ...c, id: c.id || i + 1 }));
 
     const orderHistory = {
       "maria@example.com": [
@@ -516,6 +535,26 @@
     document.addEventListener('DOMContentLoaded', function() {
       renderStats();
       renderCustomers();
+
+      // Function to reload customers from localStorage
+      function reloadCustomers() {
+        customers = loadCustomersFromStorage();
+        customers = customers.map((c, i) => ({ ...c, id: c.id || i + 1 }));
+        renderStats();
+        renderCustomers();
+      }
+
+      // Listen for storage changes from other tabs
+      window.addEventListener('storage', function(e) {
+        if (e.key === 'amosGardenUsers') {
+          reloadCustomers();
+        }
+      });
+
+      // Also check for updates when window regains focus (same tab navigation)
+      window.addEventListener('focus', function() {
+        reloadCustomers();
+      });
 
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {

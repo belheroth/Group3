@@ -191,10 +191,25 @@
       renderOrders(orders);
     }
 
+    function normalizeOrder(order) {
+      // Handle both old format (from original code) and new format (from checkout.html)
+      return {
+        orderNumber: order.orderNumber || ('AG-' + String(order.id).padStart(4, '0')),
+        date: order.date || order.order_date,
+        itemCount: order.itemCount || 1,
+        deliveryType: order.customer?.deliveryType || order.order_type,
+        total: order.total !== undefined ? order.total : order.total_amount,
+        status: order.status
+      };
+    }
+
     function renderOrders(orders) {
       const container = document.getElementById('ordersContent');
 
-      if (orders.length === 0) {
+      // Normalize orders to handle both formats
+      const normalizedOrders = orders.map(normalizeOrder);
+
+      if (normalizedOrders.length === 0) {
         container.innerHTML = `
           <div class="text-center py-5">
             <i class="bi bi-receipt display-1 text-muted"></i>
@@ -222,15 +237,16 @@
             <tbody>
       `;
 
-      orders.forEach(order => {
+      normalizedOrders.forEach(order => {
+        const isPickup = order.deliveryType === 'Pickup' || order.deliveryType === 'pickup';
         html += `
           <tr>
             <td><strong>${order.orderNumber}</strong></td>
             <td>${formatDate(order.date)}</td>
             <td>${order.itemCount || 0}</td>
             <td>
-              <span class="badge ${order.customer?.deliveryType === 'pickup' ? 'badge-pickup' : 'bg-primary'}">
-                <i class="bi ${order.customer?.deliveryType === 'pickup' ? 'bi-shop' : 'bi-truck'} me-1"></i>${order.customer?.deliveryType === 'pickup' ? 'Pickup' : 'Delivery'}
+              <span class="badge ${isPickup ? 'badge-pickup' : 'bg-primary'}">
+                <i class="bi ${isPickup ? 'bi-shop' : 'bi-truck'} me-1"></i>${isPickup ? 'Pickup' : 'Delivery'}
               </span>
             </td>
             <td><strong style="color: var(--bs-primary-dark);">${formatPrice(order.total)}</strong></td>

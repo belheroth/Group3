@@ -663,28 +663,58 @@
           total: total
         };
 
-         
-        const savedOrders = localStorage.getItem('amosGardenOrders');
-        const orders = savedOrders ? JSON.parse(savedOrders) : [];
-        orders.unshift(order);
-        localStorage.setItem('amosGardenOrders', JSON.stringify(orders));
 
-         
+        const savedOrders = localStorage.getItem('amosGardenOrders');
+        const existingOrders = savedOrders ? JSON.parse(savedOrders) : [];
+        // Handle both old (orderNumber) and new (id) formats for nextId
+        const nextId = existingOrders.length > 0
+          ? Math.max(...existingOrders.map(o => o.id || parseInt((o.orderNumber || '').replace('AG-', '')) || 0)) + 1
+          : 1;
+
+        // Build full address for delivery
+        let deliveryAddress = 'Store Pickup';
+        if (selectedDeliveryType === 'delivery') {
+          const street = formData.get('street_address');
+          const apt = formData.get('apt_suite');
+          const city = formData.get('city');
+          deliveryAddress = street + (apt ? ', ' + apt : '') + ', ' + city;
+        }
+
+        // Format date as expected by admin_dashboard.html
+        const orderDate = new Date().toISOString().replace('T', ' ').slice(0, 19);
+
+        const newOrder = {
+          id: nextId,
+          customer_name: formData.get('first_name') + ' ' + formData.get('last_name'),
+          phone: formData.get('phone'),
+          email: formData.get('email'),
+          order_type: selectedDeliveryType === 'delivery' ? 'Delivery' : 'Pickup',
+          delivery_address: deliveryAddress,
+          total_amount: total,
+          order_date: orderDate,
+          status: 'Pending'
+        };
+
+        // Save to localStorage (prepend to show newest first)
+        existingOrders.unshift(newOrder);
+        localStorage.setItem('amosGardenOrders', JSON.stringify(existingOrders));
+
+
         localStorage.removeItem('amosGardenCart');
         localStorage.removeItem('amosGardenCheckoutData');
 
-         
-        document.getElementById('orderNumber').textContent = orderNumber;
+
+        document.getElementById('orderNumber').textContent = 'AG-' + String(nextId).padStart(4, '0');
         successModal.show();
 
-         
+
         const modalEl = document.getElementById('successModal');
         modalEl.addEventListener('hidden.bs.modal', function handleModalClose() {
           modalEl.removeEventListener('hidden.bs.modal', handleModalClose);
           window.location.href = 'my_orders.html';
         }, { once: true });
 
-         
+
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalHtml;
 

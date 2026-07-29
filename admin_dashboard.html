@@ -72,6 +72,7 @@
     .status-delivering { background: #eebefa; color: #862e9c; }
     .status-delivered { background: #d4edda; color: #155724; }
     .status-pickup { background: #e7f5ff; color: #1971c2; }
+    .status-cancelled { background: #f8d7da; color: #721c24; }
 
     .btn-action {
       padding: 0.5rem 1rem;
@@ -211,16 +212,9 @@
     </div>
 
 
-
-
-
     <div class="stats-row animate-fade-in-up delay-1" id="statsCards">
 
     </div>
-
-
-
-
 
 
 
@@ -277,7 +271,8 @@
   <script src="assets/js/utils.js"></script>
 
   <script>
-    const orders = [
+    // Default sample orders (fallback if localStorage is empty)
+    const defaultOrders = [
       { id: 12, customer_name: "Maria Santos", phone: "0917-123-4567", email: "maria@example.com", order_type: "Delivery", delivery_address: "123 Green St, BF Homes, Parañaque", total_amount: 1250.00, order_date: "2026-07-25 10:30:00", status: "Pending" },
       { id: 11, customer_name: "Juan Dela Cruz", phone: "0918-234-5678", email: "juan@example.com", order_type: "Pickup", delivery_address: "Store Pickup", total_amount: 850.00, order_date: "2026-07-25 09:15:00", status: "Preparing" },
       { id: 10, customer_name: "Ana Reyes", phone: "0919-345-6789", email: "ana@example.com", order_type: "Delivery", delivery_address: "456 Rose Ave, Don Bosco, Parañaque", total_amount: 2100.00, order_date: "2026-07-24 16:45:00", status: "Ready to Deliver" },
@@ -290,12 +285,59 @@
       { id: 3, customer_name: "Dwa", phone: null, email: null, order_type: "Delivery", delivery_address: "da", total_amount: 200.00, order_date: "2026-04-08 08:55:02", status: "Delivered" }
     ];
 
+    // Normalize order to handle both old and new formats
+    function normalizeOrder(order) {
+      // New format: id, customer_name, order_type, total_amount, order_date
+      // Old format: orderNumber, customer.name, customer.deliveryType, total, date, status: 'Processing'
+      if (order.orderNumber && order.customer) {
+        // Old format
+        return {
+          id: order.id || parseInt(order.orderNumber.replace('AG-', '')) || Date.now(),
+          customer_name: order.customer?.name || 'Unknown',
+          phone: order.customer?.phone || '',
+          email: order.customer?.email || '',
+          order_type: order.customer?.deliveryType === 'delivery' ? 'Delivery' : 'Pickup',
+          delivery_address: order.customer?.address ? order.customer.address + (order.customer.city ? ', ' + order.customer.city : '') : 'Store Pickup',
+          total_amount: Number(order.total) || 0,
+          order_date: order.date || new Date().toISOString(),
+          status: order.status === 'Processing' ? 'Pending' : order.status
+        };
+      }
+      // New format - ensure total_amount is number
+      return {
+        ...order,
+        total_amount: Number(order.total_amount) || 0
+      };
+    }
+
+    // Load orders from localStorage, fallback to default sample orders
+    function loadOrdersFromStorage() {
+      const stored = localStorage.getItem('amosGardenOrders');
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            console.log('Loaded orders from localStorage:', parsed.length);
+            // Normalize orders to handle both formats
+            return parsed.map(normalizeOrder).sort((a, b) => b.id - a.id); // newest first
+          }
+        } catch (e) {
+          console.error('Failed to parse orders from localStorage:', e);
+        }
+      }
+      console.log('Using default sample orders');
+      return defaultOrders;
+    }
+
+    let orders = loadOrdersFromStorage();
+
     const statusConfig = {
-      'Pending': { class: 'status-pending', label: 'Pending', next: 'Preparing', btnClass: 'btn-warning', btnText: 'Start Preparing' },
-      'Preparing': { class: 'status-preparing', label: 'Preparing', next: 'Ready to Deliver', btnClass: 'btn-info', btnText: 'Ready to Deliver' },
-      'Ready to Deliver': { class: 'status-ready', label: 'Ready', next: 'Delivering', btnClass: 'btn-primary', btnText: 'Start Delivering' },
-      'Delivering': { class: 'status-delivering', label: 'Delivering', next: 'Delivered', btnClass: 'btn-secondary', btnText: 'Mark Delivered' },
-      'Delivered': { class: 'status-delivered', label: 'Delivered', next: null, btnClass: 'btn-outline-secondary', btnText: 'Done' }
+      'Pending': { class: 'status-pending', label: 'Pending' },
+      'Preparing': { class: 'status-preparing', label: 'Preparing' },
+      'Ready to Deliver': { class: 'status-ready', label: 'Ready' },
+      'Delivering': { class: 'status-delivering', label: 'Delivering' },
+      'Delivered': { class: 'status-delivered', label: 'Delivered' },
+      'Cancelled': { class: 'status-cancelled', label: 'Cancelled' }
     };
 
     const typeConfig = {
@@ -314,6 +356,59 @@
     function formatDate(dateStr) {
       const date = new Date(dateStr);
       return date.toLocaleDateString('en-PH', { month: 'short', day: 'numeric', year: '2-digit' });
+    }
+
+    // No validTransitions needed - allow any status change including cancel from any state
+
+    function updateOrderStatus(orderId, newStatus, selectEl) {
+      const orderIndex = orders.findIndex(o => o.id === orderId);
+      if (orderIndex === -1) {
+        alert('Order not found.');
+        selectEl.value = orders[orderIndex]?.status || '';
+        return;
+      }
+
+      const currentStatus = orders[orderIndex].status;
+
+      // Show loading state
+      const btn = document.querySelector(`.update-status-btn[data-order-id="${orderId}"]`);
+      const originalHtml = btn?.innerHTML;
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+      }
+      selectEl.disabled = true;
+
+      // Update order
+      orders[orderIndex].status = newStatus;
+      orders[orderIndex].updated_at = new Date().toISOString().replace('T', ' ').slice(0, 19);
+      localStorage.setItem('amosGardenOrders', JSON.stringify(orders));
+
+      // Refresh UI
+      renderStats();
+      renderOrders();
+
+      // Show success toast
+      showToast(`Order #${orderId} updated to "${newStatus}"`, 'success');
+    }
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toastContainer');
+      const bgClass = type === 'success' ? 'bg-success' : 'bg-danger';
+      const toastHtml = `
+        <div class="toast ${bgClass} text-white" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+          <div class="toast-header">
+            <strong class="me-auto">Amos Garden Admin</strong>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast"></button>
+          </div>
+          <div class="toast-body">${message}</div>
+        </div>
+      `;
+      container.insertAdjacentHTML('beforeend', toastHtml);
+      const toastEl = container.lastElementChild;
+      const toast = new bootstrap.Toast(toastEl);
+      toast.show();
+      toastEl.addEventListener('hidden.bs.toast', () => toastEl.remove());
     }
 
     function renderStats() {
@@ -348,6 +443,7 @@
     }
 
     function renderOrders() {
+      console.log('renderOrders called, orders.length:', orders.length);
       if (orders.length === 0) {
         ordersBody.innerHTML = '';
         emptyState.classList.remove('d-none');
@@ -358,20 +454,37 @@
       emptyState.classList.add('d-none');
       document.getElementById('ordersTable').classList.remove('d-none');
 
+      const allStatuses = ['Pending', 'Preparing', 'Ready to Deliver', 'Delivering', 'Delivered', 'Cancelled'];
+
       ordersBody.innerHTML = orders.map(order => {
-        const status = statusConfig[order.status] || { class: 'status-pending', label: order.status, next: null };
+        const status = statusConfig[order.status] || { class: 'status-pending', label: order.status };
         const type = typeConfig[order.order_type] || { class: 'status-pending', icon: 'bi-box', label: order.order_type };
 
+        // No actions for delivered or cancelled orders
+        const isFinal = order.status === 'Delivered' || order.status === 'Cancelled';
+
         let actionHtml = '';
-        if (status.next) {
+        if (!isFinal) {
+          // Build dropdown options - disable current status, show cancelled for active orders
+          const optionsHtml = allStatuses.map(s => {
+            if (s === order.status) return `<option value="${s}" disabled>${s}</option>`;
+            if (s === 'Delivered') return `<option value="${s}" disabled>Delivered</option>`; // Delivered only via transition
+            if (s === 'Cancelled' && !['Pending', 'Preparing', 'Ready to Deliver', 'Delivering'].includes(order.status)) return '';
+            return `<option value="${s}">${s}</option>`;
+          }).join('');
+
           actionHtml = `
-            <a href="update_order.html?id=${order.id}&status=${encodeURIComponent(status.next)}"
-               class="btn-action ${status.btnClass}" style="color: white;">
-              ${status.btnText}
-            </a>
+            <div class="d-flex gap-1">
+              <select class="form-select form-select-sm status-select" data-order-id="${order.id}" style="width: auto; min-width: 150px;">
+                ${optionsHtml}
+              </select>
+              <button class="btn btn-sm btn-outline-primary update-status-btn" data-order-id="${order.id}" title="Update">
+                <i class="bi bi-check-lg"></i>
+              </button>
+            </div>
           `;
         } else {
-          actionHtml = `<span class="text-muted small fw-bold">Done</span>`;
+          actionHtml = `<span class="text-muted small fw-bold">${order.status === 'Delivered' ? 'Completed' : 'Cancelled'}</span>`;
         }
 
         return `
@@ -397,6 +510,32 @@
           </tr>
         `;
       }).join('');
+
+      // Add event listeners for dropdown changes
+      document.querySelectorAll('.update-status-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const orderId = parseInt(this.dataset.orderId);
+          const select = document.querySelector(`.status-select[data-order-id="${orderId}"]`);
+          const newStatus = select.value;
+          if (newStatus && !select.options[select.selectedIndex].disabled) {
+            updateOrderStatus(orderId, newStatus, select);
+          }
+        });
+      });
+
+      // Also allow Enter key on select
+      document.querySelectorAll('.status-select').forEach(select => {
+        select.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            const orderId = parseInt(this.dataset.orderId);
+            const newStatus = this.value;
+            if (newStatus && !this.options[this.selectedIndex].disabled) {
+              updateOrderStatus(orderId, newStatus, this);
+            }
+          }
+        });
+      });
     }
 
     document.addEventListener('DOMContentLoaded', function() {
