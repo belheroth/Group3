@@ -6,8 +6,10 @@
     <meta name="description" content="Browse our wide selection of beautiful plants and gardening supplies.">
     <title>Products - Amos Garden</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
@@ -27,7 +29,10 @@
                         <a class="nav-link" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="products.html">Products</a>
+                        <a class="nav-link active" href="shop.html">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="landscaping.html">Landscaping</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="about.html">About</a>
@@ -36,7 +41,7 @@
                         <a class="nav-link" href="contact.html">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="cart.html"><i class="bi bi-cart3 me-1"></i>Cart <span class="badge bg-danger rounded-pill" id="cartCount">0</span></a>
+                        <a class="nav-link" href="cart.html"><i class="bi bi-cart3 me-1"></i>Cart <span class="badge bg-danger rounded-pill d-none" id="cartCount">0</span></a>
                     </li>
                     <li class="nav-item ms-lg-2">
                         <a class="nav-link btn btn-primary btn-nav" href="login.html">Sign Up / Login</a>
@@ -45,6 +50,12 @@
             </div>
         </div>
     </nav>
+
+
+
+
+
+
 
     <header class="section section-alt">
         <div class="container">
@@ -69,6 +80,7 @@
         <div class="container">
             <div class="product-grid" id="productsContainer">
             </div>
+
 
             <nav aria-label="Products pagination" class="mt-5">
                 <ul class="pagination justify-content-center" id="pagination">
@@ -123,12 +135,13 @@
         </div>
     </footer>
 
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="js/script.js"></script>
+    <script src="assets/js/utils.js"></script>
     <script>
         const products = [
-            { id: 1, name: "Monstera Deliciosa", category: "Indoor Plants", price: 350.00, image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80", description: "A popular tropical plant with large, glossy leaves. Perfect for adding a touch of the jungle to your home." },
-            { id: 2, name: "Snake Plant", category: "Succulents", price: 200.00, image: "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80", description: "Low maintenance plant that's perfect for beginners. It's also known for its air-purifying qualities." },
+            { id: 1, name: "Monstera Deliciosa", category: "Indoor Plants", price: 350.00, image: "https://static.vecteezy.com/system/resources/previews/068/900/353/large_2x/monstera-deliciosa-plant-in-a-textured-pot-isolated-on-white-background-free-photo.jpg", description: "A popular tropical plant with large, glossy leaves. Perfect for adding a touch of the jungle to your home." },
+            { id: 2, name: "Snake Plant", category: "Succulents", price: 200.00, image: "https://static.vecteezy.com/system/resources/previews/055/679/637/large_2x/aloe-vera-plant-growing-in-pot-isolated-on-white-background-photo.jpg", description: "Low maintenance plant that's perfect for beginners. It's also known for its air-purifying qualities." },
             { id: 3, name: "Peace Lily", category: "Flowering", price: 280.00, image: "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80", description: "Beautiful flower plant that blooms white flowers. Known for its air-purifying properties and easy care." },
             { id: 4, name: "ZZ Plant", category: "Indoor Plants", price: 320.00, image: "https://images.unsplash.com/photo-1614016821356-5c0b2f5d8c6b?auto=format&fit=crop&w=400&q=80", description: "Very low maintenance plant with glossy, dark green leaves. Tolerates low light conditions well." },
             { id: 5, name: "Fiddle Leaf Fig", category: "Indoor Plants", price: 450.00, image: "https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=400&q=80", description: "Large, glossy leaves that make a bold statement in any room. Popular as a centerpiece plant." },
@@ -183,6 +196,7 @@
             const pagination = document.getElementById('pagination');
             const totalPages = Math.ceil(productsToShow.length / itemsPerPage);
 
+
             let paginationHTML = '';
 
             paginationHTML += `
@@ -231,6 +245,7 @@
             renderPagination(productsToShow);
         }
 
+
         document.addEventListener('DOMContentLoaded', function() {
             const categoryButtons = document.querySelectorAll('.category-btn');
             categoryButtons.forEach(button => {
@@ -256,7 +271,7 @@
             const categoryParam = urlParams.get('category');
 
             if (categoryParam) {
-                const categoryButtons = document.querySelectorAll('.category-btn');
+                const categoryButtons = document.queryAll('.category-btn');
                 categoryButtons.forEach(button => {
                     if (button.textContent === categoryParam.replace('+', ' ')) {
                         button.click();

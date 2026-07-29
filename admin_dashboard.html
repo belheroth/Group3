@@ -6,13 +6,10 @@
   <meta name="description" content="Amos Garden Admin - Order Management Dashboard">
   <title>Admin Dashboard - Amos Garden</title>
 
-  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
-  
   <link rel="stylesheet" href="css/style.css">
   <style>
     .admin-page {
@@ -172,7 +169,6 @@
 </head>
 <body class="admin-page">
 
-  
   <nav class="navbar navbar-expand-lg navbar-light sticky-top admin-navbar">
     <div class="container">
       <a class="navbar-brand fw-bold" href="admin_dashboard.html">
@@ -205,9 +201,8 @@
     </div>
   </nav>
 
-  
   <div class="admin-container">
-    
+
     <div class="admin-header animate-fade-in-up">
       <div class="admin-title">
         <h2><i class="bi bi-box-seam me-2"></i>Recent Customer Orders</h2>
@@ -215,12 +210,21 @@
       </div>
     </div>
 
-    
+
+
+
+
     <div class="stats-row animate-fade-in-up delay-1" id="statsCards">
-      
+
     </div>
 
-    
+
+
+
+
+
+
+
     <div class="card shadow-sm border-0 animate-fade-in-up delay-2">
       <div class="card-body p-0">
         <div class="table-responsive">
@@ -238,12 +242,15 @@
               </tr>
             </thead>
             <tbody id="ordersBody">
-              
+
             </tbody>
           </table>
         </div>
 
-        
+
+
+
+
         <div id="emptyState" class="empty-state d-none">
           <i class="bi bi-inbox"></i>
           <h4 style="color: var(--bs-secondary);">No orders yet</h4>
@@ -253,7 +260,6 @@
     </div>
   </div>
 
-  
   <footer class="footer">
     <div class="container">
       <div class="footer-bottom">
@@ -262,18 +268,14 @@
     </div>
   </footer>
 
-  
   <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;" id="toastContainer">
-    
+
   </div>
 
-  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-  
   <script src="assets/js/utils.js"></script>
 
-  
   <script>
     const orders = [
       { id: 12, customer_name: "Maria Santos", phone: "0917-123-4567", email: "maria@example.com", order_type: "Delivery", delivery_address: "123 Green St, BF Homes, Parañaque", total_amount: 1250.00, order_date: "2026-07-25 10:30:00", status: "Pending" },
@@ -288,9 +290,6 @@
       { id: 3, customer_name: "Dwa", phone: null, email: null, order_type: "Delivery", delivery_address: "da", total_amount: 200.00, order_date: "2026-04-08 08:55:02", status: "Delivered" }
     ];
 
-    // ========================================
-    // STATUS & TYPE CONFIG
-    // ========================================
     const statusConfig = {
       'Pending': { class: 'status-pending', label: 'Pending', next: 'Preparing', btnClass: 'btn-warning', btnText: 'Start Preparing' },
       'Preparing': { class: 'status-preparing', label: 'Preparing', next: 'Ready to Deliver', btnClass: 'btn-info', btnText: 'Ready to Deliver' },
@@ -304,16 +303,10 @@
       'Pickup': { class: 'status-pickup', icon: 'bi-shop', label: 'Pickup' }
     };
 
-    // ========================================
-    // DOM ELEMENTS
-    // ========================================
     const ordersBody = document.getElementById('ordersBody');
     const emptyState = document.getElementById('emptyState');
     const statsCards = document.getElementById('statsCards');
 
-    // ========================================
-    // HELPER FUNCTIONS
-    // ========================================
     function formatPrice(price) {
       return '₱' + price.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
@@ -323,9 +316,6 @@
       return date.toLocaleDateString('en-PH', { month: 'short', day: 'numeric', year: '2-digit' });
     }
 
-    // ========================================
-    // RENDER STATS
-    // ========================================
     function renderStats() {
       const statusCounts = {};
       orders.forEach(order => {
@@ -357,9 +347,6 @@
       `;
     }
 
-    // ========================================
-    // RENDER ORDERS
-    // ========================================
     function renderOrders() {
       if (orders.length === 0) {
         ordersBody.innerHTML = '';
@@ -412,11 +399,7 @@
       }).join('');
     }
 
-    // ========================================
-    // INITIALIZE
-    // ========================================
     document.addEventListener('DOMContentLoaded', function() {
-      // Check admin auth
       if (!AdminSession.isLoggedIn()) {
         window.location.href = 'admin_login.html';
         return;
@@ -425,7 +408,6 @@
       renderStats();
       renderOrders();
 
-      // Intersection Observer for animations
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {

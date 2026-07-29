@@ -6,18 +6,14 @@
   <meta name="description" content="My Account - Amos Garden">
   <title>My Account - Amos Garden</title>
 
-  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
-  
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-  
   <nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container">
       <a class="navbar-brand" href="index.html">
@@ -36,20 +32,20 @@
           <li class="nav-item">
             <a class="nav-link" href="shop.html">Shop</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="plant_doctor.html">Plant Doctor</a>
-          </li>
-          <li class="nav-item">
+                    <li class="nav-item">
             <a class="nav-link" href="landscaping.html">Landscaping</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="cart.html"><i class="bi bi-cart3 me-1"></i>Cart <span class="badge bg-danger rounded-pill" id="cartCount">0</span></a>
+            <a class="nav-link" href="about.html">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="my_account.html"><i class="bi bi-person me-1"></i>My Account</a>
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cart.html"><i class="bi bi-cart3 me-1"></i>Cart <span class="badge bg-danger rounded-pill d-none" id="cartCount">0</span></a>
           </li>
           <li class="nav-item ms-lg-2">
-            <a class="nav-link btn btn-outline-danger" href="#" id="logoutBtn">Logout</a>
+            <a class="nav-link btn btn-primary btn-nav" href="login.html">Sign Up / Login</a>
           </li>
         </ul>
       </div>
@@ -60,10 +56,9 @@
     <i class="bi bi-arrow-left"></i> Go Back
   </button>
 
-  
   <section class="section section-alt">
     <div class="container">
-      
+
       <div class="account-header card shadow-sm border-0 animate-fade-in-up">
         <div class="card-body">
           <div class="row align-items-center">
@@ -76,24 +71,14 @@
               <h2 class="mb-1" id="userName">Loading...</h2>
               <p class="text-muted mb-0" id="userEmail">Loading...</p>
             </div>
-            <div class="col-auto">
-              <a href="shop.html" class="btn btn-outline-light border-2 fw-semibold" style="min-width: 180px;">
-                <i class="bi bi-bag-fill me-2"></i>Continue Shopping
-              </a>
-            </div>
           </div>
         </div>
       </div>
 
-      
+
       <ul class="nav nav-tabs justify-content-center mb-4 animate-fade-in-up delay-1" id="accountTabs" role="tablist">
         <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders" type="button" role="tab">
-            <i class="bi bi-receipt me-2"></i>My Orders
-          </button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab">
+          <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab">
             <i class="bi bi-person me-2"></i>Profile
           </button>
         </li>
@@ -104,25 +89,10 @@
         </li>
       </ul>
 
-      
-      <div class="tab-content" id="accountTabContent">
-        
-        <div class="tab-pane fade show active" id="orders" role="tabpanel">
-          <div class="card shadow-sm border-0">
-            <div class="card-header bg-transparent border-0 py-3">
-              <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-                <h4 class="mb-0" style="color: var(--bs-secondary);">Order History</h4>
-                <a href="shop.html" class="btn btn-sm btn-primary"><i class="bi bi-plus-circle me-1"></i>New Order</a>
-              </div>
-            </div>
-            <div class="card-body p-0" id="ordersContent">
-              
-            </div>
-          </div>
-        </div>
 
-        
-        <div class="tab-pane fade" id="profile" role="tabpanel">
+      <div class="tab-content" id="accountTabContent">
+
+        <div class="tab-pane fade show active" id="profile" role="tabpanel">
           <div class="card shadow-sm border-0">
             <div class="card-header bg-transparent border-0 py-3">
               <h4 class="mb-0" style="color: var(--bs-secondary);">Profile Information</h4>
@@ -157,7 +127,7 @@
             </div>
           </div>
 
-          
+
           <div class="card shadow-sm border-0 mt-4">
             <div class="card-header bg-transparent border-0 py-3">
               <h4 class="mb-0" style="color: var(--bs-secondary);">Change Password</h4>
@@ -188,7 +158,7 @@
           </div>
         </div>
 
-        
+
         <div class="tab-pane fade" id="settings" role="tabpanel">
           <div class="card shadow-sm border-0">
             <div class="card-header bg-transparent border-0 py-3">
@@ -227,7 +197,7 @@
             </div>
           </div>
 
-          
+
           <div class="card shadow-sm border-0 mt-4 border-danger">
             <div class="card-header bg-transparent border-0 py-3">
               <h4 class="mb-0 text-danger">Danger Zone</h4>
@@ -244,7 +214,7 @@
     </div>
   </section>
 
-  
+
   <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content border-danger">
@@ -272,7 +242,7 @@
     </div>
   </div>
 
-  
+
   <footer class="footer">
     <div class="container">
       <div class="row g-4">
@@ -285,13 +255,6 @@
           <ul class="footer-links">
             <li><a href="shop.html">All Plants</a></li>
             <li><a href="shop.html?category=Succulents">Succulents</a></li>
-          </ul>
-        </div>
-        <div class="col-lg-2 col-md-6">
-          <h5 class="footer-links">Services</h5>
-          <ul class="footer-links">
-            <li><a href="plant_doctor.html">AI Plant Doctor</a></li>
-            <li><a href="landscaping.html">Landscaping</a></li>
           </ul>
         </div>
         <div class="col-lg-4 col-md-6">
@@ -309,89 +272,53 @@
     </div>
   </footer>
 
-  
+
+
+
   <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1080;" id="toastContainer">
-    
+
   </div>
 
-  
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-  
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+
+
+  </script>
+
   <script src="assets/js/utils.js"></script>
+  <script src="js/plant-images.js"></script>
+
+
+
+
+  <script>
+
+
+
+
+
+
+
 
   
-  <script>
-    
-    // PRODUCT DATA (for order display)
-    
-    const products = [
-      { id: 1, name: "Aloe Vera", price: 150.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Aloe" },
-      { id: 2, name: "Snake Plant", price: 200.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Snake" },
-      { id: 3, name: "Echeveria Elegans", price: 180.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Ech" },
-      { id: 4, name: "Jade Plant", price: 220.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Jade" },
-      { id: 5, name: "Monstera Deliciosa", price: 350.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Mon" },
-      { id: 6, name: "Peace Lily", price: 280.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Peace" },
-      { id: 7, name: "ZZ Plant", price: 320.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=ZZ" },
-      { id: 8, name: "Fiddle Leaf Fig", price: 450.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Fid" },
-      { id: 9, name: "Phalaenopsis Orchid", price: 450.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Orch" },
-      { id: 10, name: "Anthurium Red", price: 320.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Ant" },
-      { id: 11, name: "Bromeliad", price: 280.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Bro" },
-      { id: 12, name: "African Violet", price: 180.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Afr" },
-      { id: 13, name: "Sweet Basil", price: 120.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Bas" },
-      { id: 14, name: "Peppermint", price: 120.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Mint" },
-      { id: 15, name: "Rosemary", price: 150.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Ros" },
-      { id: 16, name: "Thai Basil", price: 130.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Thai" },
-      { id: 17, name: "Bougainvillea", price: 400.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Bou" },
-      { id: 18, name: "Hibiscus", price: 350.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Hib" },
-      { id: 19, name: "Plumeria", price: 500.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Plu" },
-      { id: 20, name: "Bird of Paradise", price: 600.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Bir" }
-    ];
 
-    
-    // STATUS BADGE HELPER
-    
-    function getStatusBadge(status) {
-      const badges = {
-        'Pending': '<span class="badge badge-pending">Pending</span>',
-        'Preparing': '<span class="badge badge-preparing">Preparing</span>',
-        'Ready to Deliver': '<span class="badge badge-ready">Ready to Deliver</span>',
-        'Delivering': '<span class="badge badge-delivering">Delivering</span>',
-        'Delivered': '<span class="badge badge-delivered">Delivered</span>',
-        'Cancelled': '<span class="badge bg-danger">Cancelled</span>'
-      };
-      return badges[status] || `<span class="badge bg-secondary">${status}</span>`;
-    }
-
-    function formatPrice(price) {
-      return '₱' + price.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    }
-
-    function formatDate(dateString) {
-      return new Date(dateString).toLocaleDateString('en-PH', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-      });
-    }
-
-    
-    // INITIALIZATION
-    
     document.addEventListener('DOMContentLoaded', function() {
       checkAuth();
       loadUserData();
-      loadOrders();
       setupEventListeners();
+      updateNavbar();
+      updateCartCount();
     });
 
-    
-    // AUTH CHECK
-    
+
+
+
+
     function checkAuth() {
       const userData = localStorage.getItem('amosGardenUser');
       if (!userData) {
-        // Not logged in, redirect to login
         window.location.href = 'login.html?redirect=my_account.html';
         return;
       }
@@ -407,9 +334,10 @@
       }
     }
 
-    
-    // LOAD USER DATA
-    
+
+
+
+
     function loadUserData() {
       const userData = localStorage.getItem('amosGardenUser');
       if (userData) {
@@ -419,149 +347,37 @@
           document.getElementById('userEmail').textContent = user.email || 'No email';
           document.getElementById('avatarInitial').textContent = (user.name || 'C').charAt(0).toUpperCase();
 
-          // Prefill profile form
           if (user.name) {
             const nameParts = user.name.split(' ');
             document.getElementById('profileFirstName').value = nameParts[0] || '';
             document.getElementById('profileLastName').value = nameParts.slice(1).join(' ') || '';
           }
           document.getElementById('profileEmail').value = user.email || '';
-        } catch (e) {
-          console.error('Failed to parse user data');
-        }
+        } catch (e) {}
       }
     }
 
-    
-    // LOAD ORDERS
-    
-    function loadOrders() {
-      // In a real app, fetch from API
-      // For demo, generate sample orders from localStorage cart history
-      const orders = getSampleOrders();
-      renderOrders(orders);
-    }
 
-    function getSampleOrders() {
-      // Demo orders - in real app, fetch from backend
-      return [
-        {
-          id: 'AG-1001',
-          date: '2026-01-15',
-          status: 'Delivered',
-          type: 'Delivery',
-          items: [
-            { id: 1, name: 'Aloe Vera', price: 150.00, qty: 2 },
-            { id: 5, name: 'Monstera Deliciosa', price: 350.00, qty: 1 }
-          ],
-          total: 650.00
-        },
-        {
-          id: 'AG-1002',
-          date: '2026-02-20',
-          status: 'Delivering',
-          type: 'Pickup',
-          items: [
-            { id: 3, name: 'Echeveria Elegans', price: 180.00, qty: 3 }
-          ],
-          total: 540.00
-        },
-        {
-          id: 'AG-1003',
-          date: '2026-03-10',
-          status: 'Preparing',
-          type: 'Delivery',
-          items: [
-            { id: 9, name: 'Phalaenopsis Orchid', price: 450.00, qty: 1 },
-            { id: 13, name: 'Sweet Basil', price: 120.00, qty: 2 }
-          ],
-          total: 690.00
-        }
-      ];
-    }
 
-    function renderOrders(orders) {
-      const container = document.getElementById('ordersContent');
 
-      if (orders.length === 0) {
-        container.innerHTML = `
-          <div class="text-center py-5">
-            <i class="bi bi-receipt display-1 text-muted"></i>
-            <h4 class="mt-3" style="color: var(--bs-secondary);">No orders yet</h4>
-            <p class="text-muted">When you purchase plants, you can track them here!</p>
-            <a href="shop.html" class="btn btn-primary mt-3"><i class="bi bi-bag-plus me-2"></i>Start Shopping</a>
-          </div>
-        `;
-        return;
-      }
+ 
 
-      let html = `
-        <div class="table-responsive">
-          <table class="table table-hover mb-0">
-            <thead>
-              <tr>
-                <th>Order ID</th>
-                <th>Date</th>
-                <th>Type</th>
-                <th>Total</th>
-                <th>Status</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-      `;
-
-      orders.forEach(order => {
-        html += `
-          <tr>
-            <td><strong>${order.id}</strong></td>
-            <td>${formatDate(order.date)}</td>
-            <td>
-              <span class="badge ${order.type === 'Pickup' ? 'badge-pickup' : 'bg-primary'}">
-                <i class="bi ${order.type === 'Pickup' ? 'bi-shop' : 'bi-truck'} me-1"></i>${order.type}
-              </span>
-            </td>
-            <td><strong style="color: var(--bs-primary-dark);">${formatPrice(order.total)}</strong></td>
-            <td>${getStatusBadge(order.status)}</td>
-            <td>
-              <button type="button" class="btn btn-sm btn-outline-primary" onclick="viewOrderDetails('${order.id}')">
-                <i class="bi bi-eye"></i>
-              </button>
-            </td>
-          </tr>
-        `;
-      });
-
-      html += `
-            </tbody>
-          </table>
-        </div>
-      `;
-
-      container.innerHTML = html;
-    }
-
-    
-    // EVENT LISTENERS
-    
     function setupEventListeners() {
-      // Logout
       document.getElementById('logoutBtn')?.addEventListener('click', function(e) {
         e.preventDefault();
         localStorage.removeItem('amosGardenUser');
         localStorage.removeItem('amosGardenCart');
         localStorage.removeItem('amosGardenPrefs');
-        window.location.href = 'index.html';
+        window.location.href = 'logout.html';
       });
 
-      // Profile form
+
       document.getElementById('profileForm')?.addEventListener('submit', function(e) {
         e.preventDefault();
         const firstName = document.getElementById('profileFirstName').value;
         const lastName = document.getElementById('profileLastName').value;
         const phone = document.getElementById('profilePhone').value;
 
-        // Update localStorage
         const userData = localStorage.getItem('amosGardenUser');
         if (userData) {
           const user = JSON.parse(userData);
@@ -571,13 +387,12 @@
           loadUserData();
         }
 
-        // Show toast using ToastManager (Interactive Components PDF)
         if (window.toast) {
           window.toast.success('Profile updated successfully!');
         }
       });
 
-      // Password form
+     
       document.getElementById('passwordForm')?.addEventListener('submit', function(e) {
         e.preventDefault();
         const current = document.getElementById('currentPassword').value;
@@ -598,16 +413,13 @@
           return;
         }
 
-        // In real app, verify current password and send to backend
         this.reset();
         if (window.toast) {
           window.toast.success('Password updated successfully!');
         }
       });
 
-      // Settings
       document.getElementById('saveSettingsBtn')?.addEventListener('click', function() {
-        // Save preferences to localStorage
         const prefs = {
           emailOrders: document.getElementById('emailOrders').checked,
           emailPromos: document.getElementById('emailPromos').checked,
@@ -620,8 +432,6 @@
           window.toast.success('Preferences saved!');
         }
       });
-
-      // Delete account confirmation
       document.getElementById('confirmDelete')?.addEventListener('change', function() {
         document.getElementById('confirmDeleteBtn').disabled = !this.checked;
       });
@@ -635,15 +445,10 @@
       });
     }
 
-    
+
+
+
     // HELPERS
-    
-    function viewOrderDetails(orderId) {
-      // In real app, navigate to order detail page
-      if (window.toast) {
-        window.toast.info(`Viewing order ${orderId}`);
-      }
-    }
 
     // Initialize
     document.addEventListener('DOMContentLoaded', initTooltips);

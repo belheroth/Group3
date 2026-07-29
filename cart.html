@@ -1,288 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Your shopping cart with selected plants and gardening supplies.">
-    <title>Shopping Cart - Amos Garden</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your shopping cart with selected plants and gardening supplies.">
+  <title>Shopping Cart - Amos Garden</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">Amos Garden</a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="products.html">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
-                    </li>
-                    <li class="nav-item">
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="bi bi-flower1 me-2"></i>Amos Garden
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="shop.html">Shop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="landscaping.html">Landscaping</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+           <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="cart.html"><i class="bi bi-cart3 me-1"></i>Cart <span class="badge bg-danger rounded-pill" id="cartCount">0</span></a>
-                    </li>
-                    <li class="nav-item ms-lg-2">
-                        <a class="nav-link btn btn-primary btn-nav" href="login.html">Sign Up / Login</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+          <li class="nav-item">
+            <a class="nav-link active" href="cart.html"><i class="bi bi-cart3 me-1"></i>Cart <span class="badge bg-danger rounded-pill" id="cartCount">0</span></a>
+          </li>
+          <li class="nav-item ms-lg-2">
+            <a class="nav-link btn btn-primary btn-nav" href="login.html">Sign Up / Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-    <header class="section section-alt">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h1 class="section-title text-center">Your Shopping Cart</h1>
-                    <p class="section-subtitle text-center">Review your items before checkout</p>
-                </div>
-            </div>
-        </div>
-    </header>
+      <header class="section section-alt">
+          <div class="container">
+              <div class="row">
+                  <div class="col-12">
+                      <h1 class="section-title text-center">Your Shopping Cart</h1>
+                      <p class="section-subtitle text-center">Review your items before checkout</p>
+                  </div>
+              </div>
+          </div>
+      </header>
 
-    <section class="section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="cart-table">
-                        <div class="table-responsive">
-                            <table class="table mb-0">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Product</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Total</th>
-                                        <th scope="col">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="cartItems">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+      <section class="section">
+          <div class="container">
+              <div class="row">
+                  <div class="col-12">
+                      <div class="cart-table">
+                          <div class="table-responsive">
+                              <table class="table mb-0">
+                                  <thead>
+                                      <tr>
+                                          <th scope="col">Product</th>
+                                          <th scope="col">Price</th>
+                                          <th scope="col">Quantity</th>
+                                          <th scope="col">Total</th>
+                                          <th scope="col">Actions</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody id="cartItems">
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
 
-                    <div class="row mt-4">
-                        <div class="col-lg-6 ms-auto">
-                            <div class="card border-0 shadow-sm">
-                                <div class="card-body p-4">
-                                    <h5 class="card-title">Cart Summary</h5>
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span>Subtotal:</span>
-                                        <span id="subtotal">P0.00</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span>Shipping:</span>
-                                        <span id="shipping">P0.00</span>
-                                    </div>
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span>Tax:</span>
-                                        <span id="tax">P0.00</span>
-                                    </div>
-                                    <hr>
-                                    <div class="d-flex justify-content-between fw-bold fs-5">
-                                        <span>Total:</span>
-                                        <span id="total">P0.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                      <div class="row mt-4">
+                          <div class="col-lg-6 ms-auto">
+                              <div class="card border-0 shadow-sm">
+                                  <div class="card-body p-4">
+                                      <h5 class="card-title">Cart Summary</h5>
+                                      <div class="d-flex justify-content-between mb-2">
+                                          <span>Subtotal:</span>
+                                          <span id="subtotal">P0.00</span>
+                                      </div>
+                                      <div class="d-flex justify-content-between mb-2">
+                                          <span>Shipping:</span>
+                                          <span id="shipping">P0.00</span>
+                                      </div>
+                                      <div class="d-flex justify-content-between mb-2">
+                                          <span>Tax:</span>
+                                          <span id="tax">P0.00</span>
+                                      </div>
+                                      <hr>
+                                      <div class="d-flex justify-content-between fw-bold fs-5">
+                                          <span>Total:</span>
+                                          <span id="total">P0.00</span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
 
-                    <div class="row mt-4">
-                        <div class="col-lg-6">
-                            <a href="products.html" class="btn btn-outline-primary btn-lg">
-                                <i class="bi bi-arrow-left me-2"></i>Continue Shopping
-                            </a>
-                        </div>
-                        <div class="col-lg-6 text-end">
-                            <button class="btn btn-primary btn-lg" onclick="checkout()">
-                                <i class="bi bi-check2-circle me-2"></i>Proceed to Checkout
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                      <div class="row mt-4">
+                          <div class="col-lg-6">
+                              <a href="products.html" class="btn btn-outline-primary btn-lg">
+                                  <i class="bi bi-arrow-left me-2"></i>Continue Shopping
+                              </a>
+                          </div>
+                          <div class="col-lg-6 text-end">
+                              <button class="btn btn-primary btn-lg" onclick="checkout()">
+                                  <i class="bi bi-check2-circle me-2"></i>Proceed to Checkout
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <p class="footer-text">Your trusted plant shop in Paranaque City. We cultivate healthy, beautiful plants ready to thrive in your home.</p>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <h5 class="footer-links">Contact Us</h5>
-                    <ul class="footer-links">
-                        <li>123 Green Avenue, BF Homes, Paranaque City</li>
-                        <li>+63 917 123 4567</li>
-                        <li>hello@amosgarden.com</li>
-                        <li>Mon - Sat: 8:00 AM - 6:00 PM</li>
-                    </ul>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <h5 class="footer-links">Follow Us</h5>
-                    <ul class="footer-links">
-                        <li><a href="#" class="text-decoration-none">Facebook</a></li>
-                        <li><a href="#" class="text-decoration-none">Instagram</a></li>
-                        <li><a href="#" class="text-decoration-none">Twitter</a></li>
-                        <li><a href="#" class="text-decoration-none">YouTube</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p class="mb-0">&copy; 2026 Amos Garden. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+      <footer class="footer">
+          <div class="container">
+              <div class="row g-4">
+                  <div class="col-lg-4 col-md-6">
+                      <p class="footer-text">Your trusted plant shop in Paranaque City. We cultivate healthy, beautiful plants ready to thrive in your home.</p>
+                  </div>
+                  <div class="col-lg-4 col-md-6">
+                      <h5 class="footer-links">Contact Us</h5>
+                      <ul class="footer-links">
+                          <li>123 Green Avenue, BF Homes, Paranaque City</li>
+                          <li>+63 917 123 4567</li>
+                          <li>hello@amosgarden.com</li>
+                          <li>Mon - Sat: 8:00 AM - 6:00 PM</li>
+                      </ul>
+                  </div>
+                  <div class="col-lg-4 col-md-6">
+                      <h5 class="footer-links">Follow Us</h5>
+                      <ul class="footer-links">
+                          <li><a href="#" class="text-decoration-none">Facebook</a></li>
+                          <li><a href="#" class="text-decoration-none">Instagram</a></li>
+                          <li><a href="#" class="text-decoration-none">Twitter</a></li>
+                          <li><a href="#" class="text-decoration-none">YouTube</a></li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="footer-bottom">
+                  <p class="mb-0">&copy; 2026 Amos Garden. All rights reserved.</p>
+              </div>
+          </div>
+      </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="js/script.js"></script>
-    <script>
-        const products = [
-            { id: 1, name: "Monstera Deliciosa", price: 350.00 },
-            { id: 2, name: "Snake Plant", price: 200.00 },
-            { id: 3, name: "Peace Lily", price: 280.00 },
-            { id: 4, name: "ZZ Plant", price: 320.00 },
-            { id: 5, name: "Fiddle Leaf Fig", price: 450.00 }
-        ];
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+      <script src="assets/js/utils.js"></script>
+      <script src="js/plant-images.js"></script>
+      <script>
+          const products = [
+            { id: 1,  name: "Aloe Vera",           price: 150.00, image: getPlantImage("Aloe Vera") },
+            { id: 2,  name: "Snake Plant",         price: 200.00, image: getPlantImage("Snake Plant") },
+            { id: 3,  name: "Echeveria Elegans",   price: 180.00, image: getPlantImage("Echeveria Elegans") },
+            { id: 4,  name: "Jade Plant",          price: 220.00, image: getPlantImage("Jade Plant") },
+            { id: 5,  name: "Monstera Deliciosa",  price: 350.00, image: getPlantImage("Monstera Deliciosa") },
+            { id: 6,  name: "Peace Lily",           price: 280.00, image: getPlantImage("Peace Lily") },
+            { id: 7,  name: "ZZ Plant",             price: 320.00, image: getPlantImage("ZZ Plant") },
+            { id: 8,  name: "Fiddle Leaf Fig",      price: 450.00, image: getPlantImage("Fiddle Leaf Fig") },
+            { id: 9,  name: "Phalaenopsis Orchid",  price: 450.00, image: getPlantImage("Phalaenopsis Orchid") },
+            { id: 10, name: "Anthurium Red",        price: 320.00, image: getPlantImage("Anthurium Red") },
+            { id: 11, name: "Bromeliad",            price: 280.00, image: getPlantImage("Bromeliad") },
+            { id: 12, name: "African Violet",       price: 180.00, image: getPlantImage("African Violet") },
+            { id: 13, name: "Sweet Basil",          price: 120.00, image: getPlantImage("Sweet Basil") },
+            { id: 14, name: "Peppermint",           price: 120.00, image: getPlantImage("Peppermint") },
+            { id: 15, name: "Rosemary",             price: 150.00, image: getPlantImage("Rosemary") },
+            { id: 16, name: "Thai Basil",           price: 130.00, image: getPlantImage("Thai Basil") },
+            { id: 17, name: "Bougainvillea",        price: 400.00, image: getPlantImage("Bougainvillea") },
+            { id: 18, name: "Hibiscus",             price: 350.00, image: getPlantImage("Hibiscus") },
+            { id: 19, name: "Plumeria",             price: 500.00, image: getPlantImage("Plumeria") },
+            { id: 20, name: "Bird of Paradise",     price: 600.00, image: getPlantImage("Bird of Paradise") }
+          ];
 
-        function getCart() {
-            return JSON.parse(localStorage.getItem('amosGardenCart') || '{}');
-        }
+          function getCart() {
+              return JSON.parse(localStorage.getItem('amosGardenCart') || '{}');
+          }
 
-        function updateCartCount() {
-            const cart = getCart();
-            const itemCount = Object.values(cart).reduce((sum, count) => sum + count, 0);
-            document.getElementById('cartCount').textContent = itemCount;
-        }
+          function updateCartCount() {
+              const cart = getCart();
+              const itemCount = Object.values(cart).reduce((sum, count) => sum + count, 0);
+              const badge = document.getElementById('cartCount');
+              badge.textContent = itemCount;
+              if (itemCount === 0) {
+                  badge.classList.add('d-none');
+              } else {
+                  badge.classList.remove('d-none');
+              }
+          }
 
-        function renderCart() {
-            const cart = getCart();
-            const cartItemsContainer = document.getElementById('cartItems');
+          function renderCart() {
+              const cart = getCart();
+              const cartItemsContainer = document.getElementById('cartItems');
 
-            if (Object.keys(cart).length === 0) {
-                cartItemsContainer.innerHTML = `
-                    <tr>
-                        <td colspan="5" class="text-center py-5">
-                            <div class="alert alert-info">
-                                <i class="bi bi-cart-x me-2"></i>Your cart is empty.
-                                <a href="products.html" class="alert-link">Continue shopping</a>.
-                            </div>
-                        </td>
-                    </tr>
-                `;
-                updateCartTotals();
-                return;
-            }
+              if (Object.keys(cart).length === 0) {
+                  cartItemsContainer.innerHTML = `
+                      <tr>
+                          <td colspan="5" class="text-center py-5">
+                              <div class="alert alert-info">
+                                  <i class="bi bi-cart-x me-2"></i>Your cart is empty.
+                                  <a href="products.html" class="alert-link">Continue shopping</a>.
+                              </div>
+                          </td>
+                      </tr>
+                  `;
+                  updateCartTotals();
+                  return;
+              }
 
-            let cartHTML = '';
-            let subtotal = 0;
+              let cartHTML = '';
+              let subtotal = 0;
 
-            for (const productId in cart) {
-                const product = products.find(p => p.id == productId);
-                if (!product) continue;
+              for (const productId in cart) {
+                  const product = products.find(p => p.id == productId);
+                  if (!product) continue;
 
-                const quantity = cart[productId];
-                const itemTotal = product.price * quantity;
-                subtotal += itemTotal;
+                  const quantity = cart[productId];
+                  const itemTotal = product.price * quantity;
+                  subtotal += itemTotal;
 
-                cartHTML += `
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" alt="${product.name}" class="me-3" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
-                                <div>
-                                    <h6 class="mb-0">${product.name}</h6>
-                                </div>
-                            </div>
-                        </td>
-                        <td>P${product.price.toFixed(2)}</td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <button class="btn btn-outline-secondary btn-sm" onclick="updateQuantity(${productId}, ${quantity - 1})" ${quantity <= 1 ? 'disabled' : ''}>-</button>
-                                <span class="mx-2">${quantity}</span>
-                                <button class="btn btn-outline-secondary btn-sm" onclick="updateQuantity(${productId}, ${quantity + 1})">+</button>
-                            </div>
-                        </td>
-                        <td>P${itemTotal.toFixed(2)}</td>
-                        <td>
-                            <button class="btn btn-danger btn-sm" onclick="removeItem(${productId})">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `;
-            }
+                  cartHTML += `
+                      <tr>
+                          <td>
+                              <div class="d-flex align-items-center">
+                                  <img src="${product.image}" alt="${product.name}" class="me-3" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+                                  <div>
+                                      <h6 class="mb-0">${product.name}</h6>
+                                  </div>
+                              </div>
+                          </td>
+                          <td>P${product.price.toFixed(2)}</td>
+                          <td>
+                              <div class="d-flex align-items-center">
+                                  <button class="btn btn-outline-secondary btn-sm" onclick="updateQuantity(${productId}, ${quantity - 1})" ${quantity <= 1 ? 'disabled' : ''}>-</button>
+                                  <span class="mx-2">${quantity}</span>
+                                  <button class="btn btn-outline-secondary btn-sm" onclick="updateQuantity(${productId}, ${quantity + 1})">+</button>
+                              </div>
+                          </td>
+                          <td>P${itemTotal.toFixed(2)}</td>
+                          <td>
+                              <button class="btn btn-danger btn-sm" onclick="removeItem(${productId})">
+                                  <i class="bi bi-trash"></i>
+                              </button>
+                          </td>
+                      </tr>
+                  `;
+              }
 
-            cartItemsContainer.innerHTML = cartHTML;
-            updateCartTotals(subtotal);
-        }
+              cartItemsContainer.innerHTML = cartHTML;
+              updateCartTotals(subtotal);
+          }
 
-        function updateQuantity(productId, newQuantity) {
-            if (newQuantity <= 0) {
-                removeItem(productId);
-                return;
-            }
+          function updateQuantity(productId, newQuantity) {
+              if (newQuantity <= 0) {
+                  removeItem(productId);
+                  return;
+              }
 
-            const cart = getCart();
-            cart[productId] = newQuantity;
-            localStorage.setItem('amosGardenCart', JSON.stringify(cart));
-            updateCartCount();
-            renderCart();
-        }
+              const cart = getCart();
+              cart[productId] = newQuantity;
+              localStorage.setItem('amosGardenCart', JSON.stringify(cart));
+              updateCartCount();
+              renderCart();
+          }
 
-        function removeItem(productId) {
-            const cart = getCart();
-            delete cart[productId];
-            localStorage.setItem('amosGardenCart', JSON.stringify(cart));
-            updateCartCount();
-            renderCart();
-        }
+          function removeItem(productId) {
+              const cart = getCart();
+              delete cart[productId];
+              localStorage.setItem('amosGardenCart', JSON.stringify(cart));
+              updateCartCount();
+              renderCart();
+          }
 
-        function updateCartTotals(subtotal = 0) {
-            const shipping = 50.00;
-            const taxRate = 0.12;
-            const tax = subtotal * taxRate;
-            const total = subtotal + shipping + tax;
+          function updateCartTotals(subtotal = 0) {
+              const shipping = 50.00;
+              const taxRate = 0.12;
+              const tax = subtotal * taxRate;
+              const total = subtotal + shipping + tax;
 
-            document.getElementById('subtotal').textContent = 'P' + subtotal.toFixed(2);
-            document.getElementById('shipping').textContent = 'P' + shipping.toFixed(2);
-            document.getElementById('tax').textContent = 'P' + tax.toFixed(2);
-            document.getElementById('total').textContent = 'P' + total.toFixed(2);
-        }
+              document.getElementById('subtotal').textContent = 'P' + subtotal.toFixed(2);
+              document.getElementById('shipping').textContent = 'P' + shipping.toFixed(2);
+              document.getElementById('tax').textContent = 'P' + tax.toFixed(2);
+              document.getElementById('total').textContent = 'P' + total.toFixed(2);
+          }
 
-        function checkout() {
-            const cart = getCart();
-            if (Object.keys(cart).length === 0) {
-                alert('Your cart is empty!');
-                return;
-            }
+          function checkout() {
+              const cart = getCart();
+              if (Object.keys(cart).length === 0) {
+                  if (window.toast) {
+                      window.toast.warning('Your cart is empty! Add some plants first.');
+                  } else {
+                      alert('Your cart is empty!');
+                  }
+                  return;
+              }
 
-            const itemCount = Object.values(cart).reduce((sum, count) => sum + count, 0);
-            alert('Proceeding to checkout with ' + itemCount + ' items. In a real implementation, you would be redirected to the checkout page.');
-        }
+              // Save cart totals for checkout page
+              const subtotalEl = document.getElementById('subtotal');
+              const shippingEl = document.getElementById('shipping');
+              const taxEl = document.getElementById('tax');
+              const totalEl = document.getElementById('total');
 
-        document.addEventListener('DOMContentLoaded', function() {
-            updateCartCount();
-            renderCart();
-        });
-    </script>
+              if (subtotalEl && shippingEl && taxEl && totalEl) {
+                  const checkoutData = {
+                      subtotal: subtotalEl.textContent,
+                      shipping: shippingEl.textContent,
+                      tax: taxEl.textContent,
+                      total: totalEl.textContent,
+                      cart: cart
+                  };
+                  localStorage.setItem('amosGardenCheckoutData', JSON.stringify(checkoutData));
+              }
+
+              // Redirect to checkout page
+              window.location.href = 'checkout.html';
+          }
+
+          document.addEventListener('DOMContentLoaded', function() {
+              updateCartCount();
+              renderCart();
+          });
+      </script>
 </body>
 </html>

@@ -7,9 +7,10 @@
     <title>Amos Garden - Growing Beautiful Plants at Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+
     <nav class="navbar navbar-expand-lg navbar-light sticky-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
@@ -18,23 +19,28 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link active" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="products.html">Products</a>
+                        <a class="nav-link" href="shop.html">Shop</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="landscaping.html">Landscaping</a>
+                    </li>
+                     <li class="nav-item">
                         <a class="nav-link" href="about.html">About</a>
                     </li>
-                    <li class="nav-item">
+                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="cart.html"><i class="bi bi-cart3 me-1"></i>Cart <span class="badge bg-danger rounded-pill" id="cartCount">0</span></a>
+                       <a class="nav-link" href="cart.html"><i class="bi bi-cart3 me-1"></i>Cart <span class="badge bg-danger rounded-pill d-none" id="cartCount">0</span></a>
                     </li>
+
                     <li class="nav-item ms-lg-2">
                         <a class="nav-link btn btn-primary btn-nav" href="login.html">Sign Up / Login</a>
                     </li>
@@ -42,6 +48,7 @@
             </div>
         </div>
     </nav>
+
     <header class="hero-section">
         <div class="container">
             <div class="row align-items-center">
@@ -51,6 +58,7 @@
                     <a href="products.html" class="btn btn-primary btn-lg animate-fade-in-up delay-1">
                         <i class="bi bi-shop me-2"></i>Shop Now
                     </a>
+
                     <div class="hero-stats animate-fade-in-up delay-2">
                         <div class="stat-item">
                             <span class="stat-number">2000+</span>
@@ -97,6 +105,7 @@
             </div>
         </div>
     </header>
+
     <section class="section section-alt">
         <div class="container">
             <div class="section-header animate-fade-in-up">
@@ -119,6 +128,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="text-center mt-5 animate-fade-in-up">
                 <a href="products.html" class="btn btn-primary btn-lg">
                     <i class="bi bi-grid-3x3-gap-fill me-2"></i>View All Plants
@@ -126,6 +136,7 @@
             </div>
         </div>
     </section>
+
     <section class="section section-alt">
         <div class="container">
             <div class="row align-items-center">
@@ -141,12 +152,14 @@
                         </a>
                     </div>
                 </div>
+
                 <div class="col-lg-6 animate-fade-in-up delay-1">
-                    <img src="https://images.unsplash.com/photo-1548652377-851149b9350d?auto=format&fit=crop&w=600&q=80" alt="Promotion Banner" class="img-fluid rounded-4 shadow">
+                    <img src="https://thumbs.dreamstime.com/b/twenty-percent-off-discount-creative-concept-spring-sale-stylish-poster-banner-promotion-ads-twenty-percent-off-discount-113881837.jpg" alt="Promotion Banner" class="img-fluid rounded-4 shadow">
                 </div>
             </div>
         </div>
     </section>
+
     <section class="section section-alt">
         <div class="container">
             <div class="section-header animate-fade-in-up">
@@ -209,6 +222,7 @@
             </div>
         </div>
     </section>
+
     <section class="section">
         <div class="container">
             <div class="row justify-content-center">
@@ -231,6 +245,7 @@
             </div>
         </div>
     </section>
+
     <footer class="footer">
         <div class="container">
             <div class="row g-4">
@@ -261,18 +276,19 @@
             </div>
         </div>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="js/script.js"></script>
+    <script src="assets/js/utils.js"></script>
     <script>
         const featuredProducts = [
-            { id: 1, name: "Monstera Deliciosa", category: "Indoor Plants", price: 350.00, image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" },
-            { id: 2, name: "Snake Plant", category: "Succulents", price: 200.00, image: "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80" },
-            { id: 3, name: "Peace Lily", category: "Flowering", price: 280.00, image: "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80" },
-            { id: 4, name: "ZZ Plant", category: "Indoor Plants", price: 320.00, image: "https://images.unsplash.com/photo-1614016821356-5c0b2f5d8c6b?auto=format&fit=crop&w=400&q=80" },
-            { id: 5, name: "Fiddle Leaf Fig", category: "Indoor Plants", price: 450.00, image: "https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=400&q=80" },
-            { id: 6, name: "Pothos Golden", category: "Indoor Plants", price: 150.00, image: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=400&q=80" },
-            { id: 7, name: "Echeveria Elegans", category: "Succulents", price: 180.00, image: "https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?auto=format&fit=crop&w=400&q=80" },
-            { id: 8, name: "Phalaenopsis Orchid", category: "Flowering", price: 450.00, image: "https://images.unsplash.com/photo-1593691509543-c55fb32d8de5?auto=format&fit=crop&w=400&q=80" }
+            { id: 1, name: "Monstera Deliciosa", category: "Indoor Plants", price: 350.00, image: "https://png.pngtree.com/png-clipart/20241018/original/pngtree-monstera-tree-plant-isolated-home-garden-with-pot-png-image_16371758.png" },
+            { id: 2, name: "Snake Plant", category: "Succulents", price: 200.00, image: "https://img.magnific.com/premium-photo/snake-plant-pot-large-white-isolated-white-background_158502-310.jpg" },
+            { id: 3, name: "Peace Lily", category: "Flowering", price: 280.00, image: "https://static.vecteezy.com/system/resources/thumbnails/068/536/600/small_2x/peace-lily-plant-with-white-flowers-isolated-on-a-transparent-background-png.png" },
+            { id: 4, name: "ZZ Plant", category: "Indoor Plants", price: 320.00, image: "https://floralacres.ca/cdn/shop/files/30839-2_720x.jpg?v=1697234822" },
+            { id: 5, name: "Fiddle Leaf Fig", category: "Indoor Plants", price: 450.00, image: "https://floralacres.ca/cdn/shop/files/29692-3_720x.jpg?v=1686974812" },
+            { id: 6, name: "Pothos Golden", category: "Indoor Plants", price: 150.00, image: "https://floralacres.ca/cdn/shop/products/20203-1_720x.jpg?v=1687630539" },
+            { id: 7, name: "Echeveria Elegans", category: "Succulents", price: 180.00, image: "https://foliage-factory.com/cdn/shop/files/echeveria-elegans-03.webp?v=1776360008&width=960" },
+            { id: 8, name: "Phalaenopsis Orchid", category: "Flowering", price: 450.00, image: "https://floralacres.ca/cdn/shop/files/35698-1_720x.jpg?v=1728165551" }
         ];
         function renderFeaturedCarousel() {
             const inner = document.getElementById('featuredCarouselInner');
@@ -332,6 +348,7 @@
             renderFeaturedCarousel();
             updateCartCount();
             initTooltips();
+
         });
     </script>
 </body>

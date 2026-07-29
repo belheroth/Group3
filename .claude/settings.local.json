@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(npx serve *)",
-      "Bash(curl -s http://localhost:8080/product-details.html?id=1)",
-      "Bash(python3 *)"
-    ]
-  }
-}

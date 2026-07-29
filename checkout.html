@@ -85,19 +85,39 @@
     .delivery-option {
       border: 2px solid #e9ecef;
       border-radius: var(--bs-border-radius);
-      padding: 1rem;
+      padding: 1.25rem 1.5rem;
       margin-bottom: 1rem;
       cursor: pointer;
-      transition: var(--bs-transition);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
 
     .delivery-option:hover {
-      border-color: var(--bs-primary);
+      border-color: var(--bs-secondary);
+      background-color: rgba(45, 106, 79, 0.03);
     }
 
     .delivery-option.selected {
-      border-color: var(--bs-primary);
-      background-color: rgba(82, 183, 136, 0.05);
+      border-color: var(--bs-secondary);
+      background-color: rgba(45, 106, 79, 0.05);
+    }
+
+    .delivery-option .delivery-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: var(--bs-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .delivery-option.selected .delivery-icon {
+      background-color: var(--bs-secondary);
+      color: #fff;
     }
 
     .delivery-option input {
@@ -228,32 +248,24 @@
                 <h3><i class="bi bi-truck me-2"></i>Delivery Options</h3>
 
                 <div class="delivery-option selected" data-type="delivery" onclick="selectDelivery('delivery')">
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="order_type" id="deliveryOption" value="Delivery" checked>
-                    <label class="form-check-label w-100 d-flex align-items-center" for="deliveryOption">
-                      <div class="me-3">
-                        <i class="bi bi-truck fs-4 text-primary"></i>
-                      </div>
-                      <div>
-                        <strong class="d-block">Deliver to my address</strong>
-                        <small class="text-muted">Standard delivery within Parañaque City</small>
-                      </div>
-                    </label>
+                  <input class="form-check-input" type="radio" name="order_type" id="deliveryOption" value="Delivery" checked>
+                  <div class="delivery-icon">
+                    <i class="bi bi-truck fs-5"></i>
+                  </div>
+                  <div>
+                    <strong class="d-block">Cash on Delivery</strong>
+                    <small class="text-muted">Pay when your order arrives · Delivery fee applies</small>
                   </div>
                 </div>
 
                 <div class="delivery-option" data-type="pickup" onclick="selectDelivery('pickup')">
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="order_type" id="pickupOption" value="Pickup">
-                    <label class="form-check-label w-100 d-flex align-items-center" for="pickupOption">
-                      <div class="me-3">
-                        <i class="bi bi-shop fs-4 text-primary"></i>
-                      </div>
-                      <div>
-                        <strong class="d-block">Store Pickup</strong>
-                        <small class="text-muted">Pick up at our shop - no delivery fee</small>
-                      </div>
-                    </label>
+                  <input class="form-check-input" type="radio" name="order_type" id="pickupOption" value="Pickup">
+                  <div class="delivery-icon">
+                    <i class="bi bi-shop fs-5"></i>
+                  </div>
+                  <div>
+                    <strong class="d-block">Store Pickup</strong>
+                    <small class="text-muted">Pick up at Amos Garden · No fees</small>
                   </div>
                 </div>
 
@@ -291,7 +303,7 @@
 
               
               <div class="checkout-section">
-                <h3><i class="bi bi-credit-card me-2"></i>Payment Method</h3>
+                <h3></i>Payment Method</h3>
                 <div class="alert alert-info mb-0">
                   <i class="bi bi-info-circle me-2"></i>
                   <strong>Cash on Delivery / Pickup</strong> - Payment will be collected upon delivery or at the store.
@@ -317,16 +329,6 @@
                 
               </div>
             </div>
-
-            
-            <div class="mt-4 p-3 text-center small text-muted animate-fade-in-up delay-2">
-              <div class="d-flex justify-content-center gap-3 flex-wrap mb-2">
-                <span><i class="bi bi-shield-lock-fill me-1"></i>Secure Checkout</span>
-                <span><i class="bi bi-truck me-1"></i>Free Delivery (Parañaque)</span>
-                <span><i class="bi bi-arrow-return-left me-1"></i>Easy Returns</span>
-              </div>
-              <p class="mb-0">Your information is encrypted and secure.</p>
-            </div>
           </div>
         </div>
       </div>
@@ -350,7 +352,7 @@
           <p class="text-muted small">Order Number: <strong id="orderNumber"></strong></p>
         </div>
         <div class="modal-footer border-0 justify-content-center">
-          <a href="my_account.html" class="btn btn-primary" data-bs-dismiss="modal">View My Orders</a>
+          <a href="my_orders.html" class="btn btn-primary" data-bs-dismiss="modal">View My Orders</a>
           <a href="shop.html" class="btn btn-outline-secondary" data-bs-dismiss="modal">Continue Shopping</a>
         </div>
       </div>
@@ -399,30 +401,30 @@
 
   
   <script src="assets/js/utils.js"></script>
+  <script src="js/plant-images.js"></script>
 
-  
   <script>
     const products = [
-      { id: 1, name: "Aloe Vera", price: 150.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Aloe" },
-      { id: 2, name: "Snake Plant", price: 200.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Snake" },
-      { id: 3, name: "Echeveria Elegans", price: 180.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Ech" },
-      { id: 4, name: "Jade Plant", price: 220.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Jade" },
-      { id: 5, name: "Monstera Deliciosa", price: 350.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Mon" },
-      { id: 6, name: "Peace Lily", price: 280.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Peace" },
-      { id: 7, name: "ZZ Plant", price: 320.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=ZZ" },
-      { id: 8, name: "Fiddle Leaf Fig", price: 450.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Fid" },
-      { id: 9, name: "Phalaenopsis Orchid", price: 450.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Orch" },
-      { id: 10, name: "Anthurium Red", price: 320.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Ant" },
-      { id: 11, name: "Bromeliad", price: 280.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Bro" },
-      { id: 12, name: "African Violet", price: 180.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Afr" },
-      { id: 13, name: "Sweet Basil", price: 120.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Bas" },
-      { id: 14, name: "Peppermint", price: 120.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Mint" },
-      { id: 15, name: "Rosemary", price: 150.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Ros" },
-      { id: 16, name: "Thai Basil", price: 130.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Thai" },
-      { id: 17, name: "Bougainvillea", price: 400.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Bou" },
-      { id: 18, name: "Hibiscus", price: 350.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Hib" },
-      { id: 19, name: "Plumeria", price: 500.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Plu" },
-      { id: 20, name: "Bird of Paradise", price: 600.00, image: "https://via.placeholder.com/80x80/f8fbf9/52b788?text=Bir" }
+      { id: 1,  name: "Aloe Vera",           price: 150.00, image: getPlantImage("Aloe Vera") },
+      { id: 2,  name: "Snake Plant",         price: 200.00, image: getPlantImage("Snake Plant") },
+      { id: 3,  name: "Echeveria Elegans",   price: 180.00, image: getPlantImage("Echeveria Elegans") },
+      { id: 4,  name: "Jade Plant",          price: 220.00, image: getPlantImage("Jade Plant") },
+      { id: 5,  name: "Monstera Deliciosa",  price: 350.00, image: getPlantImage("Monstera Deliciosa") },
+      { id: 6,  name: "Peace Lily",           price: 280.00, image: getPlantImage("Peace Lily") },
+      { id: 7,  name: "ZZ Plant",             price: 320.00, image: getPlantImage("ZZ Plant") },
+      { id: 8,  name: "Fiddle Leaf Fig",      price: 450.00, image: getPlantImage("Fiddle Leaf Fig") },
+      { id: 9,  name: "Phalaenopsis Orchid",  price: 450.00, image: getPlantImage("Phalaenopsis Orchid") },
+      { id: 10, name: "Anthurium Red",        price: 320.00, image: getPlantImage("Anthurium Red") },
+      { id: 11, name: "Bromeliad",            price: 280.00, image: getPlantImage("Bromeliad") },
+      { id: 12, name: "African Violet",       price: 180.00, image: getPlantImage("African Violet") },
+      { id: 13, name: "Sweet Basil",          price: 120.00, image: getPlantImage("Sweet Basil") },
+      { id: 14, name: "Peppermint",           price: 120.00, image: getPlantImage("Peppermint") },
+      { id: 15, name: "Rosemary",             price: 150.00, image: getPlantImage("Rosemary") },
+      { id: 16, name: "Thai Basil",           price: 130.00, image: getPlantImage("Thai Basil") },
+      { id: 17, name: "Bougainvillea",        price: 400.00, image: getPlantImage("Bougainvillea") },
+      { id: 18, name: "Hibiscus",             price: 350.00, image: getPlantImage("Hibiscus") },
+      { id: 19, name: "Plumeria",             price: 500.00, image: getPlantImage("Plumeria") },
+      { id: 20, name: "Bird of Paradise",     price: 600.00, image: getPlantImage("Bird of Paradise") }
     ];
 
     
@@ -462,7 +464,6 @@
     }
 
     
-    // RENDER ORDER SUMMARY
     
     function renderOrderSummary() {
       const cart = getCart();
@@ -506,10 +507,11 @@
           <span>Subtotal (${itemCount} items)</span>
           <span>${formatPrice(subtotal)}</span>
         </div>
+        ${selectedDeliveryType === 'delivery' ? `
         <div class="summary-row">
           <span>Delivery Fee</span>
-          <span>${selectedDeliveryType === 'delivery' ? formatPrice(deliveryFee) : '<span class="text-success">Free (Pickup)</span>'}</span>
-        </div>
+          <span>${formatPrice(deliveryFee)}</span>
+        </div>` : ''}
         <div class="summary-row total">
           <span>Total</span>
           <span>${formatPrice(total)}</span>
@@ -518,12 +520,12 @@
     }
 
     
-    // DELIVERY TYPE SELECTION
+    
     
     function selectDelivery(type) {
       selectedDeliveryType = type;
 
-      // Update UI
+       
       document.querySelectorAll('.delivery-option').forEach(opt => {
         opt.classList.toggle('selected', opt.dataset.type === type);
       });
@@ -531,7 +533,7 @@
       document.getElementById('deliveryOption').checked = type === 'delivery';
       document.getElementById('pickupOption').checked = type === 'pickup';
 
-      // Toggle address fields
+       
       const addressFields = document.getElementById('addressFields');
       const pickupInfo = document.getElementById('pickupInfo');
       const streetInput = document.getElementById('streetAddress');
@@ -553,27 +555,43 @@
     }
 
     
-    // FORM VALIDATION & SUBMISSION
+     
     
     document.addEventListener('DOMContentLoaded', function() {
       const form = document.getElementById('checkoutFormElement');
 
-      // Initial render
+       
       renderOrderSummary();
 
-      // Check if cart is empty
+       
       if (Object.keys(getCart()).length === 0) {
-        // Redirect to cart page or show message
-        // For now, just let the render handle it
+        if (window.toast) {
+          window.toast.warning('Your cart is empty! Redirecting to shop...');
+        }
+        setTimeout(() => {
+          window.location.href = 'shop.html';
+        }, 1500);
+        return;
       }
 
-      // Form submission
+       
       form.addEventListener('submit', function(e) {
         e.preventDefault();
         e.stopPropagation();
 
+         
+        if (Object.keys(getCart()).length === 0) {
+          if (window.toast) {
+            window.toast.warning('Your cart is empty!');
+          } else {
+            alert('Your cart is empty!');
+          }
+          window.location.href = 'cart.html';
+          return;
+        }
+
         if (form.checkValidity()) {
-          // Validate delivery address if delivery selected
+           
           if (selectedDeliveryType === 'delivery') {
             const street = document.getElementById('streetAddress').value.trim();
             const city = document.getElementById('city').value.trim();
@@ -583,7 +601,7 @@
             }
           }
 
-          // Process order
+           
           processOrder(form);
         }
 
@@ -592,43 +610,91 @@
     });
 
     
-    // PROCESS ORDER
+     
     
     function processOrder(form) {
       const submitBtn = form.querySelector('button[type="submit"]');
       const originalHtml = submitBtn.innerHTML;
 
-      // Show loading state
+       
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Processing...';
 
-      // Simulate API call
+       
       setTimeout(() => {
-        // Generate order number
+         
         const orderNumber = 'AG-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substr(2, 4).toUpperCase();
 
-        // Clear cart
-        localStorage.removeItem('amosGardenCart');
+         
+        const formData = new FormData(form);
+        const cart = getCart();
+        const { subtotal, deliveryFee, total, itemCount } = calculateTotals();
 
-        // Show success modal (Components PDF - Modal)
+         
+        const items = Object.entries(cart).map(([id, qty]) => {
+          const product = products.find(p => p.id === parseInt(id));
+          return {
+            productId: parseInt(id),
+            name: product ? product.name : 'Unknown Plant',
+            price: product ? product.price : 0,
+            quantity: qty,
+            image: product ? product.image : '',
+            itemTotal: (product ? product.price : 0) * qty
+          };
+        });
+
+         
+        const order = {
+          orderNumber: orderNumber,
+          date: new Date().toISOString(),
+          status: 'Processing',
+          customer: {
+            name: formData.get('first_name') + ' ' + formData.get('last_name'),
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+            address: selectedDeliveryType === 'delivery' ? formData.get('street_address') : null,
+            city: selectedDeliveryType === 'delivery' ? formData.get('city') : null,
+            deliveryType: selectedDeliveryType
+          },
+          items: items,
+          itemCount: itemCount,
+          subtotal: subtotal,
+          deliveryFee: selectedDeliveryType === 'delivery' ? deliveryFee : 0,
+          total: total
+        };
+
+         
+        const savedOrders = localStorage.getItem('amosGardenOrders');
+        const orders = savedOrders ? JSON.parse(savedOrders) : [];
+        orders.unshift(order);
+        localStorage.setItem('amosGardenOrders', JSON.stringify(orders));
+
+         
+        localStorage.removeItem('amosGardenCart');
+        localStorage.removeItem('amosGardenCheckoutData');
+
+         
         document.getElementById('orderNumber').textContent = orderNumber;
         successModal.show();
 
-        // Reset button
+         
+        const modalEl = document.getElementById('successModal');
+        modalEl.addEventListener('hidden.bs.modal', function handleModalClose() {
+          modalEl.removeEventListener('hidden.bs.modal', handleModalClose);
+          window.location.href = 'my_orders.html';
+        }, { once: true });
+
+         
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalHtml;
 
-        // Redirect after modal closes (optional)
-        // setTimeout(() => window.location.href = 'my_account.html', 3000);
       }, 1500);
     }
 
     
-    // PREFILL FROM LOCALSTORAGE (if user was logged in)
+     
     
     function prefillForm() {
-      // In a real app, you'd check for logged-in user data
-      // For demo, we can check if there's saved form data
       const savedData = localStorage.getItem('amosGardenCheckoutData');
       if (savedData) {
         try {
@@ -637,13 +703,11 @@
             const input = document.getElementById(key);
             if (input) input.value = data[key];
           });
-        } catch (e) {
-          console.warn('Failed to parse saved checkout data');
-        }
+        } catch (e) {}
       }
     }
 
-    // Save form data as user types
+     
     document.getElementById('checkoutFormElement')?.addEventListener('input', function(e) {
       if (e.target.matches('input, select, textarea')) {
         const formData = new FormData(this);
@@ -652,8 +716,8 @@
       }
     });
 
-    // Initialize
+     
     prefillForm();
   </script>
 </body>
-</html>
+</html>     

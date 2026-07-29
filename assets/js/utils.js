@@ -1,13 +1,3 @@
-// ========================================
-// Amos Garden - Shared Utilities
-// Bootstrap 5 Interactive Components Library
-// Based on: Bootstrap 5 Components PDF, Interactive Components PDF, Layout & Utilities PDF
-// ========================================
-
-/**
- * Toast Notification System
- * Uses Bootstrap 5 Toast component (Interactive Components PDF)
- */
 class ToastManager {
   constructor() {
     this.container = null;
@@ -25,12 +15,6 @@ class ToastManager {
     }
   }
 
-  /**
-   * Show a toast notification
-   * @param {string} message - Message to display
-   * @param {'success'|'danger'|'warning'|'info'} type - Toast type
-   * @param {number} delay - Auto-dismiss delay in ms (default 3000)
-   */
   show(message, type = 'success', delay = 3000) {
     const toastId = 'toast-' + Date.now();
     const icons = {
@@ -74,10 +58,6 @@ class ToastManager {
   info(message, delay) { return this.show(message, 'info', delay); }
 }
 
-/**
- * Modal Manager - Enhanced Bootstrap 5 Modal handling
- * Uses Modal component (Components PDF)
- */
 class ModalManager {
   static show(modalId, options = {}) {
     const modalEl = document.getElementById(modalId);
@@ -101,7 +81,6 @@ class ModalManager {
   }
 
   static confirm(title, message, onConfirm, onCancel) {
-    // Create dynamic confirmation modal
     const modalId = 'confirmModal-' + Date.now();
     const modalHtml = `
       <div class="modal fade" id="${modalId}" tabindex="-1" aria-hidden="true">
@@ -138,10 +117,6 @@ class ModalManager {
   }
 }
 
-/**
- * Offcanvas Cart Drawer
- * Uses Offcanvas component (Interactive Components PDF)
- */
 class CartOffcanvas {
   constructor() {
     this.offcanvasEl = null;
@@ -150,17 +125,12 @@ class CartOffcanvas {
   }
 
   init() {
-    // Check if offcanvas already exists
     this.offcanvasEl = document.getElementById('cartOffcanvas');
     if (this.offcanvasEl) {
       this.offcanvas = new bootstrap.Offcanvas(this.offcanvasEl);
     }
   }
 
-  /**
-   * Create and show the cart offcanvas
-   * @param {Array} cartItems - Array of cart items
-   */
   show(cartItems = []) {
     if (!this.offcanvasEl) {
       this.createOffcanvas();
@@ -214,10 +184,10 @@ class CartOffcanvas {
     const contentEl = document.getElementById('offcanvasCartContent');
     const products = JSON.parse(localStorage.getItem('amosGardenProducts') || '[]');
     const defaultProducts = [
-      { id: 1, name: "Aloe Vera", price: 150.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Aloe" },
-      { id: 2, name: "Snake Plant", price: 200.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Snake" },
-      { id: 3, name: "Monstera Deliciosa", price: 350.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Mon" },
-      { id: 5, name: "Peace Lily", price: 280.00, image: "https://via.placeholder.com/60x60/f8fbf9/52b788?text=Peace" }
+      { id: 1, name: "Aloe Vera", price: 150.00, image: getPlantImage("Aloe Vera") },
+      { id: 2, name: "Snake Plant", price: 200.00, image: getPlantImage("Snake Plant") },
+      { id: 3, name: "Monstera Deliciosa", price: 350.00, image: getPlantImage("Monstera Deliciosa") },
+      { id: 5, name: "Peace Lily", price: 280.00, image: getPlantImage("Peace Lily") }
     ];
     const allProducts = [...products, ...defaultProducts];
 
@@ -323,14 +293,17 @@ class CartOffcanvas {
   updateCartCount() {
     const cart = JSON.parse(localStorage.getItem('amosGardenCart') || '{}');
     const totalItems = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
-    document.querySelectorAll('#cartCount').forEach(el => el.textContent = totalItems);
+    document.querySelectorAll('#cartCount').forEach(el => {
+      el.textContent = totalItems;
+      if (totalItems === 0) {
+        el.classList.add('d-none');
+      } else {
+        el.classList.remove('d-none');
+      }
+    });
   }
 }
 
-/**
- * Accordion FAQ Component
- * Uses Accordion component (Interactive Components PDF)
- */
 class FAQAccordion {
   static create(items, containerId) {
     const container = document.getElementById(containerId);
@@ -359,10 +332,6 @@ class FAQAccordion {
   }
 }
 
-/**
- * Carousel Component
- * Uses Carousel component (Components PDF)
- */
 class ImageCarousel {
   static create(images, containerId, options = {}) {
     const container = document.getElementById(containerId);
@@ -401,10 +370,6 @@ class ImageCarousel {
   }
 }
 
-/**
- * Tooltip & Popover Initialization
- * Uses Tooltip/Popover components (Components PDF)
- */
 function initTooltips() {
   const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
   tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -425,10 +390,6 @@ function initPopovers() {
   });
 }
 
-/**
- * Form Validation Helper
- * Uses Bootstrap 5 Form Validation (Components PDF)
- */
 class FormValidator {
   static init(formSelector) {
     const forms = document.querySelectorAll(formSelector);
@@ -453,10 +414,6 @@ class FormValidator {
   }
 }
 
-/**
- * ScrollSpy & Smooth Scroll
- * Uses ScrollSpy (Components PDF) and smooth scroll utility
- */
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
@@ -468,17 +425,12 @@ function initSmoothScroll() {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-        // Update URL without page reload
         history.pushState(null, null, targetId);
       }
     });
   });
 }
 
-/**
- * Intersection Observer for Animations
- * Uses Bootstrap 5 animation utilities (Layout & Utilities PDF)
- */
 function initScrollAnimations(selector = '.animate-fade-in-up') {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -495,23 +447,15 @@ function initScrollAnimations(selector = '.animate-fade-in-up') {
   });
 }
 
-/**
- * Navbar Update Utility
- * Updates the navbar based on user login state
- */
 function updateNavbar() {
   const user = UserSession.get();
   const isLoggedIn = user && user.loggedIn === true;
 
-  // Find all navbar nav items that need updating
   const navbarNav = document.querySelector('#navbarNav .navbar-nav');
   if (!navbarNav) return;
 
-  // Find the cart and login/signup items
   const navItems = navbarNav.querySelectorAll('.nav-item');
 
-  // The last two items are typically Cart and Sign Up/Login
-  // We need to find the login/signup item and update it
   let cartItem = null;
   let authItem = null;
 
@@ -529,7 +473,6 @@ function updateNavbar() {
   if (authItem) {
     const link = authItem.querySelector('a');
     if (isLoggedIn) {
-      // User is logged in - show user menu with logout
       const userName = user.name || user.email || 'User';
       authItem.innerHTML = `
         <div class="dropdown">
@@ -538,32 +481,21 @@ function updateNavbar() {
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
             <li><a class="dropdown-item" href="my_account.html"><i class="bi bi-person me-2"></i>My Account</a></li>
-            <li><a class="dropdown-item" href="checkout.html"><i class="bi bi-bag me-2"></i>My Orders</a></li>
+            <li><a class="dropdown-item" href="my_orders.html"><i class="bi bi-bag me-2"></i>My Orders</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item text-danger" href="#" id="logoutBtn"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
           </ul>
         </div>
       `;
 
-      // Add logout event listener
       const logoutBtn = authItem.querySelector('#logoutBtn');
       if (logoutBtn) {
         logoutBtn.addEventListener('click', function(e) {
           e.preventDefault();
-          UserSession.clear();
-          updateNavbar();
-          updateCartCount();
-          if (window.toast) {
-            window.toast.success('You have been logged out');
-          }
-          // Redirect to home if on account page
-          if (window.location.pathname.includes('my_account') || window.location.pathname.includes('checkout')) {
-            window.location.href = 'index.html';
-          }
+          window.location.href = 'logout.html';
         });
       }
     } else {
-      // User is not logged in - show Sign Up / Login button
       link.className = 'nav-link btn btn-primary btn-nav';
       link.href = 'login.html';
       link.innerHTML = 'Sign Up / Login';
@@ -571,18 +503,19 @@ function updateNavbar() {
   }
 }
 
-/**
- * Cart Count Utility
- */
 function updateCartCount() {
   const cart = JSON.parse(localStorage.getItem('amosGardenCart') || '{}');
   const totalItems = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
-  document.querySelectorAll('#cartCount').forEach(el => el.textContent = totalItems);
+  document.querySelectorAll('#cartCount').forEach(el => {
+    el.textContent = totalItems;
+    if (totalItems === 0) {
+      el.classList.add('d-none');
+    } else {
+      el.classList.remove('d-none');
+    }
+  });
 }
 
-/**
- * User Session Helper
- */
 const UserSession = {
   get() {
     const data = localStorage.getItem('amosGardenUser');
@@ -616,9 +549,6 @@ const UserSession = {
   }
 };
 
-/**
- * Admin Session Helper
- */
 const AdminSession = {
   get() {
     const data = localStorage.getItem('amosGardenAdmin');
@@ -639,33 +569,22 @@ const AdminSession = {
   }
 };
 
-// ========================================
-// AUTO-INITIALIZATION ON DOM READY
-// ========================================
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize global toast manager
   window.toast = new ToastManager();
 
-  // Initialize cart offcanvas
   window.cartOffcanvas = new CartOffcanvas();
 
-  // Initialize tooltips and popovers
   initTooltips();
   initPopovers();
 
-  // Initialize smooth scroll
   initSmoothScroll();
 
-  // Initialize scroll animations
   initScrollAnimations();
 
-  // Update cart count on all pages
   updateCartCount();
 
-  // Update navbar based on login state
   updateNavbar();
 
-  // Listen for storage changes (cross-tab sync)
   window.addEventListener('storage', (e) => {
     if (e.key === 'amosGardenCart') {
       updateCartCount();
@@ -676,7 +595,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// Export for module usage
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     ToastManager,

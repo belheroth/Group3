@@ -6,18 +6,14 @@
   <meta name="description" content="Amos Garden Professional Landscaping Services - Transform your outdoor space in Parañaque City with custom garden design and installation.">
   <title>Landscaping Services - Amos Garden</title>
 
-  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
-  
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-  
   <nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container">
       <a class="navbar-brand" href="index.html">
@@ -40,8 +36,15 @@
             <a class="nav-link active" href="landscaping.html">Landscaping</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="cart.html"><i class="bi bi-cart3 me-1"></i>Cart</a>
+            <a class="nav-link" href="about.html">About</a>
           </li>
+           <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cart.html"><i class="bi bi-cart3 me-1"></i>Cart <span class="badge bg-danger rounded-pill d-none" id="cartCount">0</span></a>
+          </li>
+          
           <li class="nav-item ms-lg-2">
             <a class="nav-link btn btn-primary btn-nav" href="login.html">Sign Up / Login</a>
           </li>
@@ -50,11 +53,15 @@
     </div>
   </nav>
 
+
+
+
   <button type="button" class="btn-back" onclick="window.history.back()">
     <i class="bi bi-arrow-left"></i> Go Back
   </button>
 
-  
+
+
   <header class="hero-section-small">
     <div class="container">
       <div class="row align-items-center">
@@ -67,7 +74,6 @@
     </div>
   </header>
 
-  
   <section class="section" id="portfolio">
     <div class="container">
       <div class="section-header animate-fade-in-up">
@@ -85,7 +91,7 @@
         </article>
 
         <article class="gallery-item animate-fade-in-up delay-2">
-          <img src="https://images.unsplash.com/photo-1558904541-efa843a96f09?auto=format&fit=crop&w=800&q=80" alt="Urban Balcony Oasis" loading="lazy">
+          <img src="https://cdn.mos.cms.futurecdn.net/aasdDiakrRKD2bFN87FC3T-1280-80.jpg.webp" alt="Urban Balcony Oasis" loading="lazy">
           <div class="gallery-overlay">
             <h3>Urban Balcony Oasis</h3>
             <p>Don Bosco, Parañaque</p>
@@ -109,7 +115,7 @@
         </article>
 
         <article class="gallery-item animate-fade-in-up delay-1">
-          <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80" alt="Rooftop Garden" loading="lazy">
+          <img src="https://www.gardendesign.com/pictures/images/973x490Exact_0x70/site_3/rooftop-garden-planters-weight-restrictions-amber-freda-home-garden-design_11141.jpg" alt="Rooftop Garden" loading="lazy">
           <div class="gallery-overlay">
             <h3>Rooftop Garden</h3>
             <p>Sucat, Parañaque</p>
@@ -117,7 +123,7 @@
         </article>
 
         <article class="gallery-item animate-fade-in-up delay-2">
-          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" alt="Herb Garden" loading="lazy">
+          <img src="https://static.vecteezy.com/system/resources/thumbnails/055/988/261/small_2x/a-modern-kitchen-island-with-a-built-in-herb-garden-photo.jpg" alt="Herb Garden" loading="lazy">
           <div class="gallery-overlay">
             <h3>Kitchen Herb Garden</h3>
             <p>San Dionisio, Parañaque</p>
@@ -131,7 +137,6 @@
     </div>
   </section>
 
-  
   <section class="section section-alt" id="services">
     <div class="container">
       <div class="section-header animate-fade-in-up">
@@ -191,7 +196,6 @@
     </div>
   </section>
 
-  
   <section class="section" id="process">
     <div class="container">
       <div class="section-header animate-fade-in-up">
@@ -235,7 +239,6 @@
     </div>
   </section>
 
-  
   <section class="request-section" id="request-form">
     <div class="container">
       <div class="row justify-content-center">
@@ -305,13 +308,13 @@
                 </button>
               </form>
 
-              
+
               <div id="successMessage" class="alert alert-success mt-4 d-none" role="alert">
                 <i class="bi bi-check-circle-fill me-2"></i>
                 <strong>Thank you!</strong> Your landscaping request has been sent. Our team will contact you shortly to schedule a visit.
               </div>
 
-              
+
               <div id="errorMessage" class="alert alert-danger mt-4 d-none" role="alert">
                 <i class="bi bi-exclamation-triangle-fill me-2"></i>
                 <strong>Error:</strong> <span id="errorText">Failed to send request. Please try again.</span>
@@ -323,7 +326,6 @@
     </div>
   </section>
 
-  
   <section class="section section-alt">
     <div class="container text-center">
       <div class="row justify-content-center">
@@ -339,7 +341,6 @@
     </div>
   </section>
 
-  
   <footer class="footer">
     <div class="container">
       <div class="row g-4">
@@ -358,8 +359,7 @@
         <div class="col-lg-2 col-md-6">
           <h5 class="footer-links">Services</h5>
           <ul class="footer-links">
-            <li><a href="plant_doctor.html">AI Plant Doctor</a></li>
-            <li><a href="landscaping.html">Landscaping</a></li>
+                        <li><a href="landscaping.html">Landscaping</a></li>
           </ul>
         </div>
         <div class="col-lg-4 col-md-6">
@@ -377,10 +377,17 @@
     </div>
   </footer>
 
-  
+
+
+
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-  
+
+
+
+  <script src="assets/js/utils.js"></script>
+
   <script>
     // Form validation and submission
     (function() {
@@ -396,20 +403,12 @@
         event.stopPropagation();
 
         if (form.checkValidity()) {
-          // Simulate form submission
           const submitBtn = form.querySelector('button[type="submit"]');
           const originalText = submitBtn.innerHTML;
           submitBtn.disabled = true;
           submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Sending...';
 
-          // Simulate API call
           setTimeout(() => {
-            // In a real application, you would send the form data to your backend
-            // fetch('landscaping.php', { method: 'POST', body: new FormData(form) })
-            //   .then(response => response.json())
-            //   .then(data => { ... })
-
-            // For demo purposes, show success
             form.classList.add('d-none');
             errorMessage.classList.add('d-none');
             successMessage.classList.remove('d-none');

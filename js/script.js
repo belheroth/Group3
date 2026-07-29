@@ -1,6 +1,3 @@
-// Utility functions for Amos Garden website
-
-// User Session Helper
 const UserSession = {
   get() {
     const data = localStorage.getItem('amosGardenUser');
@@ -30,20 +27,17 @@ const UserSession = {
 
   getEmail() {
     const user = this.get();
-    return user ? user.email : '';
+    user ? user.email : '';
   }
 };
 
-// Update navbar based on login state
 function updateNavbar() {
   const user = UserSession.get();
   const isLoggedIn = user && user.loggedIn === true;
 
-  // Find all navbar nav items that need updating
   const navbarNav = document.querySelector('#navbarNav .navbar-nav');
   if (!navbarNav) return;
 
-  // Find the auth item (Sign Up / Login button)
   const navItems = navbarNav.querySelectorAll('.nav-item');
   let authItem = null;
 
@@ -57,7 +51,6 @@ function updateNavbar() {
   if (authItem) {
     const link = authItem.querySelector('a');
     if (isLoggedIn) {
-      // User is logged in - show user menu with logout
       const userName = user.name || user.email || 'User';
       authItem.innerHTML = `
         <div class="dropdown">
@@ -73,7 +66,6 @@ function updateNavbar() {
         </div>
       `;
 
-      // Add logout event listener
       const logoutBtn = authItem.querySelector('#logoutBtn');
       if (logoutBtn) {
         logoutBtn.addEventListener('click', function(e) {
@@ -81,14 +73,12 @@ function updateNavbar() {
           UserSession.clear();
           updateNavbar();
           updateCartCount();
-          // Redirect to home if on account page
           if (window.location.pathname.includes('my_account') || window.location.pathname.includes('checkout')) {
-            window.location.href = 'index.html';
+            window.location.href = 'logout.html';
           }
         });
       }
     } else {
-      // User is not logged in - show Sign Up / Login button
       link.className = 'nav-link btn btn-primary btn-nav';
       link.href = 'login.html';
       link.innerHTML = 'Sign Up / Login';
@@ -96,31 +86,31 @@ function updateNavbar() {
   }
 }
 
-// Update cart count in navbar
 function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem('amosGardenCart') || '{}');
     const itemCount = Object.values(cart).reduce((sum, count) => sum + count, 0);
     const cartBadge = document.getElementById('cartCount');
     if (cartBadge) {
         cartBadge.textContent = itemCount;
+        if (itemCount === 0) {
+            cartBadge.classList.add('d-none');
+        } else {
+            cartBadge.classList.remove('d-none');
+        }
     }
 }
 
-// Initialize tooltips
 function initTooltips() {
-    const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltips = document.queryAll('[data-bs-toggle="tooltip"]');
     tooltips.forEach(tooltip => {
         new bootstrap.Tooltip(tooltip);
     });
 }
 
-// Toast notification function (if needed)
 function showToast(message, type = 'success') {
-    // In a more complete implementation, this would create toast notifications
     console.log(type.toUpperCase() + ': ' + message);
 }
 
-// Format currency
 function formatCurrency(amount) {
     return new Intl.NumberFormat('en-PH', {
         style: 'currency',
@@ -128,7 +118,6 @@ function formatCurrency(amount) {
     }).format(amount);
 }
 
-// Scroll to top function
 function scrollToTop() {
     window.scrollTo({
         top: 0,
@@ -136,14 +125,8 @@ function scrollToTop() {
     });
 }
 
-// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize tooltips
     initTooltips();
-
-    // Update cart count
     updateCartCount();
-
-    // Update navbar based on login state
     updateNavbar();
 });
