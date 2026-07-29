@@ -386,7 +386,7 @@
           <ul class="footer-links">
             <li><i class="bi bi-geo-alt me-2"></i>123 Green Avenue, Parañaque City</li>
             <li><i class="bi bi-telephone me-2"></i>+63 917 123 4567</li>
-            <li><i class="bi bi-envelope me-2"></i>hello@amosgarden.com</li>
+            <li><i class="bi bi-envelope me-2"></i>yourbestgarden@amosgarden.com</li>
           </ul>
         </div>
       </div>
@@ -428,13 +428,13 @@
     ];
 
     
-    // STATE
+     
     
-    let selectedDeliveryType = 'delivery'; // 'delivery' or 'pickup'
+    let selectedDeliveryType = 'delivery';  
     const successModal = new bootstrap.Modal(document.getElementById('successModal'));
 
     
-    // CART HELPERS
+     
     
     function getCart() {
       return JSON.parse(localStorage.getItem('amosGardenCart') || '{}');

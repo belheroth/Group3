@@ -135,7 +135,7 @@
                       <ul class="footer-links">
                           <li>123 Green Avenue, BF Homes, Paranaque City</li>
                           <li>+63 917 123 4567</li>
-                          <li>hello@amosgarden.com</li>
+                          <li>yourbestgarden@amosgarden.com</li>
                           <li>Mon - Sat: 8:00 AM - 6:00 PM</li>
                       </ul>
                   </div>
@@ -304,7 +304,7 @@
                   return;
               }
 
-              // Save cart totals for checkout page
+               
               const subtotalEl = document.getElementById('subtotal');
               const shippingEl = document.getElementById('shipping');
               const taxEl = document.getElementById('tax');
@@ -321,7 +321,7 @@
                   localStorage.setItem('amosGardenCheckoutData', JSON.stringify(checkoutData));
               }
 
-              // Redirect to checkout page
+               
               window.location.href = 'checkout.html';
           }
 
