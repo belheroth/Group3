@@ -666,12 +666,12 @@
 
         const savedOrders = localStorage.getItem('amosGardenOrders');
         const existingOrders = savedOrders ? JSON.parse(savedOrders) : [];
-        // Handle both old (orderNumber) and new (id) formats for nextId
+          
         const nextId = existingOrders.length > 0
           ? Math.max(...existingOrders.map(o => o.id || parseInt((o.orderNumber || '').replace('AG-', '')) || 0)) + 1
           : 1;
 
-        // Build full address for delivery
+          
         let deliveryAddress = 'Store Pickup';
         if (selectedDeliveryType === 'delivery') {
           const street = formData.get('street_address');
@@ -680,7 +680,7 @@
           deliveryAddress = street + (apt ? ', ' + apt : '') + ', ' + city;
         }
 
-        // Format date as expected by admin_dashboard.html
+          
         const orderDate = new Date().toISOString().replace('T', ' ').slice(0, 19);
 
         const newOrder = {
@@ -695,7 +695,7 @@
           status: 'Pending'
         };
 
-        // Save to localStorage (prepend to show newest first)
+          
         existingOrders.unshift(newOrder);
         localStorage.setItem('amosGardenOrders', JSON.stringify(existingOrders));
 

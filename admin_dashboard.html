@@ -270,7 +270,7 @@
   <script src="assets/js/utils.js"></script>
 
   <script>
-    // Default sample orders (fallback if localStorage is empty)
+     
     const defaultOrders = [
       { id: 12, customer_name: "Maria Santos", phone: "0917-123-4567", email: "maria@example.com", order_type: "Delivery", delivery_address: "123 Green St, BF Homes, Parañaque", total_amount: 1250.00, order_date: "2026-07-25 10:30:00", status: "Pending" },
       { id: 11, customer_name: "Juan Dela Cruz", phone: "0918-234-5678", email: "juan@example.com", order_type: "Pickup", delivery_address: "Store Pickup", total_amount: 850.00, order_date: "2026-07-25 09:15:00", status: "Preparing" },
@@ -284,12 +284,10 @@
       { id: 3, customer_name: "Dwa", phone: null, email: null, order_type: "Delivery", delivery_address: "da", total_amount: 200.00, order_date: "2026-04-08 08:55:02", status: "Delivered" }
     ];
 
-    // Normalize order to handle both old and new formats
+     
     function normalizeOrder(order) {
-      // New format: id, customer_name, order_type, total_amount, order_date
-      // Old format: orderNumber, customer.name, customer.deliveryType, total, date, status: 'Processing'
+       
       if (order.orderNumber && order.customer) {
-        // Old format
         return {
           id: order.id || parseInt(order.orderNumber.replace('AG-', '')) || Date.now(),
           customer_name: order.customer?.name || 'Unknown',
@@ -302,14 +300,27 @@
           status: order.status === 'Processing' ? 'Pending' : order.status
         };
       }
-      // New format - ensure total_amount is number
-      return {
+       
+      const normalized = {
         ...order,
-        total_amount: Number(order.total_amount) || 0
+        id: Number(order.id) || 0,
+        total_amount: Number(order.total_amount) || 0,
+        customer_name: order.customer_name || 'Unknown',
+        phone: order.phone || '',
+        email: order.email || '',
+        order_type: order.order_type || 'Delivery',
+        delivery_address: order.delivery_address || 'Store Pickup',
+        order_date: order.order_date || new Date().toISOString(),
+        status: order.status || 'Pending'
       };
+       
+      if (normalized.order_date && normalized.order_date.includes(' ') && !normalized.order_date.includes('T')) {
+        normalized.order_date = normalized.order_date.replace(' ', 'T');
+      }
+      return normalized;
     }
 
-    // Load orders from localStorage, fallback to default sample orders
+     
     function loadOrdersFromStorage() {
       const stored = localStorage.getItem('amosGardenOrders');
       if (stored) {
@@ -317,8 +328,8 @@
           const parsed = JSON.parse(stored);
           if (Array.isArray(parsed) && parsed.length > 0) {
             console.log('Loaded orders from localStorage:', parsed.length);
-            // Normalize orders to handle both formats
-            return parsed.map(normalizeOrder).sort((a, b) => b.id - a.id); // newest first
+             
+            return parsed.map(normalizeOrder).sort((a, b) => b.id - a.id);   
           }
         } catch (e) {
           console.error('Failed to parse orders from localStorage:', e);
@@ -349,19 +360,34 @@
     const statsCards = document.getElementById('statsCards');
 
     function formatPrice(price) {
-      return '₱' + price.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const num = Number(price);
+      if (isNaN(num)) {
+        return '₱0.00';
+      }
+      return '₱' + num.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
 
     function formatDate(dateStr) {
-      const date = new Date(dateStr);
-      return date.toLocaleDateString('en-PH', { month: 'short', day: 'numeric', year: '2-digit' });
+      try {
+        const date = new Date(dateStr);
+        if (isNaN(date.getTime())) {
+          return 'Invalid Date';
+        }
+        return date.toLocaleDateString('en-PH', { month: 'short', day: 'numeric', year: '2-digit' });
+      } catch (e) {
+        return 'Invalid Date';
+      }
     }
 
-    // No validTransitions needed - allow any status change including cancel from any state
+      
 
     function updateOrderStatus(orderId, newStatus, selectEl) {
-      const orderIndex = orders.findIndex(o => o.id === orderId);
+        
+      const id = Number(orderId);
+      console.log('updateOrderStatus called:', { id, newStatus, selectEl });
+      const orderIndex = orders.findIndex(o => Number(o.id) === id);
       if (orderIndex === -1) {
+        console.error('Order not found:', id, 'Available IDs:', orders.map(o => o.id));
         alert('Order not found.');
         selectEl.value = orders[orderIndex]?.status || '';
         return;
@@ -369,7 +395,7 @@
 
       const currentStatus = orders[orderIndex].status;
 
-      // Show loading state
+        
       const btn = document.querySelector(`.update-status-btn[data-order-id="${orderId}"]`);
       const originalHtml = btn?.innerHTML;
       if (btn) {
@@ -378,16 +404,16 @@
       }
       selectEl.disabled = true;
 
-      // Update order
+        
       orders[orderIndex].status = newStatus;
       orders[orderIndex].updated_at = new Date().toISOString().replace('T', ' ').slice(0, 19);
       localStorage.setItem('amosGardenOrders', JSON.stringify(orders));
 
-      // Refresh UI
+        
       renderStats();
       renderOrders();
 
-      // Show success toast
+        
       showToast(`Order #${orderId} updated to "${newStatus}"`, 'success');
     }
 
@@ -417,7 +443,7 @@
       });
 
       const totalOrders = orders.length;
-      const totalRevenue = orders.reduce((sum, o) => sum + o.total_amount, 0);
+      const totalRevenue = orders.reduce((sum, o) => sum + (Number(o.total_amount) || 0), 0);
       const pendingCount = statusCounts['Pending'] || 0;
       const deliveringCount = (statusCounts['Delivering'] || 0) + (statusCounts['Ready to Deliver'] || 0);
 
@@ -455,79 +481,96 @@
 
       const allStatuses = ['Pending', 'Preparing', 'Ready to Deliver', 'Delivering', 'Delivered', 'Cancelled'];
 
-      ordersBody.innerHTML = orders.map(order => {
-        const status = statusConfig[order.status] || { class: 'status-pending', label: order.status };
-        const type = typeConfig[order.order_type] || { class: 'status-pending', icon: 'bi-box', label: order.order_type };
+      try {
+        ordersBody.innerHTML = orders.map(order => {
+          const status = statusConfig[order.status] || { class: 'status-pending', label: order.status || 'Unknown' };
+          const type = typeConfig[order.order_type] || { class: 'status-pending', icon: 'bi-box', label: order.order_type || 'Delivery' };
 
-        // No actions for delivered or cancelled orders
-        const isFinal = order.status === 'Delivered' || order.status === 'Cancelled';
+            
+          const isFinal = order.status === 'Delivered' || order.status === 'Cancelled';
 
-        let actionHtml = '';
-        if (!isFinal) {
-          // Build dropdown options - disable current status, show cancelled for active orders
-          const optionsHtml = allStatuses.map(s => {
-            if (s === order.status) return `<option value="${s}" disabled>${s}</option>`;
-            if (s === 'Delivered') return `<option value="${s}" disabled>Delivered</option>`; // Delivered only via transition
-            if (s === 'Cancelled' && !['Pending', 'Preparing', 'Ready to Deliver', 'Delivering'].includes(order.status)) return '';
-            return `<option value="${s}">${s}</option>`;
-          }).join('');
+          let actionHtml = '';
+          if (!isFinal) {
+              
+            const optionsHtml = allStatuses.map(s => {
+              if (s === order.status) return `<option value="${s}" disabled>${s}</option>`;
+              if (s === 'Delivered') return `<option value="${s}" disabled>Delivered</option>`;   
+              if (s === 'Cancelled' && !['Pending', 'Preparing', 'Ready to Deliver', 'Delivering'].includes(order.status)) return '';
+              return `<option value="${s}">${s}</option>`;
+            }).join('');
 
-          actionHtml = `
-            <div class="d-flex gap-1">
-              <select class="form-select form-select-sm status-select" data-order-id="${order.id}" style="width: auto; min-width: 150px;">
-                ${optionsHtml}
-              </select>
-              <button class="btn btn-sm btn-outline-primary update-status-btn" data-order-id="${order.id}" title="Update">
-                <i class="bi bi-check-lg"></i>
-              </button>
-            </div>
+            actionHtml = `
+              <div class="d-flex gap-1">
+                <select class="form-select form-select-sm status-select" data-order-id="${order.id}" style="width: auto; min-width: 150px;">
+                  ${optionsHtml}
+                </select>
+                <button class="btn btn-sm btn-outline-primary update-status-btn" data-order-id="${order.id}" title="Update">
+                  <i class="bi bi-check-lg"></i>
+                </button>
+              </div>
+            `;
+          } else {
+            actionHtml = `<span class="text-muted small fw-bold">${order.status === 'Delivered' ? 'Completed' : 'Cancelled'}</span>`;
+          }
+
+          const totalAmount = Number(order.total_amount) || 0;
+          const formattedDate = formatDate(order.order_date);
+
+          return `
+            <tr>
+              <td><strong>#${order.id}</strong></td>
+              <td>
+                <strong style="font-size: 15px;">${order.customer_name}</strong><br>
+                ${order.phone ? `<span style="font-size: 13px; color: #555;"><i class="bi bi-telephone me-1"></i>${order.phone}</span><br>` : ''}
+                ${order.email ? `<span style="font-size: 13px; color: #555;"><i class="bi bi-envelope me-1"></i>${order.email}</span>` : ''}
+              </td>
+              <td>
+                <span class="badge ${type.class} d-inline-flex align-items-center gap-1">
+                  <i class="bi ${type.icon}"></i>${type.label}
+                </span>
+              </td>
+              <td>${order.delivery_address}</td>
+              <td><strong style="color: var(--bs-primary-dark);">${formatPrice(totalAmount)}</strong></td>
+              <td>${formattedDate}</td>
+              <td>
+                <span class="badge ${status.class}">${status.label}</span>
+              </td>
+              <td>${actionHtml}</td>
+            </tr>
           `;
-        } else {
-          actionHtml = `<span class="text-muted small fw-bold">${order.status === 'Delivered' ? 'Completed' : 'Cancelled'}</span>`;
-        }
+        }).join('');
+      } catch (e) {
+        console.error('Error rendering orders:', e);
+        ordersBody.innerHTML = '<tr><td colspan="8" class="text-center text-danger">Error loading orders</td></tr>';
+      }
 
-        return `
-          <tr>
-            <td><strong>#${order.id}</strong></td>
-            <td>
-              <strong style="font-size: 15px;">${order.customer_name}</strong><br>
-              ${order.phone ? `<span style="font-size: 13px; color: #555;"><i class="bi bi-telephone me-1"></i>${order.phone}</span><br>` : ''}
-              ${order.email ? `<span style="font-size: 13px; color: #555;"><i class="bi bi-envelope me-1"></i>${order.email}</span>` : ''}
-            </td>
-            <td>
-              <span class="badge ${type.class} d-inline-flex align-items-center gap-1">
-                <i class="bi ${type.icon}"></i>${type.label}
-              </span>
-            </td>
-            <td>${order.delivery_address}</td>
-            <td><strong style="color: var(--bs-primary-dark);">${formatPrice(order.total_amount)}</strong></td>
-            <td>${formatDate(order.order_date)}</td>
-            <td>
-              <span class="badge ${status.class}">${status.label}</span>
-            </td>
-            <td>${actionHtml}</td>
-          </tr>
-        `;
-      }).join('');
-
-      // Add event listeners for dropdown changes
+       
       document.querySelectorAll('.update-status-btn').forEach(btn => {
         btn.addEventListener('click', function() {
-          const orderId = parseInt(this.dataset.orderId);
-          const select = document.querySelector(`.status-select[data-order-id="${orderId}"]`);
-          const newStatus = select.value;
-          if (newStatus && !select.options[select.selectedIndex].disabled) {
+          const orderId = Number(this.dataset.orderId);
+          console.log('Button clicked for order:', orderId, 'btn:', this);
+
+           
+          const row = this.closest('tr');
+          const select = row?.querySelector('.status-select');
+          console.log('Found select in row:', select);
+
+          if (select) {
+            console.log('Select value:', select.value, 'data-order-id:', select.dataset.orderId);
+          }
+          const newStatus = select?.value;
+          if (newStatus && !select?.options[select?.selectedIndex]?.disabled) {
             updateOrderStatus(orderId, newStatus, select);
           }
         });
       });
 
-      // Also allow Enter key on select
+       
       document.querySelectorAll('.status-select').forEach(select => {
         select.addEventListener('keydown', function(e) {
           if (e.key === 'Enter') {
             e.preventDefault();
-            const orderId = parseInt(this.dataset.orderId);
+            const orderId = Number(this.dataset.orderId);
             const newStatus = this.value;
             if (newStatus && !this.options[this.selectedIndex].disabled) {
               updateOrderStatus(orderId, newStatus, this);

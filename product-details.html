@@ -148,7 +148,7 @@
 
     <script src="assets/js/utils.js"></script>
     <script>
-        // Default fallback products (same as shop.html)
+          
         const defaultProducts = [
             { id: 1, name: "Golden Pothos", category: "Indoor Plants", price: 350.00, stock: 25, image: "assets/images/defo.png", description: "A hardy, trailing vine with heart-shaped leaves. Perfect for beginners and low-light spaces.", specs: { "Light": "Low to bright indirect light", "Water": "When top inch of soil is dry", "Difficulty": "Easy", "Pet Safe": "No" } },
             { id: 2, name: "Snake Plant", category: "Succulents", price: 450.00, stock: 18, image: "assets/images/defo.png", description: "Tough, air-purifying plant with upright sword-like leaves. Thrives on neglect.", specs: { "Light": "Low to bright indirect light", "Water": "Every 2-3 weeks, let soil dry completely", "Difficulty": "Very Easy", "Pet Safe": "No" } },
@@ -172,7 +172,7 @@
             { id: 20, name: "Bird of Paradise", category: "Outdoor", price: 600.00, stock: 4, image: "assets/images/defo.png", description: "Striking orange and blue flowers.", specs: { "Light": "Full sun to bright indirect", "Water": "Keep soil moist", "Difficulty": "Moderate", "Pet Safe": "No" } }
         ];
 
-        // Load products from localStorage (admin inventory) with fallback to defaults
+          
         function loadProducts() {
             const stored = localStorage.getItem('amosGardenProducts');
             if (stored) {
@@ -208,7 +208,7 @@
 
             document.getElementById('breadcrumb-product').textContent = product.name;
 
-            // Handle images - admin inventory has single image, old format has images array
+              
             const images = product.images || [product.image || 'assets/images/defo.png'];
             const carouselItems = images.map((img, index) => `
                 <div class="carousel-item ${index === 0 ? 'active' : ''}">
@@ -271,7 +271,7 @@
                 </div>
             `;
 
-            // Handle specs - admin inventory might not have specs, fallback to basic care info
+              
             let specsHTML = '';
             if (product.specs) {
                 for (const [key, value] of Object.entries(product.specs)) {
@@ -291,7 +291,7 @@
                     `;
                 }
             } else {
-                // Default specs for admin inventory products
+                  
                 const defaultSpecs = {
                     "Light": "Bright indirect light",
                     "Water": "When top inch of soil is dry",

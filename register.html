@@ -234,7 +234,7 @@
   <script src="assets/js/utils.js"></script>
 
   <script>
-    // Toggle password visibility
+      
     document.getElementById('togglePassword')?.addEventListener('click', function() {
       const passwordInput = document.getElementById('password');
       const icon = this.querySelector('i');
@@ -248,7 +248,7 @@
       }
     });
 
-    // Confirm password validation
+      
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirmPassword');
 
@@ -263,7 +263,7 @@
     passwordInput.addEventListener('input', validatePasswordMatch);
     confirmPasswordInput.addEventListener('input', validatePasswordMatch);
 
-    // Form validation and submission
+      
     (function() {
       'use strict';
 
@@ -298,7 +298,7 @@
             const fullName = document.getElementById('fullName').value;
             const email = document.getElementById('email').value;
 
-            // Save current user session
+              
             localStorage.setItem('amosGardenUser', JSON.stringify({
               name: fullName,
               email: email,
@@ -306,7 +306,7 @@
               loginTime: Date.now()
             }));
 
-            // Save to all users list
+              
             const users = JSON.parse(localStorage.getItem('amosGardenUsers') || '[]');
             if (!users.find(u => u.email === email)) {
               users.push({
@@ -335,7 +335,7 @@
       }, false);
     })();
 
-    // Password strength indicator
+      
     passwordInput?.addEventListener('input', function() {
       const password = this.value;
       let strength = 0;

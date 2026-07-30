@@ -215,7 +215,7 @@
   <script src="assets/js/utils.js"></script>
 
   <script>
-    // Load orders from localStorage or use defaults
+      
     function loadOrdersFromStorage() {
       const stored = localStorage.getItem('amosGardenOrders');
       if (stored) {
@@ -239,9 +239,9 @@
       ];
     }
 
-    // Normalize order to handle both old and new formats
+      
     function normalizeOrder(order) {
-      // Old format: orderNumber, customer.name, customer.deliveryType, total, date, status: 'Processing'
+        
       if (order.orderNumber && order.customer) {
         return {
           id: order.id || parseInt(order.orderNumber.replace('AG-', '')) || Date.now(),
@@ -255,7 +255,7 @@
           status: order.status === 'Processing' ? 'Pending' : order.status
         };
       }
-      // New format - ensure total_amount is number
+        
       return {
         ...order,
         total_amount: Number(order.total_amount) || 0
@@ -320,7 +320,7 @@
         return;
       }
 
-      // Compare using loose equality to handle string vs number
+        
       const order = orders.find(o => o.id == id);
 
       console.log('Found order:', order);
@@ -358,7 +358,7 @@
         </div>
       `;
 
-      // Pre-select the status from URL
+        
       if (status) {
         document.getElementById('newStatus').value = status;
       }
@@ -394,7 +394,7 @@
         return;
       }
 
-      // Validate status transition
+        
       const currentStatus = orders[orderIndex].status;
       const validTransitions = {
       'Pending': ['Preparing', 'Cancelled'],
@@ -412,7 +412,7 @@
         return;
       }
 
-      // Update order
+        
       orders[orderIndex].status = newStatus;
       orders[orderIndex].updated_at = new Date().toISOString().replace('T', ' ').slice(0, 19);
       saveOrders();
@@ -422,7 +422,7 @@
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalHtml;
 
-      // Redirect back to dashboard after short delay
+        
       setTimeout(() => {
         window.location.href = 'admin_dashboard.html';
       }, 1500);

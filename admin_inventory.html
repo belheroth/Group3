@@ -430,7 +430,7 @@
   <script src="js/plant-images.js"></script>
 
   <script>
-    // Load products from localStorage or use defaults
+      
     function loadProducts() {
       const stored = localStorage.getItem('amosGardenProducts');
       if (stored) {
@@ -568,14 +568,14 @@
     });
 
 
-    // Add plant form handling
+      
     const addPlantForm = document.getElementById('addPlantForm');
     const plantImageInput = document.getElementById('plantImage');
     const imagePreviewContainer = document.getElementById('imagePreviewContainer');
     const previewImg = document.getElementById('previewImg');
     const fileUploadArea = document.getElementById('fileUploadArea');
 
-    // Image preview functionality for file upload
+      
     function previewImage(input) {
       const file = input.files[0];
       if (file) {
@@ -613,7 +613,7 @@
       }
     }
 
-    // Reset file input
+      
     window.resetFileInput = function() {
       const input = document.getElementById('plantImage');
       const previewContainer = document.getElementById('imagePreviewContainer');
@@ -630,7 +630,7 @@
       `;
     };
 
-    // Drag and drop events
+      
     fileUploadArea.addEventListener('dragover', (e) => {
       e.preventDefault();
       fileUploadArea.classList.add('dragover');
@@ -652,7 +652,7 @@
       }
     });
 
-    // Reset form and preview when modal is hidden
+      
     const addPlantModalEl = document.getElementById('addPlantModal');
     addPlantModalEl.addEventListener('hidden.bs.modal', function() {
       addPlantForm.reset();
@@ -660,7 +660,7 @@
       resetFileInput();
     });
 
-    // Form submission
+      
     addPlantForm.addEventListener('submit', function(e) {
       e.preventDefault();
       e.stopPropagation();
@@ -701,14 +701,14 @@
         saveProducts();
         renderProducts();
 
-        // Show success toast
+          
         if (window.toast) {
           window.toast.success('Plant added successfully!');
         } else {
           alert('Plant added successfully!');
         }
 
-        // Close modal
+          
         const modal = bootstrap.Modal.getInstance(addPlantModalEl);
         if (modal) modal.hide();
       };

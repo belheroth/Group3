@@ -192,7 +192,7 @@
     }
 
     function normalizeOrder(order) {
-      // Handle both old format (from original code) and new format (from checkout.html)
+        
       return {
         orderNumber: order.orderNumber || ('AG-' + String(order.id).padStart(4, '0')),
         date: order.date || order.order_date,
@@ -206,7 +206,7 @@
     function renderOrders(orders) {
       const container = document.getElementById('ordersContent');
 
-      // Normalize orders to handle both formats
+        
       const normalizedOrders = orders.map(normalizeOrder);
 
       if (normalizedOrders.length === 0) {
